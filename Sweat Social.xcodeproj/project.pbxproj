@@ -15,7 +15,7 @@
 		0B6E8B2A2B6A9D0800455CB3 /* Sweat_SocialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B292B6A9D0800455CB3 /* Sweat_SocialUITests.swift */; };
 		0B6E8B2C2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */; };
 		C5766A082B741AE900F898EA /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A072B741AE900F898EA /* Models.swift */; };
-		C5766A0A2B741B1800F898EA /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* File.swift */; };
+		C5F8A1082B756A4000B14165 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F8A1072B756A4000B14165 /* ViewModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,7 @@
 		0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sweat-Social-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C5766A072B741AE900F898EA /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = "Sweat Social/Models/Models.swift"; sourceTree = SOURCE_ROOT; };
-		C5766A092B741B1800F898EA /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C5F8A1072B756A4000B14165 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +99,9 @@
 		0B6E8B0D2B6A9D0600455CB3 /* Sweat Social */ = {
 			isa = PBXGroup;
 			children = (
+				C5F8A1062B756A2900B14165 /* ViewModels */,
 				0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */,
 				C5766A032B7418A400F898EA /* Views */,
-				C5766A042B7418AE00F898EA /* Services */,
 				C5766A062B7418E100F898EA /* App */,
 				C5766A052B7418C100F898EA /* Models */,
 				0B6E8B122B6A9D0800455CB3 /* Assets.xcassets */,
@@ -143,14 +143,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C5766A042B7418AE00F898EA /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				C5766A092B741B1800F898EA /* File.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		C5766A052B7418C100F898EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +157,14 @@
 				0B6E8B0E2B6A9D0600455CB3 /* Sweat_SocialApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		C5F8A1062B756A2900B14165 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C5F8A1072B756A4000B14165 /* ViewModels.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,8 +298,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5766A082B741AE900F898EA /* Models.swift in Sources */,
-				C5766A0A2B741B1800F898EA /* File.swift in Sources */,
 				0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */,
+				C5F8A1082B756A4000B14165 /* ViewModels.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
