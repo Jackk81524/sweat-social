@@ -13,6 +13,6 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Build and Test
-        run: xcodebuild test -project Sweat\ Social.xcodeproj -scheme Sweat\ Social -destination generic/platform=iOS build test
+        run: xcodebuild test -project Sweat\ Social.xcodeproj -scheme Sweat\ Social -destination 'platform=iOS Simulator,name=iPhone 12,OS=16.2' build test
 
       - uses: codecov/codecov-action@v1.2.1
