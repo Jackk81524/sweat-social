@@ -8,10 +8,10 @@ on:
 
 jobs:
   swiftlint:
-  runs-on: macos-latest
-  steps:
-    - uses: actions/checkout@v2
-    - name: Install SwiftLint
-      run: brew install swiftlint
-    - name: Run SwiftLint
-      run: swiftlint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Run SwiftLint
+        run: swiftlint
