@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State var email = ""
+    @State var password = ""
+    
     var body: some View {
         VStack {
             ZStack {
@@ -24,6 +27,30 @@ struct LoginView: View {
             }
             .frame(width: UIScreen.main.bounds.width * 2.3, height: 259)
             .offset(y: -315)
+            
+            VStack {
+                Text("Already have an account?")
+                    .font(.system(size:26))
+                    .padding(.bottom, 20)
+                
+                
+                TextField("Email Address", text: $email)
+                    .padding()
+                    .frame(width:306,height: 45)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(Color.black,lineWidth:2)
+                    )
+                SecureField("Password", text: $password)
+                    .padding()
+                    .frame(width:306,height: 45)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .strokeBorder(Color.black,lineWidth:2)
+                    )
+                
+            }
+            .offset(y:-275)
         }
     }
 }
