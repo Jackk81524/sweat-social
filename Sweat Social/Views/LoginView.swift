@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LoginView: View {
     @State var email = ""
@@ -52,7 +53,7 @@ struct LoginView: View {
                         )
                     
                     Button {
-                        //Attemp login
+                        // Do something
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 32)
@@ -68,6 +69,14 @@ struct LoginView: View {
                     
                 }
                 .offset(y:-200)
+            }
+        }
+    }
+    
+    func login() {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil {
+                print(error!.localizedDescription)
             }
         }
     }
