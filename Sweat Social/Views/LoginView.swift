@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
@@ -61,6 +63,12 @@ struct LoginView: View {
                     
                 }
                 .offset(y:-200)
+                
+                GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .light, style: .wide, state: .normal))
+                    {
+                    
+                }
+                
             }
         }
     }
