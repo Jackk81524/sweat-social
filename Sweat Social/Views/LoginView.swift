@@ -9,27 +9,12 @@ import SwiftUI
 import Firebase
 
 struct LoginView: View {
-    @State var email = ""
-    @State var password = ""
+    @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
-                ZStack {
-                    Ellipse()
-                        .foregroundColor(.black)
-                    
-                    Text("Sweat Social")
-                        .font(.custom("Futura-MediumItalic", size: 64))
-                        .fontWidth(.condensed)
-                        .foregroundStyle(.white)
-                        .baselineOffset(-135)
-                        .bold()
-                    
-                }
-                .frame(width: UIScreen.main.bounds.width * 2.3, height: 259)
-                .offset(y: -190)
-                .padding()
+                EntryHeaderView()
                 
                 VStack {
                     Text("Already have an account?")
@@ -37,14 +22,16 @@ struct LoginView: View {
                         .padding(.bottom, 20)
                     
                     
-                    TextField("Email Address", text: $email)
+                    TextField("Email Address", text: $viewModel.email)
                         .padding()
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                        .autocorrectionDisabled()
                         .frame(width:306,height: 45)
                         .overlay(
                             RoundedRectangle(cornerRadius: 16)
                                 .strokeBorder(Color.black,lineWidth:2)
                         )
-                    SecureField("Password", text: $password)
+                    SecureField("Password", text: $viewModel.password)
                         .padding()
                         .frame(width:306,height: 45)
                         .overlay(
@@ -53,7 +40,7 @@ struct LoginView: View {
                         )
                     
                     Button {
-                        // Do something
+                        viewModel.login()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 32)
@@ -73,13 +60,6 @@ struct LoginView: View {
         }
     }
     
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-        }
-    }
 }
     
 #Preview {
