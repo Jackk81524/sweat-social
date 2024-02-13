@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = MainViewModel()
+    
     var body: some View {
-        LoginView()
-        
+        if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
+            Text("Welcome to your account")
+        } else {
+            LoginView()
+        }
         
     }
 }

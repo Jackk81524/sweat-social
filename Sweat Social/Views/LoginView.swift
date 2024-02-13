@@ -21,6 +21,11 @@ struct LoginView: View {
                         .font(.system(size:26))
                         .padding(.bottom, 20)
                     
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            
+                    }
+                    
                     
                     TextField("Email Address", text: $viewModel.email)
                         .padding()
