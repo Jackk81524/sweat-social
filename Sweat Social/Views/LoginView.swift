@@ -27,40 +27,22 @@ struct LoginView: View {
                     }
                     
                     
-                    TextField("Email Address", text: $viewModel.email)
-                        .padding()
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        .autocorrectionDisabled()
-                        .frame(width:306,height: 45)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(Color.black,lineWidth:2)
-                        )
-                    SecureField("Password", text: $viewModel.password)
-                        .padding()
-                        .frame(width:306,height: 45)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(Color.black,lineWidth:2)
-                        )
+                    EntryTextFieldView(display: "Email Address", input: $viewModel.email)
+                    EntryPasswordView(display: "Password", input: $viewModel.password)
                     
-                    Button {
+                    EntryButtonView(title: "Login") {
                         viewModel.login()
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 32)
-                                .foregroundColor(.black)
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .font(.system(size:16))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        }
-                        .frame(width: 141, height: 45)
-                        .padding()
                     }
+                    
+                    
                     
                 }
                 .offset(y:-200)
+                
+                VStack {
+                    Text("Don't have an account?")
+                    NavigationLink("Create one", destination: RegisterView())
+                }
             }
         }
     }

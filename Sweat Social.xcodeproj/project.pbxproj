@@ -20,6 +20,11 @@
 		C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2332B76B75B00346B27 /* FirebaseAuth */; };
 		C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2352B76B75B00346B27 /* FirebaseFirestore */; };
 		C528A23C2B76B9E900346B27 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A23B2B76B9E900346B27 /* File.swift */; };
+		C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */; };
+		C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */; };
+		C536A1F42B7D13D900079DCC /* EntryTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F32B7D13D900079DCC /* EntryTextFieldView.swift */; };
+		C536A1F62B7D13E800079DCC /* EntryPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F52B7D13E800079DCC /* EntryPasswordView.swift */; };
+		C536A1F82B7D235B00079DCC /* EntryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F72B7D235B00079DCC /* EntryButtonView.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +62,11 @@
 		C50CA40C2B795FFB00AEACCA /* EntryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryHeaderView.swift; sourceTree = "<group>"; };
 		C50F11172B7AFEC80025FB0E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C528A23B2B76B9E900346B27 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		C536A1F32B7D13D900079DCC /* EntryTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTextFieldView.swift; sourceTree = "<group>"; };
+		C536A1F52B7D13E800079DCC /* EntryPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPasswordView.swift; sourceTree = "<group>"; };
+		C536A1F72B7D235B00079DCC /* EntryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryButtonView.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,12 +158,24 @@
 			path = "Sweat SocialUITests";
 			sourceTree = "<group>";
 		};
+		C536A1F02B7D128200079DCC /* LoginRegisterHelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				C50CA40C2B795FFB00AEACCA /* EntryHeaderView.swift */,
+				C536A1F32B7D13D900079DCC /* EntryTextFieldView.swift */,
+				C536A1F52B7D13E800079DCC /* EntryPasswordView.swift */,
+				C536A1F72B7D235B00079DCC /* EntryButtonView.swift */,
+			);
+			path = LoginRegisterHelperViews;
+			sourceTree = "<group>";
+		};
 		C5766A032B7418A400F898EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C536A1F02B7D128200079DCC /* LoginRegisterHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
-				C50CA40C2B795FFB00AEACCA /* EntryHeaderView.swift */,
+				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +185,7 @@
 			children = (
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* MainViewModel.swift */,
+				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -326,7 +349,12 @@
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
 				0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */,
 				C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */,
+				C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */,
 				C50CA40D2B795FFB00AEACCA /* EntryHeaderView.swift in Sources */,
+				C536A1F62B7D13E800079DCC /* EntryPasswordView.swift in Sources */,
+				C536A1F42B7D13D900079DCC /* EntryTextFieldView.swift in Sources */,
+				C536A1F82B7D235B00079DCC /* EntryButtonView.swift in Sources */,
+				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
