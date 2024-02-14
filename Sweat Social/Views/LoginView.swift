@@ -64,10 +64,10 @@ struct LoginView: View {
                 }
                 .offset(y:-200)
                 
-                GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .light, style: .wide, state: .normal))
+                /*GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .light, style: .wide, state: .normal))
                     {
                     
-                }
+                }*/
                 
             }
         }
