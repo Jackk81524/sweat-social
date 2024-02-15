@@ -123,6 +123,7 @@
 		0B6E8B0D2B6A9D0600455CB3 /* Sweat Social */ = {
 			isa = PBXGroup;
 			children = (
+				C53768C32B7E9A99008D8050 /* GoogleService-Info.plist */,
 				C536A1FB2B7D2C2500079DCC /* Other */,
 				0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */,
 				C5766A032B7418A400F898EA /* Views */,
@@ -174,7 +175,6 @@
 		C536A1FB2B7D2C2500079DCC /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				C53768C32B7E9A99008D8050 /* GoogleService-Info.plist */,
 				C536A1FC2B7D2C4600079DCC /* Extensions.swift */,
 			);
 			path = Other;
