@@ -60,7 +60,7 @@ struct GoalBlock: View {
                 .fill(.gray)
             
             // Top Leading
-            Text("Top Leading")
+            Text("Goal Name")
                 .padding(.top, 8)
                 .padding(.leading, 8)
             
@@ -91,7 +91,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("Bottom Trailing")
+                    Text("13/20") // TODO: Use a variable for this
                         .padding(.bottom, 8)
                         .padding(.trailing, 8)
                 }
@@ -102,7 +102,9 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("Center")
+                    ProgressBar(value: 13/20)
+                        .frame(height: 20)
+                        .padding(10)
                     Spacer()
                 }
                 Spacer()
@@ -112,6 +114,26 @@ struct GoalBlock: View {
     }
 }
 
+struct ProgressBar: View {
+    var value: Float
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle() // Background of progress bar
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .opacity(0.3)
+                    .foregroundColor(.blue)
+                
+                Rectangle() // Filled portion of the bar
+                    .frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
+                    .foregroundColor(.yellow)
+                    .animation(.linear, value: value)
+            }
+            .cornerRadius(45.0)
+        }
+    }
+}
 
 #Preview {
     GoalView()
