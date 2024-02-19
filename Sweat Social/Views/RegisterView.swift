@@ -8,42 +8,57 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @Environment(\.presentationMode) private var
+        presentationMode: Binding<PresentationMode>
+    
     @StateObject var viewModel = RegisterViewModel()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                EntryHeaderView()
+        NavigationStack{
+            ZStack {
+                AuthHeaderView()
+                    .offset(y:-125)
                 
                 VStack {
                     Text("Register with us now")
                         .font(.system(size:26))
                         .padding(.bottom, 20)
                     
-                    EntryTextFieldView(display: "Full Name",
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            
+                    }
+                    AuthTextFieldView(display: "Full Name",
                                        input: $viewModel.name)
-                    EntryTextFieldView(display: "Email",
+                    AuthTextFieldView(display: "Email",
                                        input: $viewModel.email)
-                    EntryPasswordView(display: "Password",
+                    AuthPasswordView(display: "Password",
                                       input: $viewModel.password)
-                    EntryPasswordView(display: "Confirm Password",
+                    AuthPasswordView(display: "Confirm Password",
                                       input: $viewModel.confirm_password)
                     
-                    EntryButtonView(title: "Sign up")
+                    AuthButtonView(title: "Sign up")
                     {
                         viewModel.register()
                     }
                 }
-                .offset(y:-200)
+                .offset(y:25)
                 
                 VStack {
                     Text("Already have an account?")
-                    NavigationLink("Log in", destination: LoginView())
+                    Button(action: {
+                        presentationMode.wrappedValue
+                            .dismiss()
+                    }, label: {
+                        Text("Log in")
+                    })
                 }
+                .offset(y:320)
                 
                 
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

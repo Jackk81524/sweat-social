@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EntryHeaderView: View {
+struct AuthHeaderView: View {
     var body: some View {
         ZStack {
             Ellipse()
@@ -28,5 +28,5 @@ struct EntryHeaderView: View {
 }
 
 #Preview {
-    EntryHeaderView()
+    AuthHeaderView()
 }

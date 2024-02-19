@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EntryPasswordView: View {
+struct AuthPasswordView: View {
     let display: String
     @Binding var input: String
     
@@ -23,5 +23,5 @@ struct EntryPasswordView: View {
 }
 
 #Preview {
-    EntryPasswordView(display: "Password", input: .constant("Password"))
+    AuthPasswordView(display: "Password", input: .constant("Password"))
 }

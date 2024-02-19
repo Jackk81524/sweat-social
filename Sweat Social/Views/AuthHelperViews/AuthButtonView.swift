@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EntryButtonView: View {
+struct AuthButtonView: View {
     let title: String
     let action: () -> Void
     
@@ -30,7 +30,7 @@ struct EntryButtonView: View {
 }
 
 #Preview {
-    EntryButtonView(title: "Login") {
+    AuthButtonView(title: "Login") {
         // Action
     }
 }

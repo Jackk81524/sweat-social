@@ -12,9 +12,10 @@ struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                EntryHeaderView()
+        NavigationStack {
+            ZStack {
+                AuthHeaderView()
+                    .offset(y:-125)
                 
                 VStack {
                     Text("Already have an account?")
@@ -27,22 +28,21 @@ struct LoginView: View {
                     }
                     
                     
-                    EntryTextFieldView(display: "Email Address", input: $viewModel.email)
-                    EntryPasswordView(display: "Password", input: $viewModel.password)
+                    AuthTextFieldView(display: "Email Address", input: $viewModel.email)
+                    AuthPasswordView(display: "Password", input: $viewModel.password)
                     
-                    EntryButtonView(title: "Login") {
+                    AuthButtonView(title: "Login") {
                         viewModel.login()
                     }
                     
-                    
-                    
                 }
-                .offset(y:-200)
+                .offset(y:-30)
                 
                 VStack {
                     Text("Don't have an account?")
                     NavigationLink("Create one", destination: RegisterView())
                 }
+                .offset(y:320)
             }
         }
     }

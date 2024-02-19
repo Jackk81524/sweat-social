@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EntryTextFieldView: View {
+struct AuthTextFieldView: View {
     let display: String
     @Binding var input: String
 
@@ -25,5 +25,5 @@ struct EntryTextFieldView: View {
 }
 
 #Preview {
-    EntryTextFieldView(display: "Email", input: .constant("Email"))
+    AuthTextFieldView(display: "Email", input: .constant("Email"))
 }
