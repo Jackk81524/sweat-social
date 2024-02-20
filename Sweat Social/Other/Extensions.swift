@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Helper function to automatically convert model to JSON format
 extension Encodable {
     func asDictionary() -> [String:Any] {
         guard let data = try? JSONEncoder().encode(self) else {

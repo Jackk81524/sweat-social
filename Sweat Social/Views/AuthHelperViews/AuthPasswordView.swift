@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Abstracts rounded password input seen on auth inputs
+// Needs to be different then AuthTextFieldView as this view hides characters inputted, as is typical during password input
 struct AuthPasswordView: View {
     let display: String
     @Binding var input: String

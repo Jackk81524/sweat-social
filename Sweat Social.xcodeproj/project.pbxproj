@@ -28,6 +28,7 @@
 		C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1FC2B7D2C4600079DCC /* Extensions.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
+		C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		C536A1FC2B7D2C4600079DCC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		0B6E8B022B6A9D0600455CB3 = {
 			isa = PBXGroup;
 			children = (
+				C5F64D102B84323300A0454D /* ci_scripts */,
 				0B6E8B0D2B6A9D0600455CB3 /* Sweat Social */,
 				0B6E8B1E2B6A9D0800455CB3 /* Sweat SocialTests */,
 				0B6E8B282B6A9D0800455CB3 /* Sweat SocialUITests */,
@@ -217,6 +220,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		C5F64D102B84323300A0454D /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -329,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B6E8B162B6A9D0800455CB3 /* Preview Assets.xcassets in Resources */,
+				C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */,
 				C5304A152B83BE3C00DA755E /* GoogleService-Info.plist in Resources */,
 				0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */,
 			);

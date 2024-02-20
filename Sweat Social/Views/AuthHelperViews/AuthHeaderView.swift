@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Creates and abstracts the rounded header to be used on login and registration pages
+// Can be used easily if desired in future
 struct AuthHeaderView: View {
     var body: some View {
         ZStack {
