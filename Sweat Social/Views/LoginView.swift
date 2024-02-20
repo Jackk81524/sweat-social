@@ -10,10 +10,10 @@ import Firebase
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
-    
     var body: some View {
         NavigationStack {
             ZStack {
+                // add header
                 AuthHeaderView()
                     .offset(y:-125)
                 

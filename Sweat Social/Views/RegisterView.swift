@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
+    // Below lines are needed to edit back button. Without, the Log in button would not go back to Login View, but create an entirely new login view on navigation stack.
     @Environment(\.presentationMode) private var
         presentationMode: Binding<PresentationMode>
     

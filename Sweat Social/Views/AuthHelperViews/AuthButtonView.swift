@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// Abstracts button UI to approve auth, takes label and action as input.
+//Saves code repetition across login and registration
+
 struct AuthButtonView: View {
     let title: String
     let action: () -> Void

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Abstracts the rounded text input seen on auth views.
+// Saves code repetition
 struct AuthTextFieldView: View {
     let display: String
     @Binding var input: String
