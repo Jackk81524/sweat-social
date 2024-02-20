@@ -12,9 +12,10 @@ struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                EntryHeaderView()
+        NavigationStack {
+            ZStack {
+                AuthHeaderView()
+                    .offset(y:-125)
                 
                 VStack {
                     Text("Already have an account?")
@@ -27,40 +28,21 @@ struct LoginView: View {
                     }
                     
                     
-                    TextField("Email Address", text: $viewModel.email)
-                        .padding()
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        .autocorrectionDisabled()
-                        .frame(width:306,height: 45)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(Color.black,lineWidth:2)
-                        )
-                    SecureField("Password", text: $viewModel.password)
-                        .padding()
-                        .frame(width:306,height: 45)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .strokeBorder(Color.black,lineWidth:2)
-                        )
+                    AuthTextFieldView(display: "Email Address", input: $viewModel.email)
+                    AuthPasswordView(display: "Password", input: $viewModel.password)
                     
-                    Button {
+                    AuthButtonView(title: "Login") {
                         viewModel.login()
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 32)
-                                .foregroundColor(.black)
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .font(.system(size:16))
-                                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        }
-                        .frame(width: 141, height: 45)
-                        .padding()
                     }
                     
                 }
-                .offset(y:-200)
+                .offset(y:-30)
+                
+                VStack {
+                    Text("Don't have an account?")
+                    NavigationLink("Create one", destination: RegisterView())
+                }
+                .offset(y:320)
             }
         }
     }
