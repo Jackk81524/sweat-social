@@ -14,6 +14,10 @@
 		0B6E8B202B6A9D0800455CB3 /* Sweat_SocialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B1F2B6A9D0800455CB3 /* Sweat_SocialTests.swift */; };
 		0B6E8B2A2B6A9D0800455CB3 /* Sweat_SocialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B292B6A9D0800455CB3 /* Sweat_SocialUITests.swift */; };
 		0B6E8B2C2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */; };
+
+		0BE9245F2B7D828F006F65F4 /* References in Resources */ = {isa = PBXBuildFile; fileRef = 0BE9245E2B7D828F006F65F4 /* References */; };
+		0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE924602B7D8A23006F65F4 /* TabBarView.swift */; };
+
 		C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */; };
 		C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */; };
 		C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2332B76B75B00346B27 /* FirebaseAuth */; };
@@ -29,6 +33,7 @@
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
 		C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,10 @@
 		0B6E8B292B6A9D0800455CB3 /* Sweat_SocialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialUITests.swift; sourceTree = "<group>"; };
 		0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sweat-Social-Info.plist"; sourceTree = SOURCE_ROOT; };
+
+		0BE9245E2B7D828F006F65F4 /* References */ = {isa = PBXFileReference; lastKnownFileType = text; path = References; sourceTree = "<group>"; };
+		0BE924602B7D8A23006F65F4 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		
 		C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C528A23B2B76B9E900346B27 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -73,6 +82,7 @@
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,15 +136,16 @@
 		0B6E8B0D2B6A9D0600455CB3 /* Sweat Social */ = {
 			isa = PBXGroup;
 			children = (
-				C5304A142B83BE3B00DA755E /* GoogleService-Info.plist */,
 				C536A1FB2B7D2C2500079DCC /* Other */,
 				0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */,
 				C5766A032B7418A400F898EA /* Views */,
 				C5766A042B7418AE00F898EA /* ViewModels */,
+
 				C5766A062B7418E100F898EA /* App */,
 				C5766A052B7418C100F898EA /* Models */,
 				0B6E8B122B6A9D0800455CB3 /* Assets.xcassets */,
 				0B6E8B142B6A9D0800455CB3 /* Preview Content */,
+				0BE9245E2B7D828F006F65F4 /* References */,
 			);
 			path = "Sweat Social";
 			sourceTree = "<group>";
@@ -188,12 +199,15 @@
 			children = (
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
+				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
+
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
+
 		C5766A042B7418AE00F898EA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +218,7 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+
 		C5766A052B7418C100F898EA /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,12 +235,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+
 		C5F64D102B84323300A0454D /* ci_scripts */ = {
 			isa = PBXGroup;
 			children = (
 				C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */,
 			);
 			path = ci_scripts;
+
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +360,7 @@
 				C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */,
 				C5304A152B83BE3C00DA755E /* GoogleService-Info.plist in Resources */,
 				0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */,
+				0BE9245F2B7D828F006F65F4 /* References in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
 				C528A23C2B76B9E900346B27 /* User.swift in Sources */,
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
@@ -379,6 +398,7 @@
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
+
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
