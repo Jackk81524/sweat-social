@@ -5,7 +5,7 @@ echo "Stage: PRE-Xcode Build is activated .... "
 # for future reference
 # https://developer.apple.com/documentation/xcode/environment-variable-reference
 
-cd ../"Sweat Social"/
+cd "../Sweat Social/Other"
 
 if [ ! -f GoogleService-Info.plist ]; then
     echo '<?xml version="1.0" encoding="UTF-8"?>' > GoogleService-Info.plist
