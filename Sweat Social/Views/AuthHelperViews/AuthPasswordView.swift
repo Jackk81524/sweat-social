@@ -16,10 +16,10 @@ struct AuthPasswordView: View {
     var body: some View {
         SecureField(display, text: $input)
             .padding()
-            .frame(width:306,height: 45)
+            .frame(width:306, height: 45)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .strokeBorder(Color.black,lineWidth:2)
+                    .strokeBorder(Color.black, lineWidth:2)
             )
     }
 }

@@ -19,17 +19,16 @@ class LoginViewViewModel: ObservableObject {
             return
         }
         
-        //Try login
+        // Try login
         // This throws User doesnt exist message upon failure, but doesn't actually check error message
         // At the time, this was too complex, and should be fixed as the app develops
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
             if let error = error {
                 self.errorMessage = "User does not exist"
             }
         }
-        
-        
     }
+    
     // Validates login info entered
     private func validate() -> Bool {
         errorMessage = ""
@@ -49,5 +48,3 @@ class LoginViewViewModel: ObservableObject {
         return true
     }
 }
-
-

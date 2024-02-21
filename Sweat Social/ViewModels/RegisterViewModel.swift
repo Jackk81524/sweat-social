@@ -13,7 +13,7 @@ class RegisterViewModel: ObservableObject {
     @Published var name = ""
     @Published var email = ""
     @Published var password = ""
-    @Published var confirm_password = ""
+    @Published var confirmPassword = ""
     @Published var errorMessage = ""
     
     init() {}
@@ -66,7 +66,7 @@ class RegisterViewModel: ObservableObject {
             return false
         }
         // Password and confirm passwrod entries must be equal
-        guard password == confirm_password else {
+        guard password == confirmPassword else {
             errorMessage = "Passwords do not match."
             return false
         }

@@ -36,7 +36,7 @@ struct RegisterView: View {
                     AuthPasswordView(display: "Password",
                                       input: $viewModel.password)
                     AuthPasswordView(display: "Confirm Password",
-                                      input: $viewModel.confirm_password)
+                                      input: $viewModel.confirmPassword)
                     
                     AuthButtonView(title: "Sign up")
                     {
