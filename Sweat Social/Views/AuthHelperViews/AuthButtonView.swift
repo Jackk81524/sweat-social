@@ -24,7 +24,7 @@ struct AuthButtonView: View {
                 Text(title)
                     .foregroundColor(.white)
                     .font(.system(size:16))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .fontWeight(.bold)
             }
             .frame(width: 141, height: 45)
             .padding()

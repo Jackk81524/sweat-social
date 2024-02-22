@@ -16,7 +16,7 @@ struct AuthTextFieldView: View {
     var body: some View {
         TextField(display, text: $input)
             .padding()
-            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+            .autocapitalization(.none)
             .autocorrectionDisabled()
             .frame(width:306,height: 45)
             .overlay(
