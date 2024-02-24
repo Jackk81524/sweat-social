@@ -11,11 +11,13 @@ import FirebaseFirestore
 
 class WorkoutLogViewModel: ObservableObject {
     @Published var userID = ""
+    @Published var muscleGroupToAdd = ""
+    @Published var addWorkoutForm = false
     init() {
         if let user = Auth.auth().currentUser {
             userID = user.uid
         } else {
-            print("error")
+            //print("error")
         }
     }
     

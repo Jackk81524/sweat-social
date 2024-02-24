@@ -12,9 +12,45 @@ struct WorkoutLogView: View {
     
     var body: some View {
         NavigationStack {
-            AuthButtonView(title: "test") {
-                viewModel.addWorkout(workoutToAdd: "arms")
+            ZStack {
+                
+                ZStack{
+                    
+                    Text("Your Workout")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    HStack {
+                        Spacer()
+                        Button {
+                            viewModel.addWorkoutForm.toggle()
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .foregroundColor(.black)
+                                Text("+")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 20))
+                                    .fontWeight(.bold)
+                            }
+                            .frame(width: 39, height: 26)
+                            .padding()
+                            
+                        }
+                        
+                    }
+                }
+                .offset(y:-340)
+                    
+                if viewModel.addWorkoutForm {
+                    ZStack {
+                        
+                        
+                        AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkout)
+                    }
+                }
+                
             }
+            
         }
     }
 }
