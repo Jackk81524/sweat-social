@@ -15,8 +15,9 @@ struct AddWorkoutView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .strokeBorder(Color.black,lineWidth:2)
-                .foregroundStyle(.white)
+                .strokeBorder(Color.black,lineWidth:2)                
+                .background(Color.white)
+                .foregroundColor(.white)
                 .frame(width: 350, height: 300)
             
             VStack {

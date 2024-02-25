@@ -13,6 +13,16 @@ struct WorkoutLogView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                VStack {
+                    ScrollView {
+                        if let workoutGroups = viewModel.workoutGroups {
+                            ForEach(workoutGroups) { group in
+                                WorkoutGroupButtonView(name: group.name)
+                            }
+                            .offset(y:50)
+                        }
+                    }
+                }
                 
                 ZStack{
                     
@@ -36,16 +46,15 @@ struct WorkoutLogView: View {
                             .padding()
                             
                         }
+                        .padding(8)
                         
                     }
                 }
                 .offset(y:-340)
-                    
+
                 if viewModel.addWorkoutForm {
                     ZStack {
-                        
-                        
-                        AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkout)
+                        AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
                     }
                 }
                 
