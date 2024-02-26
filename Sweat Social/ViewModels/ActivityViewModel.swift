@@ -20,8 +20,8 @@ class ActivityViewModel: ObservableObject {
                 return
             }
             
-            self.users = documents.map { (QueryDocumentSnapshot) -> User in
-                let data = QueryDocumentSnapshot.data()
+            self.users = documents.map { (queryDocumentSnapshot) -> User in
+                let data = queryDocumentSnapshot.data()
                 
                 let id = data["id"] as? String ?? ""
                 let name = data["name"] as? String ?? ""
