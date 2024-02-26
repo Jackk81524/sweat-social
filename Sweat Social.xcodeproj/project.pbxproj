@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B1D36C62B87D7C4004D46C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B1D36C52B87D7C4004D46C9 /* GoogleService-Info.plist */; };
 		0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B0E2B6A9D0600455CB3 /* Sweat_SocialApp.swift */; };
 		0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B102B6A9D0600455CB3 /* ContentView.swift */; };
 		0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B6E8B122B6A9D0800455CB3 /* Assets.xcassets */; };
@@ -53,7 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B1D36C52B87D7C4004D46C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0B6E8B0B2B6A9D0600455CB3 /* Sweat Social.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sweat Social.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6E8B0E2B6A9D0600455CB3 /* Sweat_SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialApp.swift; sourceTree = "<group>"; };
 		0B6E8B102B6A9D0600455CB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 		C536A1FB2B7D2C2500079DCC /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				0B1D36C52B87D7C4004D46C9 /* GoogleService-Info.plist */,
 				C536A1FC2B7D2C4600079DCC /* Extensions.swift */,
 			);
 			path = Other;
@@ -363,7 +360,6 @@
 			files = (
 				0B6E8B162B6A9D0800455CB3 /* Preview Assets.xcassets in Resources */,
 				C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */,
-				0B1D36C62B87D7C4004D46C9 /* GoogleService-Info.plist in Resources */,
 				0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */,
 				0BE9245F2B7D828F006F65F4 /* References in Resources */,
 			);
