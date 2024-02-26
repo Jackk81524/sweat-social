@@ -9,9 +9,9 @@ import SwiftUI
 
 struct GoalsView: View {
     @State var goals: [Goal] = [
-        Goal(name: "Do 300 Nm of work", num_complete: 290, num_total: 300),
-        Goal(name: "Do 2 hours of cardio", num_complete: 0, num_total: 2),
-        Goal(name: "Go to the gym 4 times this week", num_complete: 2, num_total: 4),
+        Goal(name: "Do 300 Nm of work", numComplete: 290, numTotal: 300),
+        Goal(name: "Do 2 hours of cardio", numComplete: 0, numTotal: 2),
+        Goal(name: "Go to the gym 4 times this week", numComplete: 2, numTotal: 4),
     ]
     
     var body: some View {
@@ -32,7 +32,7 @@ struct GoalsView: View {
             
             HStack {
                 Button(action: {
-                    goals[0].num_complete -= 10
+                    goals[0].numComplete -= 10
                 }) {
                     Text("Decrement 1")
                         .font(.title)
@@ -42,7 +42,7 @@ struct GoalsView: View {
                         .cornerRadius(10)
                 }
                 Button(action: {
-                    goals[0].num_complete += 1
+                    goals[0].numComplete += 1
                 }) {
                     Text("Increment 1")
                         .font(.title)
@@ -54,7 +54,7 @@ struct GoalsView: View {
             }
             HStack {
                 Button(action: {
-                    goals[1].num_complete -= 1
+                    goals[1].numComplete -= 1
                 }) {
                     Text("Decrement 2")
                         .font(.title)
@@ -64,7 +64,7 @@ struct GoalsView: View {
                         .cornerRadius(10)
                 }
                 Button(action: {
-                    goals[1].num_complete += 1
+                    goals[1].numComplete += 1
                 }) {
                     Text("Increment 2")
                         .font(.title)
@@ -76,7 +76,7 @@ struct GoalsView: View {
             }
             HStack {
                 Button(action: {
-                    goals[2].num_complete -= 1
+                    goals[2].numComplete -= 1
                 }) {
                     Text("Decrement 3")
                         .font(.title)
@@ -86,7 +86,7 @@ struct GoalsView: View {
                         .cornerRadius(10)
                 }
                 Button(action: {
-                    goals[2].num_complete += 1
+                    goals[2].numComplete += 1
                 }) {
                     Text("Increment 3")
                         .font(.title)
@@ -118,8 +118,8 @@ struct GoalsView: View {
 
 struct Goal {
     var name: String
-    var num_complete: Int
-    var num_total: Int
+    var numComplete: Int
+    var numTotal: Int
 }
 
 struct HeaderView: View {
@@ -178,7 +178,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text(String(self.goal.num_complete) + "/" + String(self.goal.num_total))
+                    Text(String(self.goal.numComplete) + "/" + String(self.goal.numTotal))
                         .padding(.bottom, 8)
                         .padding(.trailing, 8)
                 }
@@ -189,7 +189,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    ProgressBar(value: Float(self.goal.num_complete) / Float(self.goal.num_total))
+                    ProgressBar(value: Float(self.goal.numComplete) / Float(self.goal.numTotal))
                         .frame(height: 20)
                         .padding(10)
                     Spacer()
