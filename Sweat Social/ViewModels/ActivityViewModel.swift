@@ -27,9 +27,9 @@ class ActivityViewModel: ObservableObject {
                 let name = data["name"] as? String ?? ""
                 let email = data["email"] as? String ?? ""
                 let joined = data["joined"] as? TimeInterval ?? 0
-
+                let workouts = data["workouts"] as? [WorkoutGroup] ?? []
                 
-                return User(id: id, name: name, email: email, joined: joined)
+                return User(id: id, name: name, email: email, joined: joined, workout:  workouts)
                 
             }
             

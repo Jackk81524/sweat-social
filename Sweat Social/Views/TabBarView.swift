@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabBar: View {
     var body: some View {
+        //AuthHeaderView()
         TabView {
             ActivityTabView()
                 .tabItem {
@@ -22,12 +23,12 @@ struct TabBar: View {
                 }
                 
             
-            Text("Log Workout")
+            WorkoutLogView()
                 .tabItem {
                     Label("Log Workout", systemImage: "plus.circle.fill")
                 }
             
-            Text("Achievements")
+            GoalsView()
                 .tabItem {
                     Label("Achievements", systemImage: "medal")
 
