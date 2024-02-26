@@ -16,6 +16,8 @@
 		0B6E8B2C2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */; };
 		0BE9245F2B7D828F006F65F4 /* References in Resources */ = {isa = PBXBuildFile; fileRef = 0BE9245E2B7D828F006F65F4 /* References */; };
 		0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE924602B7D8A23006F65F4 /* TabBarView.swift */; };
+		0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */; };
+		0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */; };
 		C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */; };
 		C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */; };
 		C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */; };
@@ -74,6 +76,8 @@
 		0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sweat-Social-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0BE9245E2B7D828F006F65F4 /* References */ = {isa = PBXFileReference; lastKnownFileType = text; path = References; sourceTree = "<group>"; };
 		0BE924602B7D8A23006F65F4 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTabView.swift; sourceTree = "<group>"; };
+		0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogView.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */,
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
+				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
@@ -251,6 +256,7 @@
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
+				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
 				C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */,
 				C531FD3F2B8C094F005CE16C /* ExcerciseLogViewModel.swift */,
 			);
@@ -427,6 +433,7 @@
 				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
+				0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */,
 				C528A23C2B76B9E900346B27 /* User.swift in Sources */,
 				C531FD392B8BD7C3005CE16C /* Workout.swift in Sources */,
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
@@ -440,6 +447,7 @@
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
 				C531FD3E2B8C0900005CE16C /* ExcerciseLogView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
+				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
 				C531FD402B8C094F005CE16C /* ExcerciseLogViewModel.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
