@@ -15,11 +15,11 @@ class AuthViewModel: ObservableObject {
     // This updates the view if the users login status changes
     init() {
         
-       /* do {
+       do {
             try Auth.auth().signOut()
         } catch let _ as NSError {
             //Catch
-        }*/
+        }
         
         let handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async {

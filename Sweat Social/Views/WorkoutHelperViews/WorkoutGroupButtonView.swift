@@ -9,22 +9,28 @@ import SwiftUI
 
 struct WorkoutGroupButtonView: View {
     let name: String
+    @State private var showExcercise = false
     var body: some View {
-        Button {
-            // Mock
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .strokeBorder(Color.black,lineWidth: 2)
-                    .foregroundColor(.white)
+        NavigationStack{
+            Button {
+                self.showExcercise = true
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .strokeBorder(Color.black,lineWidth: 2)
+                        .foregroundColor(.white)
                     
-                Text(name)
-                    .foregroundColor(.black)
-                    .font(.system(size:16))
-                    .fontWeight(.bold)
+                    Text(name)
+                        .foregroundColor(.black)
+                        .font(.system(size:16))
+                        .fontWeight(.bold)
+                }
+                .frame(width: 367, height: 51)
+                .padding(4)
             }
-            .frame(width: 367, height: 51)
-            .padding(4)
+            .navigationDestination(isPresented: $showExcercise) {
+                ExcerciseLogView(workoutGroup: name)
+            }
         }
     }
 }

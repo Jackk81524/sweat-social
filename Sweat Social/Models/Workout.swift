@@ -13,7 +13,8 @@ struct WorkoutGroup: Codable, Identifiable {
     var excercises: [Excercises]
 }
 
-struct Excercises: Codable {
+struct Excercises: Codable, Identifiable {
+    let id = UUID()
     let name: String
     var sets: [Set]?
 }
