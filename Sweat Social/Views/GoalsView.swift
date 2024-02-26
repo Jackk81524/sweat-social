@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-struct GoalView: View {
+struct GoalsView: View {
+    @State var goals: [Goal] = [
+        Goal(name: "Do 300 Nm of work", num_complete: 290, num_total: 300),
+        Goal(name: "Do 2 hours of cardio", num_complete: 0, num_total: 2),
+        Goal(name: "Go to the gym 4 times this week", num_complete: 2, num_total: 4),
+    ]
+    
     var body: some View {
         VStack {
             HeaderView()
@@ -16,26 +22,104 @@ struct GoalView: View {
                 .background(Color.black)
                 .foregroundColor(.white)
             
-            Spacer()
-            
-            Text("Weekly Goals")
+            Text("Weekly Goals!")
                 .font(.title)
+                .padding()
             
-            GoalBlock()
+            GoalBlock(goal: goals[0])
+            GoalBlock(goal: goals[1])
+            GoalBlock(goal: goals[2])
+            
+            HStack {
+                Button(action: {
+                    goals[0].num_complete -= 10
+                }) {
+                    Text("Decrement 1")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    goals[0].num_complete += 1
+                }) {
+                    Text("Increment 1")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            HStack {
+                Button(action: {
+                    goals[1].num_complete -= 1
+                }) {
+                    Text("Decrement 2")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    goals[1].num_complete += 1
+                }) {
+                    Text("Increment 2")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            HStack {
+                Button(action: {
+                    goals[2].num_complete -= 1
+                }) {
+                    Text("Decrement 3")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    goals[2].num_complete += 1
+                }) {
+                    Text("Increment 3")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
             
             Spacer()
             
-            FooterView()
+            
+            
+            /*
+             FooterView()
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 75)
                 .background(Color.black)
                 .foregroundColor(.white)
+             */
             
         }
         .edgesIgnoringSafeArea(.top)
         .edgesIgnoringSafeArea(.bottom)
         
     }
+}
+
+struct Goal {
+    var name: String
+    var num_complete: Int
+    var num_total: Int
 }
 
 struct HeaderView: View {
@@ -54,13 +138,16 @@ struct FooterView: View {
 }
 
 struct GoalBlock: View {
+    var goal: Goal
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             Rectangle()
                 .fill(.gray)
+                .cornerRadius(10)
             
             // Top Leading
-            Text("Goal Name")
+            Text(self.goal.name)
                 .padding(.top, 8)
                 .padding(.leading, 8)
             
@@ -91,7 +178,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text("13/20") // TODO: Use a variable for this
+                    Text(String(self.goal.num_complete) + "/" + String(self.goal.num_total))
                         .padding(.bottom, 8)
                         .padding(.trailing, 8)
                 }
@@ -102,7 +189,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    ProgressBar(value: 13/20)
+                    ProgressBar(value: Float(self.goal.num_complete) / Float(self.goal.num_total))
                         .frame(height: 20)
                         .padding(10)
                     Spacer()
@@ -136,5 +223,5 @@ struct ProgressBar: View {
 }
 
 #Preview {
-    GoalView()
+    GoalsView()
 }
