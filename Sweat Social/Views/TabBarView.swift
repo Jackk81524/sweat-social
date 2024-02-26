@@ -28,7 +28,7 @@ struct TabBar: View {
                     Label("Log Workout", systemImage: "plus.circle.fill")
                 }
             
-            Text("Achievements")
+            GoalsView()
                 .tabItem {
                     Label("Achievements", systemImage: "medal")
 
