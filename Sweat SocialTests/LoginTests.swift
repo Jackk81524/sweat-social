@@ -11,21 +11,21 @@ import XCTest
 
 final class LoginTests: XCTestCase {
     
-    func test_LoginViewModel_email_shouldBeEmpty() {
+    func test_LoginViewModel_email_shouldBeEmptyOnInitialization() {
         let viewModel = LoginViewModel()
         
         XCTAssertEqual(viewModel.email, "")
         
     }
     
-    func test_LoginViewModel_password_shouldBeEmpty() {
+    func test_LoginViewModel_password_shouldBeEmptyOnInitialization() {
         let viewModel = LoginViewModel()
         
         XCTAssertEqual(viewModel.password, "")
         
     }
     
-    func test_LoginViewModel_errorMessage_shouldBeEmpty() {
+    func test_LoginViewModel_errorMessage_shouldBeEmptyOnIntiInitialization() {
         let viewModel = LoginViewModel()
         
         XCTAssertEqual(viewModel.errorMessage, "")
@@ -94,5 +94,28 @@ final class LoginTests: XCTestCase {
         
     }
     
+    func test_LoginViewModel_login_succesfulLogin() {
+        let email = "test@email.com"
+        let password = generateRandomString(length: Int.random(in:1...10))
+        let viewModel = LoginViewModel(auth: MockFirebaseAuthServiceSuccess())
+        
+        viewModel.email = email
+        viewModel.password = password
+        viewModel.login()
+        
+        XCTAssertEqual(viewModel.errorMessage,"")
+    }
+    
+    func test_LoginViewModel_login_failedLogin() {
+        let email = "test@email.com"
+        let password = generateRandomString(length: Int.random(in:1...10))
+        let viewModel = LoginViewModel(auth: MockFirebaseAuthServiceFailed())
+        
+        viewModel.email = email
+        viewModel.password = password
+        viewModel.login()
+        
+        XCTAssertEqual(viewModel.errorMessage,"User does not exist")
+    }
 
 }
