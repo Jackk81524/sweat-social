@@ -14,3 +14,7 @@ protocol AuthProtocol {
     func signIn(withEmail email: String, password: String, completion: @escaping completionHandler)
     func createUser(withEmail email: String, password: String, completion: @escaping completionHandler2)
 }
+
+protocol FirestoreProtocol {
+    func insertNewUser(id: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void)
+}

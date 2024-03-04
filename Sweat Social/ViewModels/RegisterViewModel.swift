@@ -17,9 +17,11 @@ class RegisterViewModel: ObservableObject {
     @Published var errorMessage = ""
     
     private let auth: AuthProtocol
+    private let firestore: FirestoreProtocol
     
-    init(auth: AuthProtocol = FirebaseAuthService()) {
+    init(auth: AuthProtocol = FirebaseAuthService(), firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
+        self.firestore = firestore
     }
     
     func register() {
@@ -27,31 +29,24 @@ class RegisterViewModel: ObservableObject {
             return
         }
         // Creates a user on firebase auth
-        auth.createUser(withEmail: email, password: password) { result in
+        auth.createUser(withEmail: email, password: password) { [weak self] result in
             switch result {
             case .success(let userId):
-                self.insertUserRecord(id: userId ?? "")
+                self?.firestore.insertNewUser(id: userId ?? "", name: self?.name ?? "", email: self?.email ?? "") { firestoreResult in
+
+                    switch firestoreResult{
+                    case .failure(let error):
+                        self?.errorMessage = error.localizedDescription
+                    default:
+                        break
+                    }
+                }
             case .failure(let error):
-                self.errorMessage = error.localizedDescription
+                self?.errorMessage = error.localizedDescription
             }
-            
-            
         }
     }
     
-    // Adds user info to firestore, doesn't include password for security reasons
-    private func insertUserRecord(id: String) {
-        let newUser = User(id: id,
-                           name: name,
-                           email: email,
-                           joined: Date().timeIntervalSince1970) // Firebase cannot store date as is, so this is a way to handle that
-        
-        let db = Firestore.firestore()
-        
-        db.collection("users")
-            .document(id)
-            .setData(newUser.asDictionary())
-    }
     
     // Validates registration input
     private func validate() -> Bool {
