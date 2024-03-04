@@ -50,7 +50,6 @@ class RegisterViewModel: ObservableObject {
         }
     }
     
-    
     // Validates registration input
     private func validate() -> Bool {
         // Makes sure no blank fields

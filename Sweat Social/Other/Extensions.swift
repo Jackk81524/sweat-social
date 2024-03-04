@@ -22,4 +22,10 @@ extension Encodable {
         }
         
     }
+    
+    static func fromDictionary<T: Decodable>(_ dictionary: [String: Any]) throws -> T {
+        let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: jsonData)
+    }
 }

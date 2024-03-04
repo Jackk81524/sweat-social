@@ -19,12 +19,21 @@
 		C507850C2B90DB5F00555C57 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507850B2B90DB5F00555C57 /* Protocol.swift */; };
 		C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507850F2B90E61400555C57 /* FirebaseAuthService.swift */; };
 		C50785122B90F58500555C57 /* RegisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50785112B90F58400555C57 /* RegisterTests.swift */; };
+		0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */; };
+		0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */; };
 		C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */; };
 		C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */; };
+		C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */; };
+		C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */; };
 		C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2332B76B75B00346B27 /* FirebaseAuth */; };
 		C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2352B76B75B00346B27 /* FirebaseFirestore */; };
 		C528A23C2B76B9E900346B27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A23B2B76B9E900346B27 /* User.swift */; };
-		C52C0E0C2B8527170070D707 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C52C0E0B2B8527160070D707 /* GoogleService-Info.plist */; };
+		C531FD392B8BD7C3005CE16C /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD382B8BD7C3005CE16C /* Workout.swift */; };
+		C531FD3B2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD3A2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift */; };
+		C531FD3E2B8C0900005CE16C /* ExcerciseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD3D2B8C0900005CE16C /* ExcerciseLogView.swift */; };
+		C531FD402B8C094F005CE16C /* ExcerciseLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD3F2B8C094F005CE16C /* ExcerciseLogViewModel.swift */; };
+		C531FD422B8C18F9005CE16C /* AddExcerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD412B8C18F9005CE16C /* AddExcerciseView.swift */; };
+		C531FD442B8C19E6005CE16C /* ExcerciseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD432B8C19E6005CE16C /* ExcerciseButtonView.swift */; };
 		C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */; };
 		C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */; };
 		C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */; };
@@ -36,7 +45,10 @@
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
+		C5C5611E2B87D83200DBD76D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5C5611D2B87D83100DBD76D /* GoogleService-Info.plist */; };
+		C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */; };
 		C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */; };
+		C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5414D2B882056005AC444 /* GoalsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,11 +85,20 @@
 		C507850B2B90DB5F00555C57 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		C507850F2B90E61400555C57 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		C50785112B90F58400555C57 /* RegisterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTests.swift; sourceTree = "<group>"; };
+		0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTabView.swift; sourceTree = "<group>"; };
+		0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		C50CA40C2B795FFB00AEACCA /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
 		C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogView.swift; sourceTree = "<group>"; };
+		C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogViewModel.swift; sourceTree = "<group>"; };
 		C528A23B2B76B9E900346B27 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		C52C0E0B2B8527160070D707 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5304A142B83BE3B00DA755E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Other/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C531FD382B8BD7C3005CE16C /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		C531FD3A2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGroupButtonView.swift; sourceTree = "<group>"; };
+		C531FD3D2B8C0900005CE16C /* ExcerciseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogView.swift; sourceTree = "<group>"; };
+		C531FD3F2B8C094F005CE16C /* ExcerciseLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogViewModel.swift; sourceTree = "<group>"; };
+		C531FD412B8C18F9005CE16C /* AddExcerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExcerciseView.swift; sourceTree = "<group>"; };
+		C531FD432B8C19E6005CE16C /* ExcerciseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseButtonView.swift; sourceTree = "<group>"; };
 		C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldView.swift; sourceTree = "<group>"; };
@@ -89,7 +110,10 @@
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C5C5611D2B87D83100DBD76D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
 		C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
+		C8A5414D2B882056005AC444 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +228,17 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				C531FD3A2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift */,
+				C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */,
+				C531FD412B8C18F9005CE16C /* AddExcerciseView.swift */,
+				C531FD432B8C19E6005CE16C /* ExcerciseButtonView.swift */,
+			);
+			path = WorkoutHelperViews;
+			sourceTree = "<group>";
+		};
 		C536A1F02B7D128200079DCC /* AuthHelperViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +253,7 @@
 		C536A1FB2B7D2C2500079DCC /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				C52C0E0B2B8527160070D707 /* GoogleService-Info.plist */,
+				C5C5611D2B87D83100DBD76D /* GoogleService-Info.plist */,
 				C536A1FC2B7D2C4600079DCC /* Extensions.swift */,
 			);
 			path = Other;
@@ -227,11 +262,16 @@
 		C5766A032B7418A400F898EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */,
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
+				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
+				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
+				C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */,
+				C531FD3D2B8C0900005CE16C /* ExcerciseLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +282,9 @@
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
+				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
+				C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */,
+				C531FD3F2B8C094F005CE16C /* ExcerciseLogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -250,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				C528A23B2B76B9E900346B27 /* User.swift */,
+				C531FD382B8BD7C3005CE16C /* Workout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,7 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B6E8B162B6A9D0800455CB3 /* Preview Assets.xcassets in Resources */,
-				C52C0E0C2B8527170070D707 /* GoogleService-Info.plist in Resources */,
+				C5C5611E2B87D83200DBD76D /* GoogleService-Info.plist in Resources */,
 				C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */,
 				0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */,
 				0BE9245F2B7D828F006F65F4 /* References in Resources */,
@@ -410,21 +454,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C531FD3B2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift in Sources */,
+				C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */,
+				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C507850C2B90DB5F00555C57 /* Protocol.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
 				C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */,
+				0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */,
 				C528A23C2B76B9E900346B27 /* User.swift in Sources */,
+				C531FD392B8BD7C3005CE16C /* Workout.swift in Sources */,
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
 				0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */,
 				C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */,
+				C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */,
+				C531FD422B8C18F9005CE16C /* AddExcerciseView.swift in Sources */,
+				C531FD442B8C19E6005CE16C /* ExcerciseButtonView.swift in Sources */,
 				C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */,
 				C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */,
 				C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */,
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
+				C531FD3E2B8C0900005CE16C /* ExcerciseLogView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
+				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
+				C531FD402B8C094F005CE16C /* ExcerciseLogViewModel.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
+				C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);

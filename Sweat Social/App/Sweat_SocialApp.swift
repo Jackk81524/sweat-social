@@ -13,6 +13,7 @@ struct Sweat_SocialApp: App {
     
     init() {
         FirebaseApp.configure()
+        
     }
     
     var body: some Scene {

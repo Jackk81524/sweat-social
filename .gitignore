@@ -4,3 +4,5 @@
 *.xcuserdata/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+
+GoogleService-Info.plist
