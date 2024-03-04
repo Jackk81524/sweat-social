@@ -16,19 +16,26 @@ class RegisterViewModel: ObservableObject {
     @Published var confirmPassword = ""
     @Published var errorMessage = ""
     
-    init() {}
+    private let auth: AuthProtocol
+    
+    init(auth: AuthProtocol = FirebaseAuthService()) {
+        self.auth = auth
+    }
     
     func register() {
         guard validate() else {
             return
         }
         // Creates a user on firebase auth
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            guard let userId = result?.user.uid else {
-                return
+        auth.createUser(withEmail: email, password: password) { result in
+            switch result {
+            case .success(let userId):
+                self.insertUserRecord(id: userId ?? "")
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
             }
             
-            self?.insertUserRecord(id: userId)
+            
         }
     }
     
