@@ -14,7 +14,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
         let newUser = User(id: id,
                            name: name,
                            email: email,
-                           joined: Date().timeIntervalSince1970) // Firebase cannot store date as is, so this is a way to handle that
+                           joined: Date().timeIntervalSince1970,
+                           workout: []) // Firebase cannot store date as is, so this is a way to handle that
         
         let db = Firestore.firestore()
         

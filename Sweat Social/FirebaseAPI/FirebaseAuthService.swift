@@ -24,7 +24,7 @@ class FirebaseAuthService: AuthProtocol {
             } else if let userId = result?.user.uid {
                 completion(.success(userId))
             } else {
-                completion(.failure("Invalid User" as! Error))
+                completion(.failure(InvalidUserError()))
             }
         }
     }
