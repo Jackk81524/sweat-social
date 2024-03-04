@@ -9,10 +9,10 @@ import Foundation
 import FirebaseAuth
 
 protocol AuthProtocol {
-    typealias completionHandler = (Error?) -> Void
-    typealias completionHandler2 = (Result<String?,Error>) -> Void
-    func signIn(withEmail email: String, password: String, completion: @escaping completionHandler)
-    func createUser(withEmail email: String, password: String, completion: @escaping completionHandler2)
+    typealias errorHandler = (Error?) -> Void
+    typealias completionHandler = (Result<String?,Error>) -> Void
+    func signIn(withEmail email: String, password: String, completion: @escaping errorHandler)
+    func createUser(withEmail email: String, password: String, completion: @escaping completionHandler)
 }
 
 protocol FirestoreProtocol {

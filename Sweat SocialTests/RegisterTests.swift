@@ -9,7 +9,7 @@ import XCTest
 @testable import Sweat_Social
 
 final class RegisterTests: XCTestCase {
-
+    
     func test_RegisterViewModel_email_shouldBeEmptyOnInitialization() {
         let viewModel = RegisterViewModel()
         
@@ -123,11 +123,11 @@ final class RegisterTests: XCTestCase {
         XCTAssertEqual(viewModel.errorMessage, "Please fill in all fields.")
     }
     
-    func test_RegisterViewModel_Register_validEmail() {
+    func test_RegisterViewModel_Register_invalidEmail() {
         let numberOfSpaces = Int.random(in:1...10)
         let email = generateRandomString(length: Int.random(in: 6...16))
         let password = generateRandomString(length: Int.random(in: 6...16))
-        let confirmPassword = generateRandomString(length: Int.random(in: 6...16))
+        let confirmPassword = password
         let name = generateRandomString(length: Int.random(in: 6...16))
         
         let viewModel = RegisterViewModel()
@@ -180,28 +180,61 @@ final class RegisterTests: XCTestCase {
         
         
     }
-    /*
-    func test_RegisterViewModel_Register_succesfulRegister() {
+    
+    func test_RegisterViewModel_Register_succesfulRegister_succesfulFirestore() {
         let email = "test@email.com"
-        let password = generateRandomString(length: Int.random(in:1...10))
-        let viewModel = RegisterViewModel(auth: MockFirebaseAuthServiceSuccess())
+        let password = generateRandomString(length: Int.random(in:6...10))
+        let confirmPassword = password
+        let name = generateRandomString(length: Int.random(in: 7...12))
         
+        let viewModel = RegisterViewModel(auth: MockFirebaseAuthServiceSuccess(), firestore: MockFirebaseFirestoreServiceSuccess())
         viewModel.email = email
         viewModel.password = password
-        viewModel.Register()
+        viewModel.name = name
+        viewModel.confirmPassword = confirmPassword
         
+        viewModel.register()
+        
+        XCTAssertEqual(viewModel.userId, password) // Password is used to mock userId, look at helper
+        XCTAssertEqual(viewModel.password, password)
+        XCTAssertEqual(viewModel.email, email)
+        XCTAssertEqual(viewModel.name, name)
         XCTAssertEqual(viewModel.errorMessage,"")
     }
     
     func test_RegisterViewModel_Register_failedRegister() {
         let email = "test@email.com"
-        let password = generateRandomString(length: Int.random(in:1...10))
-        let viewModel = RegisterViewModel(auth: MockFirebaseAuthServiceFailed())
+        let password = generateRandomString(length: Int.random(in:6...10))
+        let confirmPassword = password
+        let name = generateRandomString(length: Int.random(in: 6...16))
         
+        let viewModel = RegisterViewModel(auth: MockFirebaseAuthServiceFailed(), firestore: MockFirebaseFirestoreServiceSuccess()) // Firestore should be irrelevant, if code works correctly then it shouldnt be used
         viewModel.email = email
         viewModel.password = password
-        viewModel.Register()
+        viewModel.name = name
+        viewModel.confirmPassword = confirmPassword
         
-        XCTAssertEqual(viewModel.errorMessage,"User does not exist")
-    }*/
+        viewModel.register()
+        
+        //XCTAssertEqual(viewModel.password, password)
+        XCTAssertEqual(viewModel.errorMessage,"Failure creating user.")
+    }
+    
+    func test_RegisterViewModel_Register_succesfulRegister_failedFirestore() {
+        let email = "test@email.com"
+        let password = generateRandomString(length: Int.random(in:6...10))
+        let confirmPassword = password
+        let name = generateRandomString(length: Int.random(in: 6...16))
+        
+        let viewModel = RegisterViewModel(auth: MockFirebaseAuthServiceSuccess(), firestore: MockFirebaseFirestoreServiceFailed())
+        viewModel.email = email
+        viewModel.password = password
+        viewModel.name = name
+        viewModel.confirmPassword = confirmPassword
+        
+        viewModel.register()
+        
+        //XCTAssertEqual(viewModel.password, password)
+        XCTAssertEqual(viewModel.errorMessage,"Failure connecting to Firestore.")
+    }
 }

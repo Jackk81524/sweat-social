@@ -15,6 +15,8 @@ class RegisterViewModel: ObservableObject {
     @Published var password = ""
     @Published var confirmPassword = ""
     @Published var errorMessage = ""
+    @Published var userId = ""
+    
     
     private let auth: AuthProtocol
     private let firestore: FirestoreProtocol
@@ -32,7 +34,8 @@ class RegisterViewModel: ObservableObject {
         auth.createUser(withEmail: email, password: password) { [weak self] result in
             switch result {
             case .success(let userId):
-                self?.firestore.insertNewUser(id: userId ?? "", name: self?.name ?? "", email: self?.email ?? "") { firestoreResult in
+                self?.userId = userId ?? ""
+                self?.firestore.insertNewUser(id: self?.userId ?? "", name: self?.name ?? "", email: self?.email ?? "") { firestoreResult in
 
                     switch firestoreResult{
                     case .failure(let error):
