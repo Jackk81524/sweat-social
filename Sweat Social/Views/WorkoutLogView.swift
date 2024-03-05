@@ -12,55 +12,57 @@ struct WorkoutLogView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                VStack {
-                    ScrollView {
-                        if let workoutGroups = viewModel.workoutGroups {
-                            ForEach(workoutGroups) { group in
-                                WorkoutGroupButtonView(name: group.name)
-                            }
-                            .offset(y:50)
-                        }
-                    }
-                }
-                
-                ZStack{
-                    
-                    Text("Your Workout")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    HStack {
-                        Spacer()
-                        Button {
-                            viewModel.addWorkoutForm.toggle()
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundColor(.black)
-                                Text("+")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 20))
-                                    .fontWeight(.bold)
-                            }
-                            .frame(width: 39, height: 26)
-                            .padding()
+            VStack {
+                ZStack {
+                    VStack {
+                        ZStack{
                             
+                            Text("Your Workout")
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            
+                            HStack {
+                                Spacer()
+                                Button {
+                                    viewModel.addWorkoutForm.toggle()
+                                } label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .foregroundColor(.black)
+                                        Text("+")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .fontWeight(.bold)
+                                    }
+                                    .frame(width: 39, height: 26)
+                                    .padding()
+                                    
+                                }
+                                //.padding(8)
+                                
+                            }
                         }
-                        .padding(8)
                         
+                        ScrollView {
+                            if let workoutGroups = viewModel.workoutGroups {
+                                ForEach(workoutGroups) { group in
+                                    WorkoutGroupButtonView(name: group.name)
+                                }
+                                
+                            }
+                        }
                     }
-                }
-                .offset(y:-340)
 
-                if viewModel.addWorkoutForm {
-                    ZStack {
-                        AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                    if viewModel.addWorkoutForm {
+                        ZStack {
+                            AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                        }
                     }
+                    
                 }
-                
             }
-            
+            .padding(.top,40)
         }
+        
     }
 }
 

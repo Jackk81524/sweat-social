@@ -9,35 +9,55 @@ import SwiftUI
 
 struct TabBar: View {
     var body: some View {
-        //AuthHeaderView()
-        TabView {
-            ActivityTabView()
-                .tabItem {
-                    Label("Social", systemImage: "message")
-                }
-                .badge(3)
+        ZStack {
             
-            Text("Calender")
-                .tabItem {
-                    Label("Calender", systemImage: "calendar")
-                }
+            
+            TabView {
+                ActivityTabView()
+                    .tabItem {
+                        Label("Social", systemImage: "message")
+                    }
+                    .badge(3)
                 
-            
-            WorkoutLogView()
-                .tabItem {
-                    Label("Log Workout", systemImage: "plus.circle.fill")
-                }
-            
-            GoalsView()
-                .tabItem {
-                    Label("Achievements", systemImage: "medal")
-
-                }
-            
-            Text("Profile")
-                .tabItem {
-                    Label("Profile", systemImage: "person.fill")
+                Text("Calender")
+                    .tabItem {
+                        Label("Calender", systemImage: "calendar")
+                    }
+                
+                
+                WorkoutLogView()
+                    .tabItem {
+                        Label("Log Workout", systemImage: "plus.circle.fill")
+                    }
+                
+                GoalsView()
+                    .tabItem {
+                        Label("Achievements", systemImage: "medal")
+                        
+                    }
+                
+                Text("Profile")
+                    .tabItem {
+                        Label("Profile", systemImage: "person.fill")
+                    }
             }
+            .padding(.top, 70)
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.black)
+                
+                Text("Sweat Social")
+                    .font(.custom("Futura-MediumItalic", size: 64))
+                    .fontWidth(.condensed)
+                    .foregroundStyle(.white)
+                    .baselineOffset(-135)
+                    .bold()
+                
+            }
+            .frame(width: UIScreen.main.bounds.width, height: 259)
+            .offset(y: -400)
+            
         }
     }
 }
