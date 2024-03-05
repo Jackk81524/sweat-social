@@ -15,32 +15,7 @@ struct WorkoutLogView: View {
             VStack {
                 ZStack {
                     VStack {
-                        ZStack{
-                            
-                            Text("Your Workout")
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                            HStack {
-                                Spacer()
-                                Button {
-                                    viewModel.addWorkoutForm.toggle()
-                                } label: {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .foregroundColor(.black)
-                                        Text("+")
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 20))
-                                            .fontWeight(.bold)
-                                    }
-                                    .frame(width: 39, height: 26)
-                                    .padding()
-                                    
-                                }
-                                //.padding(8)
-                                
-                            }
-                        }
+                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout")
                         
                         ScrollView {
                             if let workoutGroups = viewModel.workoutGroups {
@@ -54,7 +29,7 @@ struct WorkoutLogView: View {
 
                     if viewModel.addWorkoutForm {
                         ZStack {
-                            AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
                         }
                     }
                     

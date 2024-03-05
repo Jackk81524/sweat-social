@@ -9,20 +9,34 @@ import SwiftUI
 
 struct AddWorkoutView: View {
     @State private var input = ""
-    @Binding var showForm: Bool
+    @Binding var showAddWorkoutForm: Bool
     let action: (String) -> Void
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16)
-                .strokeBorder(Color.black,lineWidth:2)                
-                .background(Color.white)
-                .foregroundColor(.white)
-                .frame(width: 350, height: 300)
-            
+            ZStack(alignment: .topLeading){
+                RoundedRectangle(cornerRadius: 16,style:.continuous)
+                    .strokeBorder(Color.black,lineWidth:2)
+                    .background(Color.white)
+                    .foregroundStyle(.white)
+                    .frame(width: 350, height: 270)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16, style: .circular)
+                        .frame(width: 350, height: 100)
+                        .foregroundStyle(.black)
+                    Rectangle()
+                        .frame(width:350, height: 20)
+                        .foregroundStyle(.black)
+                        .offset(y:40)
+                }
+                    
+            }
+
             VStack {
-                Text("Add a workout group")
+                Text("Add Workout Category")
                     .font(.system(size:26))
+                    .foregroundStyle(.white)
+                    .bold()
                     .offset(y:-40)
                 
                 HStack {
@@ -36,25 +50,21 @@ struct AddWorkoutView: View {
                         .padding()
                         .onSubmit {
                             action(input)
-                            showForm.toggle()
+                            showAddWorkoutForm.toggle()
                         }
                 }
                 
             }
             
-            
-                    
-             
-            
-            
-                
+      
         }
         
     }
 }
 
+
 #Preview {
-    AddWorkoutView(showForm: .constant(true)) {_ in
+    AddWorkoutView(showAddWorkoutForm: .constant(true)) {_ in
         // Action
     }
 }

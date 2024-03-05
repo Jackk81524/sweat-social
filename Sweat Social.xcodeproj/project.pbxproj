@@ -43,6 +43,7 @@
 		C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1FC2B7D2C4600079DCC /* Extensions.swift */; };
 		C538E5132B8FE5400035FC15 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E5122B8FE5400035FC15 /* LoginTests.swift */; };
 		C538E5172B8FF3470035FC15 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E5162B8FF3470035FC15 /* Helper.swift */; };
+		C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */; };
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
@@ -109,6 +110,7 @@
 		C536A1FC2B7D2C4600079DCC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C538E5122B8FE5400035FC15 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		C538E5162B8FF3470035FC15 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHeaderView.swift; sourceTree = "<group>"; };
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */,
 				C531FD412B8C18F9005CE16C /* AddExcerciseView.swift */,
 				C531FD432B8C19E6005CE16C /* ExcerciseButtonView.swift */,
+				C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */,
 			);
 			path = WorkoutHelperViews;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */,
 				C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */,
 				C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */,
+				C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */,
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
 				C531FD3E2B8C0900005CE16C /* ExcerciseLogView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,

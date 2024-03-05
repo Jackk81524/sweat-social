@@ -55,7 +55,7 @@ struct ExcerciseLogView: View {
 
                 if viewModel.addExcerciseForm {
                     ZStack {
-                        AddExcerciseView(showForm: $viewModel.addExcerciseForm, action: viewModel.addExcercise)
+                        Text("Temp")
                     }
                 }
                 
