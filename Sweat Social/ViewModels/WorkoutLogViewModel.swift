@@ -10,23 +10,23 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class WorkoutLogViewModel: ObservableObject {
-    @Published var userID = ""
+    @Published var userId: String?
     @Published var muscleGroupToAdd = ""
     @Published var addWorkoutForm = false
     @Published var currentUser: User?
-    @Published var workoutGroups: [WorkoutGroup]?
-    private var db = Firestore.firestore()
+    @Published var workoutCategories: [WorkoutCategory]?
     
-    init() {
-        if let user = Auth.auth().currentUser {
-            userID = user.uid
-            fetchWorkoutGroups()
-        } else {
-            //print("error")
-        }
+    private let firestore: FirestoreProtocol
+    private let auth: AuthProtocol
+    
+    init(auth: AuthProtocol = FirebaseAuthService(),
+         firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+        self.auth = auth
+        self.firestore = firestore
+        self.userId = auth.currentUser
     }
     
-    func fetchWorkoutGroups() {
+    /*func fetchWorkoutGroups() {
         db.collection("users").document(userID).getDocument { (document, error) in
             if let document = document, document.exists {
                 do {
@@ -43,11 +43,12 @@ class WorkoutLogViewModel: ObservableObject {
                 return
             }
         }
-    }
+    }*/
     
-    func addWorkoutGroup(workoutGroupName: String){
-        fetchWorkoutGroups()
-        let newWorkoutGroup = WorkoutGroup(name: workoutGroupName, excercises: [])
+    func addWorkoutCategory(workoutCategoryName: String){
+        //fetchWorkoutGroups()
+        let dateAdded = Date().timeIntervalSince1970
+        let newWorkoutCategory = WorkoutCategory(name: workoutCategoryName, dateAdded: dateAdded
         
         var workoutGroupsDicts: [[String: Any]] = []
         if var workoutGroups = workoutGroups {

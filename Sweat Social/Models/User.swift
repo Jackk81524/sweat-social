@@ -12,5 +12,5 @@ struct User: Codable {
     let name: String
     let email: String
     let joined: TimeInterval
-    var workout: [WorkoutGroup]
+    var workout: [WorkoutCategory]?
 }

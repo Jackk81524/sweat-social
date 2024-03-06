@@ -17,11 +17,11 @@ class AuthViewModel: ObservableObject {
         
        do {
             try Auth.auth().signOut()
-        } catch let _ as NSError {
+       } catch _ as NSError {
             //Catch
-        }
+       }
         
-        let handler = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+        _ = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async {
                 self?.currentUserId = user?.uid ?? ""
             }
