@@ -12,7 +12,7 @@ protocol AuthProtocol {
     typealias errorHandler = (Error?) -> Void
     typealias completionHandler = (Result<String?,Error>) -> Void
     
-    var currentUser: String? { get }
+    var currentUser: String { get }
     
     func signIn(withEmail email: String, password: String, completion: @escaping errorHandler)
     func createUser(withEmail email: String, password: String, completion: @escaping completionHandler)
@@ -20,7 +20,11 @@ protocol AuthProtocol {
 
 protocol FirestoreProtocol {
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void)
-    func insertWorkoutCategory(userId: String,newWorkoutName: String, completion: @escaping (Result<Void?, Error>) -> Void)
+    
+    func insertWorkoutCategory(userId: String,newWorkoutCategory: WorkoutCategory, completion: @escaping (Result<Void?, Error>) -> Void)
+    func fetchWorkoutCategories(userId: String, completion: @escaping (Result<[WorkoutCategory], Error>) -> Void)
     func insertExcercise(userId: String,workoutCategory: String, newExcerciseName: String, completion: @escaping (Result<Void?, Error>) -> Void)
+    
+    
 }
 

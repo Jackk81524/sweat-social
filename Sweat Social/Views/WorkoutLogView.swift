@@ -10,6 +10,7 @@ import SwiftUI
 struct WorkoutLogView: View {
     @StateObject var viewModel = WorkoutLogViewModel()
     
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -18,18 +19,15 @@ struct WorkoutLogView: View {
                         WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout")
                         
                         ScrollView {
-                            if let workoutGroups = viewModel.workoutGroups {
-                                ForEach(workoutGroups) { group in
-                                    WorkoutGroupButtonView(name: group.name)
-                                }
-                                
+                            ForEach(viewModel.workoutCategories) { group in
+                                WorkoutGroupButtonView(name: group.id)
                             }
                         }
                     }
 
                     if viewModel.addWorkoutForm {
                         ZStack {
-                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutCategory)
                         }
                     }
                     

@@ -10,6 +10,8 @@ import FirebaseFirestore
 
 class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
+    static var userCollection = "users"
+    static var workoutCategoryCollection = "Workout Categories"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newUser = User(id: userId,
@@ -18,7 +20,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
                            joined: Date().timeIntervalSince1970) // Firebase cannot store date as is, so this is a way to handle that
         
         
-        FirebaseFirestoreService.db.collection("users")
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .setData(newUser.asDictionary()) { error in
                 if let error = error {
@@ -31,10 +33,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     
     func insertWorkoutCategory(userId: String,newWorkoutCategory: WorkoutCategory, completion: @escaping (Result<Void?, Error>) -> Void) {
         
-        FirebaseFirestoreService.db.collection("users")
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
-            .collection("Workout Categories")
-            .document(newWorkoutCategory.name)
+            .collection(FirebaseFirestoreService.workoutCategoryCollection)
+            .document(newWorkoutCategory.id)
             .setData(newWorkoutCategory.asDictionary()) { error in
                 if let error = error {
                     completion(.failure(error))
@@ -42,6 +44,36 @@ class FirebaseFirestoreService : FirestoreProtocol {
                     completion(.success(()))
                 }
             }
+    }
+    
+    func fetchWorkoutCategories(userId: String, completion: @escaping (Result<[WorkoutCategory], Error>) -> Void){
+        
+        let workoutCategoryCollection = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.workoutCategoryCollection)
+        
+        workoutCategoryCollection.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                completion(.success([]))
+                return
+            }
+            
+            let workoutCategories: [WorkoutCategory] = documents.compactMap { document in
+                if let id = document["id"] as? String,
+                   let dateAdded = document["dateAdded"] as? TimeInterval  {
+                    return WorkoutCategory(id: id, dateAdded: dateAdded)
+                }
+                return nil
+            }
+            
+            completion(.success(workoutCategories))
+        }
+        
     }
     
     func insertExcercise(userId: String,workoutCategory: String, newExcerciseName: String, completion: @escaping (Result<Void?, Error>) -> Void) {
@@ -63,22 +95,4 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 }
             }
     }
-    /*func fetchWorkouts(userId: String, currentUser: User?) {
-        FirebaseFirestoreService.db.collection("users").document(userId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                do {
-                    currentUser = try document.data(as: User.self)
-                    
-                    if let workoutGroups = self.currentUser?.workout {
-                        self.workoutGroups = workoutGroups
-                    }
-                } catch {
-                    print(error)
-                }
-            } else {
-                print("Document does not exist")
-                return
-            }
-        }
-    }*/
 }

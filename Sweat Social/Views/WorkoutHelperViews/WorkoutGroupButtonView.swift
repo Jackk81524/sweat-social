@@ -28,9 +28,9 @@ struct WorkoutGroupButtonView: View {
                 .frame(width: 367, height: 51)
                 .padding(4)
             }
-            .navigationDestination(isPresented: $showExcercise) {
+            /*.navigationDestination(isPresented: $showExcercise) {
                 ExcerciseLogView(workoutGroup: name)
-            }
+            }*/
         }
     }
 }

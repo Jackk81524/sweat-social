@@ -10,11 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class WorkoutLogViewModel: ObservableObject {
-    @Published var userId: String?
-    @Published var muscleGroupToAdd = ""
+    @Published var userId: String
     @Published var addWorkoutForm = false
-    @Published var currentUser: User?
-    @Published var workoutCategories: [WorkoutCategory]?
+    @Published var workoutCategories: [WorkoutCategory] = []
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -23,50 +21,40 @@ class WorkoutLogViewModel: ObservableObject {
          firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
         self.firestore = firestore
+        
         self.userId = auth.currentUser
+        fetchWorkoutCategories(userId: userId)
     }
     
-    /*func fetchWorkoutGroups() {
-        db.collection("users").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                do {
-                    self.currentUser = try document.data(as: User.self)
-                    
-                    if let workoutGroups = self.currentUser?.workout {
-                        self.workoutGroups = workoutGroups
-                    }
-                } catch {
-                    print(error)
-                }
-            } else {
-                print("Document does not exist")
+    
+    func addWorkoutCategory(workoutCategoryName: String){
+        let dateAdded = Date().timeIntervalSince1970
+        let newWorkoutCategory = WorkoutCategory(id: workoutCategoryName, dateAdded: dateAdded)
+        
+        firestore.insertWorkoutCategory(userId: self.userId, newWorkoutCategory: newWorkoutCategory) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            default:
+                self.workoutCategories.append(newWorkoutCategory)
                 return
             }
         }
-    }*/
+    }
     
-    func addWorkoutCategory(workoutCategoryName: String){
-        //fetchWorkoutGroups()
-        let dateAdded = Date().timeIntervalSince1970
-        let newWorkoutCategory = WorkoutCategory(name: workoutCategoryName, dateAdded: dateAdded
-        
-        var workoutGroupsDicts: [[String: Any]] = []
-        if var workoutGroups = workoutGroups {
-            for group in workoutGroups {
-                workoutGroupsDicts.append(group.asDictionary())
+    func fetchWorkoutCategories(userId: String) {
+        firestore.fetchWorkoutCategories(userId: userId) { [weak self] result in
+            
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let workoutCategories):
+                self?.workoutCategories = workoutCategories
             }
-            workoutGroups.append(newWorkoutGroup)
-            self.workoutGroups = workoutGroups
             
         }
-        
-        
-        
-        workoutGroupsDicts.append(newWorkoutGroup.asDictionary())
-        
-        let workoutGroupsData = ["workout": workoutGroupsDicts]
-        db.collection("users").document(userID).updateData(workoutGroupsData)
-            
     }
     
     

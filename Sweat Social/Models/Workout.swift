@@ -7,11 +7,10 @@
 
 import Foundation
 
-struct WorkoutCategory: Codable {
-    let name: String
+struct WorkoutCategory: Codable, Identifiable {
+    let id: String
     let dateAdded: TimeInterval
-    var excercises: [Excercise]?
-    
+    //var excercises: [String]?
 }
 
 struct Excercise: Codable {

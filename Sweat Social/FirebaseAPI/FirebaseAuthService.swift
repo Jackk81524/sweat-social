@@ -10,8 +10,13 @@ import FirebaseAuth
 
 
 class FirebaseAuthService: AuthProtocol {    
-    var currentUser: String? {
-        return Auth.auth().currentUser?.uid
+    var currentUser: String {
+        if let currentUser = Auth.auth().currentUser {
+            return currentUser.uid
+        } else {
+            return ""
+        }
+        
     }
     
     func signIn(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
