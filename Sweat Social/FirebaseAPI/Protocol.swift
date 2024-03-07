@@ -21,9 +21,9 @@ protocol AuthProtocol {
 protocol FirestoreProtocol {
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void)
     
-    func insertWorkoutCategory(userId: String,newWorkoutCategory: WorkoutCategory, completion: @escaping (Result<Void?, Error>) -> Void)
-    func fetchWorkoutCategories(userId: String, completion: @escaping (Result<[WorkoutCategory], Error>) -> Void)
-    func insertExcercise(userId: String,workoutCategory: String, newExcerciseName: String, completion: @escaping (Result<Void?, Error>) -> Void)
+    func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void)
+    func fetchWorkouts(userId: String, workout: WorkoutExcercise?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void)
+   
     
     
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct WorkoutGroupButtonView: View {
     let name: String
     @State private var showExcercise = false
@@ -17,8 +19,13 @@ struct WorkoutGroupButtonView: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .strokeBorder(Color.black,lineWidth: 2)
-                        .foregroundColor(.white)
+                        .fill(Color(hex: 0xF4F4F4))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .strokeBorder(Color.black,lineWidth: 2)
+                                //.shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        )
+                        
                     
                     Text(name)
                         .foregroundColor(.black)

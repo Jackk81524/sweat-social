@@ -13,11 +13,13 @@ struct InvalidUserError: Error {
 
 enum CustomErrors: Error {
     case noCurrentUser
-    
-    var localizedDescription: String {
-        switch self {
-        case .noCurrentUser:
-            return NSLocalizedString("No current user retrieved", comment: "")
-        }
-    }
+    case existingWorkout
+}
+
+struct NoCurrentUser: Error {
+    let message = "No current user"
+}
+
+struct WorkoutExists: Error {
+    let message = "This workout category already exists"
 }

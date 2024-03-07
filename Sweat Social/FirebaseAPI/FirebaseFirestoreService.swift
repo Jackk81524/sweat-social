@@ -11,7 +11,8 @@ import FirebaseFirestore
 class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
     static var userCollection = "users"
-    static var workoutCategoryCollection = "Workout Categories"
+    static var WorkoutCategoriesCollection = "Workout Categories"
+    static var excerciseCollection = "Excercises"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newUser = User(id: userId,
@@ -31,29 +32,53 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
     }
     
-    func insertWorkoutCategory(userId: String,newWorkoutCategory: WorkoutCategory, completion: @escaping (Result<Void?, Error>) -> Void) {
+    func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+    
+        var toAdd = newWorkoutCategory
         
-        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+        var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
-            .collection(FirebaseFirestoreService.workoutCategoryCollection)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(newWorkoutCategory.id)
-            .setData(newWorkoutCategory.asDictionary()) { error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
+        
+        if let newExcercise = newExcercise {
+            toAdd = newExcercise
+            doc = doc.collection(FirebaseFirestoreService.excerciseCollection)
+                .document(newExcercise.id)
+        }
+        
+        doc.getDocument { (document, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            } else if let document = document, document.exists {
+                completion(.failure(WorkoutExists()))
+                return
             }
+        }
+        
+        doc.setData(toAdd.asDictionary()) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
     
-    func fetchWorkoutCategories(userId: String, completion: @escaping (Result<[WorkoutCategory], Error>) -> Void){
+    func fetchWorkouts(userId: String, workout: WorkoutExcercise?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void){
         
-        let workoutCategoryCollection = FirebaseFirestoreService.db
+        var collection = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
-            .collection(FirebaseFirestoreService.workoutCategoryCollection)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
         
-        workoutCategoryCollection.addSnapshotListener { (querySnapshot, error) in
+        if let workout = workout {
+            collection = collection.document(workout.id)
+                .collection(FirebaseFirestoreService.excerciseCollection)
+        }
+        
+        collection.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 completion(.failure(error))
             }
@@ -63,36 +88,43 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 return
             }
             
-            let workoutCategories: [WorkoutCategory] = documents.compactMap { document in
+            let workoutList: [WorkoutExcercise] = documents.compactMap { document in
                 if let id = document["id"] as? String,
                    let dateAdded = document["dateAdded"] as? TimeInterval  {
-                    return WorkoutCategory(id: id, dateAdded: dateAdded)
+                    return WorkoutExcercise(id: id, dateAdded: dateAdded)
                 }
                 return nil
             }
             
-            completion(.success(workoutCategories))
+            completion(.success(workoutList))
         }
         
     }
     
-    func insertExcercise(userId: String,workoutCategory: String, newExcerciseName: String, completion: @escaping (Result<Void?, Error>) -> Void) {
-        
+    /*func insertExcercise(userId: String,WorkoutExcercise: String, newExcerciseName: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newExcercise = Excercise(name: newExcerciseName,
                                      dateAdded: Date().timeIntervalSince1970)
         
-        FirebaseFirestoreService.db.collection("users")
+        let doc = FirebaseFirestoreService.db.collection("users")
             .document(userId)
             .collection("Workout Categories")
-            .document(workoutCategory)
+            .document(WorkoutExcercise)
             .collection("Excercises")
             .document(newExcerciseName)
-            .setData(newExcercise.asDictionary()) { error in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
+        
+        doc.getDocument { (document, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else if let document = document, document.exists {
+                completion(.failure(CustomErrors.existingWorkout))
             }
-    }
+        }
+        doc.setData(newExcercise.asDictionary()) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }*/
 }
