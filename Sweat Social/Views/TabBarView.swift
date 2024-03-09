@@ -25,7 +25,10 @@ struct TabBar: View {
                     }
                 
                 
-                WorkoutLogView(title: "Your Workout")
+                WorkoutLogView(title: "Your Workout",
+                               workoutSelected: nil,
+                               addMainTitle:"Add Workout Category",
+                               addPlaceHolder: "Enter workout category")
                     .tabItem {
                         Label("Log Workout", systemImage: "plus.circle.fill")
                     }

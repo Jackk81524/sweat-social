@@ -16,26 +16,33 @@ class WorkoutLogViewModel: ObservableObject {
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
+    private let workout: String?
     
-    init(auth: AuthProtocol = FirebaseAuthService(),
+    init(workout: String?,auth: AuthProtocol = FirebaseAuthService(),
          firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
         self.firestore = firestore
-        
+        self.workout = workout
         self.userId = auth.currentUser
-        fetchWorkouts(userId: userId)
+        fetchWorkouts(userId: userId,workout: workout)
     }
     
     
-    func addWorkout(workoutName: String){
+    func addWorkout(workoutName: String,excerciseName:String? = nil){
         let dateAdded = Date().timeIntervalSince1970
-        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
         
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: nil) { [weak self] result in
+        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
+        var newExcercise: WorkoutExcercise? = nil
+        
+        if let excerciseName = excerciseName {
+            newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
+        }
+        
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: newExcercise) { [weak self] result in
             guard self != nil else { return }
             
             if case let .failure(error) = result {
-                if let customError = error as? WorkoutExists {
+                if error is WorkoutExists {
                     print("This workout already exists")
                 } else {
                     print(error.localizedDescription)
@@ -44,8 +51,9 @@ class WorkoutLogViewModel: ObservableObject {
         }
     }
     
-    func fetchWorkouts(userId: String) {
-        firestore.fetchWorkouts(userId: userId, workout: nil) { [weak self] result in
+    func fetchWorkouts(userId: String, workout: String? = nil) {
+        
+        firestore.fetchWorkouts(userId: userId, workout: workout) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

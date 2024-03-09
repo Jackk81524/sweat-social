@@ -8,9 +8,20 @@
 import SwiftUI
 
 struct WorkoutLogView: View {
-    @StateObject var viewModel = WorkoutLogViewModel()
     let title: String
+    let workoutSelected: String?
+    let addMainTitle: String
+    let addPlaceHolder: String
     
+    @StateObject var viewModel : WorkoutLogViewModel
+    
+    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String) {
+        self.title = title
+        self.workoutSelected = workoutSelected
+        self.addMainTitle = addMainTitle
+        self.addPlaceHolder = addPlaceHolder
+        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(workout: workoutSelected))
+    }
     
     var body: some View {
         NavigationStack {
@@ -28,7 +39,7 @@ struct WorkoutLogView: View {
 
                     if viewModel.addWorkoutForm {
                         ZStack {
-                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, action: viewModel.addWorkout)
+                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, workoutSelected: workoutSelected, mainTitle: addMainTitle, placeHolder: addPlaceHolder, action: viewModel.addWorkout)
                         }
                     }
                     
@@ -36,10 +47,11 @@ struct WorkoutLogView: View {
             }
             .padding(.top,40)
         }
+        .navigationBarHidden(true)
         
     }
 }
 
 #Preview {
-    WorkoutLogView(title: "Your Workout")
+    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise")
 }

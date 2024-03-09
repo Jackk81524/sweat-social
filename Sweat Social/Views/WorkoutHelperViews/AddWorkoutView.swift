@@ -10,7 +10,11 @@ import SwiftUI
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
-    let action: (String) -> Void
+    let workoutSelected: String?
+    let mainTitle: String
+    let placeHolder: String
+    let action: (String, String?) -> Void
+    
     
     var body: some View {
         ZStack {
@@ -33,7 +37,7 @@ struct AddWorkoutView: View {
             }
 
             VStack {
-                Text("Add Workout Category")
+                Text(mainTitle)
                     .font(.system(size:26))
                     .foregroundStyle(.white)
                     .bold()
@@ -44,12 +48,16 @@ struct AddWorkoutView: View {
                         .font(.system(size:22))
                         .offset(x:50)
                     
-                    TextField("Add muscle group", text: $input)
+                    TextField(placeHolder, text: $input)
                         .offset(x:100)
                         .font(.system(size:22))
                         .padding()
                         .onSubmit {
-                            action(input)
+                            if let workoutSelected = workoutSelected {
+                                action(workoutSelected,input)
+                            } else {
+                                action(input,nil)
+                            }
                             showAddWorkoutForm.toggle()
                         }
                 }
@@ -64,7 +72,7 @@ struct AddWorkoutView: View {
 
 
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true)) {_ in
-        // Action
+    AddWorkoutView(showAddWorkoutForm: .constant(true), workoutSelected: "", mainTitle: "Enter workout", placeHolder: "Add excercise") {_,_ in 
+        // Nothing
     }
 }
