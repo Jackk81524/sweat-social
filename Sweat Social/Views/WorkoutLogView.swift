@@ -12,14 +12,16 @@ struct WorkoutLogView: View {
     let workoutSelected: String?
     let addMainTitle: String
     let addPlaceHolder: String
+    let excercisesListed: Bool
     
     @StateObject var viewModel : WorkoutLogViewModel
     
-    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String) {
+    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String, excercisesListed: Bool) {
         self.title = title
         self.workoutSelected = workoutSelected
         self.addMainTitle = addMainTitle
         self.addPlaceHolder = addPlaceHolder
+        self.excercisesListed = excercisesListed
         self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(workout: workoutSelected))
     }
     
@@ -32,7 +34,7 @@ struct WorkoutLogView: View {
                         
                         ScrollView {
                             ForEach(viewModel.workoutList) { group in
-                                WorkoutGroupButtonView(name: group.id)
+                                WorkoutGroupButtonView(name: group.id, excercisesListed: self.excercisesListed)
                             }
                         }
                     }
@@ -53,5 +55,5 @@ struct WorkoutLogView: View {
 }
 
 #Preview {
-    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise")
+    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise", excercisesListed: false)
 }
