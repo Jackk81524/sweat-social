@@ -43,6 +43,8 @@
 		C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */; };
 		C5F64D122B84323300A0454D /* ci_pre_xcodebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */; };
 		C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5414D2B882056005AC444 /* GoalsView.swift */; };
+		C8A9BF462BAA0FA90086F2B5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A9BF452BAA0FA90086F2B5 /* ProfileView.swift */; };
+		C8A9BF482BAA1A2D0086F2B5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A9BF472BAA1A2D0086F2B5 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		C5F38B2A2B8952D80033B5C6 /* AddWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutView.swift; sourceTree = "<group>"; };
 		C5F64D112B84323300A0454D /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		C8A5414D2B882056005AC444 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		C8A9BF452BAA0FA90086F2B5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C8A9BF472BAA1A2D0086F2B5 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +246,7 @@
 				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
+				C8A9BF452BAA0FA90086F2B5 /* ProfileView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 				C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */,
@@ -254,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
+				C8A9BF472BAA1A2D0086F2B5 /* ProfileViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
 				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
@@ -430,6 +436,7 @@
 			files = (
 				C531FD3B2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift in Sources */,
 				C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */,
+				C8A9BF482BAA1A2D0086F2B5 /* ProfileViewModel.swift in Sources */,
 				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
@@ -439,6 +446,7 @@
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
 				0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */,
 				C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */,
+				C8A9BF462BAA0FA90086F2B5 /* ProfileView.swift in Sources */,
 				C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */,
 				C531FD422B8C18F9005CE16C /* AddExcerciseView.swift in Sources */,
 				C531FD442B8C19E6005CE16C /* ExcerciseButtonView.swift in Sources */,
