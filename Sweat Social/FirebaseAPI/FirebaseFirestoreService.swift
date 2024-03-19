@@ -66,6 +66,48 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
     }
     
+    func insertSet(userId: String, workout: String, excercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+        
+        let document = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workout)
+            .collection(FirebaseFirestoreService.ExcerciseCollection)
+            .document(excercise)
+        
+        document.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard var setInfo = documentSnapshot?.data() else {
+                print("Unknown Error")
+                return
+            }
+            
+            if var weightList = setInfo["Weight"] as? [Int], var repsList = setInfo["Reps"] as? [Int] {
+                // Lists exist, append new values
+                weightList.append(weight)
+                repsList.append(reps)
+                setInfo["Weight"] = weightList
+                setInfo["Reps"] = repsList
+            } else {
+                // Lists don't exist, create them with the new values
+                setInfo["Weight"] = [weight]
+                setInfo["Reps"] = [reps]
+            }
+            
+            document.setData(setInfo) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+    
     func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void){
         
         var collection = FirebaseFirestoreService.db

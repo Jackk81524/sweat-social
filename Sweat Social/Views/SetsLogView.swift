@@ -34,7 +34,7 @@ struct SetsLogView: View {
 
                     if viewModel.addSetForm {
                         ZStack {
-                            Text("Add")
+                            AddSetView(showAddSetForm: $viewModel.addSetForm, action: viewModel.addSet) 
                         }
                     }
                     

@@ -26,28 +26,18 @@ class SetsLogViewModel: ObservableObject {
     }
     
     
-    /*func addWorkout(workoutName: String,excerciseName:String? = nil){
-        let dateAdded = Date().timeIntervalSince1970
+    func addSet(repsInput: Int, weightInput: Int){
         
-        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
-        var newExcercise: WorkoutExcercise? = nil
-        
-        if let excerciseName = excerciseName {
-            newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
-        }
-        
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: newExcercise) { [weak self] result in
-            guard self != nil else { return }
+        firestore.insertSet(userId: self.userId, workout: self.workout, excercise: self.excercise, reps: repsInput, weight: weightInput) { [weak self] result in
+            guard self != nil else {
+                return
+            }
             
             if case let .failure(error) = result {
-                if error is WorkoutExists {
-                    print("This workout already exists")
-                } else {
                     print(error.localizedDescription)
-                }
             }
         }
-    }*/
+    }
     
     func fetchSets() {
         firestore.fetchSets(userId: self.userId, workout: self.workout, excercise: self.excercise) { [weak self] result in
