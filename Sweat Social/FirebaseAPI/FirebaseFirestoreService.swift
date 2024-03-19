@@ -12,7 +12,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
     static var userCollection = "users"
     static var WorkoutCategoriesCollection = "Workout Categories"
-    static var excerciseCollection = "Excercises"
+    static var ExcerciseCollection = "Excercises"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newUser = User(id: userId,
@@ -42,7 +42,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         if let newExcercise = newExcercise {
             toAdd = newExcercise
-            doc = doc.collection(FirebaseFirestoreService.excerciseCollection)
+            doc = doc.collection(FirebaseFirestoreService.ExcerciseCollection)
                 .document(newExcercise.id)
         }
         
@@ -75,7 +75,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         if let workout = workout {
             collection = collection.document(workout)
-                .collection(FirebaseFirestoreService.excerciseCollection)
+                .collection(FirebaseFirestoreService.ExcerciseCollection)
         }
         
         collection.addSnapshotListener { (querySnapshot, error) in
@@ -97,6 +97,38 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
             
             completion(.success(workoutList))
+        }
+        
+    }
+    
+    func fetchSets(userId: String, workout: String, excercise: String, completion: @escaping (Result<Sets?, Error>) -> Void){
+        
+        var sets: Sets? = nil
+        
+        var document = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workout)
+            .collection(FirebaseFirestoreService.ExcerciseCollection)
+            .document(excercise)
+        
+        document.addSnapshotListener { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard let setInfo = documentSnapshot?.data() else {
+                print("Unknown Error")
+                return
+            }
+            
+            if let reps = setInfo["Reps"] as? [Int],
+               let weight = setInfo["Weight"] as? [Int] {
+                sets = Sets(reps: reps,weight: weight)
+            } 
+            
+            completion(.success(sets))
         }
         
     }

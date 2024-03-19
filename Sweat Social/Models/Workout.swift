@@ -18,7 +18,8 @@ struct WorkoutExcercise: Codable, Identifiable {
     //var sets: [Set]?
 }*/
 
-struct Set: Codable {
-    let reps: Int?
-    let weight: Double?
+struct Sets: Codable {
+    //let id: String
+    let reps: [Int]
+    let weight: [Int]
 }

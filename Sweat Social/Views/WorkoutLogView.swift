@@ -9,9 +9,12 @@ import SwiftUI
 
 struct WorkoutLogView: View {
     let title: String
-    let workoutSelected: String?
+    let workoutSelected: String? // Value if user clicks a workout, and goes to excercise page
+    
+    // Variables on addForm
     let addMainTitle: String
     let addPlaceHolder: String
+    
     let excercisesListed: Bool
     
     @StateObject var viewModel : WorkoutLogViewModel
@@ -34,7 +37,7 @@ struct WorkoutLogView: View {
                         
                         ScrollView {
                             ForEach(viewModel.workoutList) { group in
-                                WorkoutGroupButtonView(name: group.id, excercisesListed: self.excercisesListed)
+                                WorkoutGroupButtonView(name: group.id, workout: workoutSelected, excercisesListed: self.excercisesListed)
                             }
                         }
                     }

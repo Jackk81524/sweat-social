@@ -11,6 +11,7 @@ import SwiftUI
 
 struct WorkoutGroupButtonView: View {
     let name: String
+    let workout: String?
     let excercisesListed: Bool
     @State private var showExcercise = false
     
@@ -39,7 +40,7 @@ struct WorkoutGroupButtonView: View {
     
     private var destinationView: some View {
         if excercisesListed {
-            return AnyView(SetsWeightsView())
+            return AnyView(SetsLogView(workout:workout ?? "",excercise: name))
         } else {
             return AnyView(WorkoutLogView(title: "Your \(name) Exercises",
                                   workoutSelected: name,
@@ -51,5 +52,5 @@ struct WorkoutGroupButtonView: View {
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: "Test", excercisesListed: false)
+    WorkoutGroupButtonView(name: "Test", workout: "Biceps", excercisesListed: false)
 }

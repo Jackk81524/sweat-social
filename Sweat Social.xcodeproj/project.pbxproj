@@ -39,7 +39,8 @@
 		C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1FC2B7D2C4600079DCC /* Extensions.swift */; };
 		C538E5132B8FE5400035FC15 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E5122B8FE5400035FC15 /* LoginTests.swift */; };
 		C538E5172B8FF3470035FC15 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C538E5162B8FF3470035FC15 /* Helper.swift */; };
-		C53A75C12B9BE14A008338B6 /* SetsWeightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A75C02B9BE149008338B6 /* SetsWeightsView.swift */; };
+		C53935E72BA9D63D003228F9 /* SetsLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53935E62BA9D63D003228F9 /* SetsLogViewModel.swift */; };
+		C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A75C02B9BE149008338B6 /* SetsLogView.swift */; };
 		C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */; };
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
@@ -103,7 +104,8 @@
 		C536A1FC2B7D2C4600079DCC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C538E5122B8FE5400035FC15 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		C538E5162B8FF3470035FC15 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		C53A75C02B9BE149008338B6 /* SetsWeightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsWeightsView.swift; sourceTree = "<group>"; };
+		C53935E62BA9D63D003228F9 /* SetsLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsLogViewModel.swift; sourceTree = "<group>"; };
+		C53A75C02B9BE149008338B6 /* SetsLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsLogView.swift; sourceTree = "<group>"; };
 		C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHeaderView.swift; sourceTree = "<group>"; };
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -268,7 +270,7 @@
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 				C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */,
-				C53A75C02B9BE149008338B6 /* SetsWeightsView.swift */,
+				C53A75C02B9BE149008338B6 /* SetsLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +283,7 @@
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
 				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
 				C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */,
+				C53935E62BA9D63D003228F9 /* SetsLogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -452,7 +455,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C531FD3B2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift in Sources */,
-				C53A75C12B9BE14A008338B6 /* SetsWeightsView.swift in Sources */,
+				C53935E72BA9D63D003228F9 /* SetsLogViewModel.swift in Sources */,
+				C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */,
 				C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */,
 				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
