@@ -35,6 +35,7 @@ struct WorkoutHeaderView: View {
             
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .center)
+                .font(.system(size:24))
             
             //HStack {
                 //Spacer()

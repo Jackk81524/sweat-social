@@ -26,8 +26,7 @@ struct SetsLogView: View {
                             if let sets = viewModel.sets {
                                 
                                 ForEach(0..<sets.reps.count, id: \.self) { index in
-                                    Text("Reps: \(sets.reps[index])")
-                                    Text("Weight: \(sets.weight[index])")
+                                    SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
                                 }
                             }
                         }
