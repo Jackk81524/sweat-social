@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct WorkoutGroup: Codable, Identifiable {
-    let id = UUID()
-    let name: String
-    var excercises: [Excercises]
+struct WorkoutExcercise: Codable, Identifiable {
+    let id: String
+    let dateAdded: TimeInterval
 }
 
-struct Excercises: Codable, Identifiable {
-    let id = UUID()
-    let name: String
-    var sets: [Set]?
-}
+/*struct Excercise: Codable {
+    let id: String
+    let dateAdded: TimeInterval
+    //var sets: [Set]?
+}*/
 
-struct Set: Codable {
-    let reps: Int?
-    let weight: Double?
+struct Sets: Codable {
+    //let id: String
+    let reps: [Int]
+    let weight: [Int]
 }

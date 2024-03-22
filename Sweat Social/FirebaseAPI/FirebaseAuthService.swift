@@ -9,7 +9,15 @@ import Foundation
 import FirebaseAuth
 
 
-class FirebaseAuthService: AuthProtocol {
+class FirebaseAuthService: AuthProtocol {    
+    var currentUser: String {
+        if let currentUser = Auth.auth().currentUser {
+            return currentUser.uid
+        } else {
+            return ""
+        }
+        
+    }
     
     func signIn(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (_, error) in

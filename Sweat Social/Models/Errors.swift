@@ -10,3 +10,16 @@ import Foundation
 struct InvalidUserError: Error {
     var localizedDescription: String = "Invalid User"
 }
+
+enum CustomErrors: Error {
+    case noCurrentUser
+    case existingWorkout
+}
+
+struct NoCurrentUser: Error {
+    let message = "No current user"
+}
+
+struct WorkoutExists: Error {
+    let message = "This workout category already exists"
+}

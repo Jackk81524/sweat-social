@@ -35,7 +35,7 @@ class RegisterViewModel: ObservableObject {
             switch result {
             case .success(let userId):
                 self?.userId = userId ?? ""
-                self?.firestore.insertNewUser(id: self?.userId ?? "", name: self?.name ?? "", email: self?.email ?? "") { firestoreResult in
+                self?.firestore.insertNewUser(userId: self?.userId ?? "", name: self?.name ?? "", email: self?.email ?? "") { firestoreResult in
 
                     switch firestoreResult{
                     case .failure(let error):

@@ -1,19 +1,18 @@
 //
-//  AddWorkoutView.swift
+//  AddSetView.swift
 //  Sweat Social
 //
-//  Created by Jack.Knox on 2024-02-23.
+//  Created by Jack.Knox on 2024-03-19.
 //
 
 import SwiftUI
 
-struct AddWorkoutView: View {
-    @State private var input = ""
-    @Binding var showAddWorkoutForm: Bool
-    let workoutSelected: String?
-    let mainTitle: String
-    let placeHolder: String
-    let action: (String, String?) -> Void
+struct AddSetView: View {
+    @State private var inputWeight = ""
+    @State private var inputReps = ""
+    @Binding var showAddSetForm: Bool
+    
+    let action: (Int, Int) -> Void
     
     
     var body: some View {
@@ -37,28 +36,41 @@ struct AddWorkoutView: View {
             }
 
             VStack {
-                Text(mainTitle)
+                Text("Add a Set")
                     .font(.system(size:26))
                     .foregroundStyle(.white)
                     .bold()
-                    .offset(y:-40)
-                
+                    .offset(y:-5)
+                 
                 HStack {
-                    Text("Enter: ")
+                    Text("Weight: ")
                         .font(.system(size:22))
                         .offset(x:50)
                     
-                    TextField(placeHolder, text: $input)
+                    TextField("Weight", text: $inputWeight)
                         .offset(x:100)
                         .font(.system(size:22))
                         .padding()
+                }
+                .offset(y:10)
+                
+                HStack {
+                    Text("Reps: ")
+                        .font(.system(size:22))
+                        .offset(x:50)
+                    
+                    TextField("Reps", text: $inputReps)
+                        .offset(x:120)
+                        .font(.system(size:22))
+                        .padding()
                         .onSubmit {
-                            if let workoutSelected = workoutSelected {
-                                action(workoutSelected,input)
-                            } else {
-                                action(input,nil)
+                            if !inputWeight.isEmpty && !inputReps.isEmpty {
+                                if let intWeight = Int(inputWeight), let intReps = Int(inputReps) {
+                                    action(intWeight,intReps)
+                                }
+                                
                             }
-                            showAddWorkoutForm.toggle()
+                            showAddSetForm.toggle()
                         }
                 }
                 
@@ -70,9 +82,8 @@ struct AddWorkoutView: View {
     }
 }
 
-
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true), workoutSelected: "", mainTitle: "Enter workout", placeHolder: "Add excercise") {_,_ in 
-        // Nothing
+    AddSetView(showAddSetForm: .constant(true)){_,_ in
+        
     }
 }

@@ -10,62 +10,58 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class WorkoutLogViewModel: ObservableObject {
-    @Published var userID = ""
-    @Published var muscleGroupToAdd = ""
+    @Published var userId: String
     @Published var addWorkoutForm = false
-    @Published var currentUser: User?
-    @Published var workoutGroups: [WorkoutGroup]?
-    private var db = Firestore.firestore()
+    @Published var workoutList: [WorkoutExcercise] = []
     
-    init() {
-        if let user = Auth.auth().currentUser {
-            userID = user.uid
-            fetchWorkoutGroups()
-        } else {
-            //print("error")
-        }
+    private let firestore: FirestoreProtocol
+    private let auth: AuthProtocol
+    private let workout: String?
+    
+    init(workout: String?,auth: AuthProtocol = FirebaseAuthService(),
+         firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+        self.auth = auth
+        self.firestore = firestore
+        self.workout = workout
+        self.userId = auth.currentUser
+        fetchWorkouts(userId: userId,workout: workout)
     }
     
-    func fetchWorkoutGroups() {
-        db.collection("users").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                do {
-                    self.currentUser = try document.data(as: User.self)
-                    
-                    if let workoutGroups = self.currentUser?.workout {
-                        self.workoutGroups = workoutGroups
-                    }
-                } catch {
-                    print(error)
+    
+    func addWorkout(workoutName: String,excerciseName:String? = nil){
+        let dateAdded = Date().timeIntervalSince1970
+        
+        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
+        var newExcercise: WorkoutExcercise? = nil
+        
+        if let excerciseName = excerciseName {
+            newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
+        }
+        
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: newExcercise) { [weak self] result in
+            guard self != nil else { return }
+            
+            if case let .failure(error) = result {
+                if error is WorkoutExists {
+                    print("This workout already exists")
+                } else {
+                    print(error.localizedDescription)
                 }
-            } else {
-                print("Document does not exist")
-                return
             }
         }
     }
     
-    func addWorkoutGroup(workoutGroupName: String){
-        fetchWorkoutGroups()
-        let newWorkoutGroup = WorkoutGroup(name: workoutGroupName, excercises: [])
+    func fetchWorkouts(userId: String, workout: String? = nil) {
         
-        var workoutGroupsDicts: [[String: Any]] = []
-        if var workoutGroups = workoutGroups {
-            for group in workoutGroups {
-                workoutGroupsDicts.append(group.asDictionary())
+        firestore.fetchWorkouts(userId: userId, workout: workout) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let workoutList):
+                self?.workoutList = workoutList
             }
-            workoutGroups.append(newWorkoutGroup)
-            self.workoutGroups = workoutGroups
             
         }
-        
-        
-        
-        workoutGroupsDicts.append(newWorkoutGroup.asDictionary())
-        
-        let workoutGroupsData = ["workout": workoutGroupsDicts]
-        db.collection("users").document(userID).updateData(workoutGroupsData)
-            
     }
     
     

@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
+//Test
 struct User: Codable {
     let id: String
     let name: String
     let email: String
     let joined: TimeInterval
-    var workout: [WorkoutGroup]
+    var workout: [WorkoutExcercise]?
 }

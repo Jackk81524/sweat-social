@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // Helper function to automatically convert model to JSON format
 extension Encodable {
@@ -27,5 +28,14 @@ extension Encodable {
         let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: jsonData)
+    }
+}
+
+extension Color {
+    init(hex: UInt32, opacity: Double = 1) {
+        let red = Double((hex >> 16) & 0xFF) / 255.0
+        let green = Double((hex >> 8) & 0xFF) / 255.0
+        let blue = Double(hex & 0xFF) / 255.0
+        self.init(red: red, green: green, blue: blue, opacity: opacity)
     }
 }

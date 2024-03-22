@@ -8,53 +8,43 @@
 import SwiftUI
 
 struct WorkoutLogView: View {
-    @StateObject var viewModel = WorkoutLogViewModel()
+    let title: String
+    let workoutSelected: String? // Value if user clicks a workout, and goes to excercise page
+    
+    // Variables on addForm
+    let addMainTitle: String
+    let addPlaceHolder: String
+    
+    let excercisesListed: Bool
+    
+    @StateObject var viewModel : WorkoutLogViewModel
+    
+    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String, excercisesListed: Bool) {
+        self.title = title
+        self.workoutSelected = workoutSelected
+        self.addMainTitle = addMainTitle
+        self.addPlaceHolder = addPlaceHolder
+        self.excercisesListed = excercisesListed
+        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(workout: workoutSelected))
+    }
     
     var body: some View {
         NavigationStack {
             VStack {
                 ZStack {
                     VStack {
-                        ZStack{
-                            
-                            Text("Your Workout")
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                            HStack {
-                                Spacer()
-                                Button {
-                                    viewModel.addWorkoutForm.toggle()
-                                } label: {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .foregroundColor(.black)
-                                        Text("+")
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 20))
-                                            .fontWeight(.bold)
-                                    }
-                                    .frame(width: 39, height: 26)
-                                    .padding()
-                                    
-                                }
-                                //.padding(8)
-                                
-                            }
-                        }
+                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: title)
                         
                         ScrollView {
-                            if let workoutGroups = viewModel.workoutGroups {
-                                ForEach(workoutGroups) { group in
-                                    WorkoutGroupButtonView(name: group.name)
-                                }
-                                
+                            ForEach(viewModel.workoutList) { group in
+                                WorkoutGroupButtonView(name: group.id, workout: workoutSelected, excercisesListed: self.excercisesListed)
                             }
                         }
                     }
 
                     if viewModel.addWorkoutForm {
                         ZStack {
-                            AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, workoutSelected: workoutSelected, mainTitle: addMainTitle, placeHolder: addPlaceHolder, action: viewModel.addWorkout)
                         }
                     }
                     
@@ -62,10 +52,11 @@ struct WorkoutLogView: View {
             }
             .padding(.top,40)
         }
+        .navigationBarHidden(true)
         
     }
 }
 
 #Preview {
-    WorkoutLogView()
+    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise", excercisesListed: false)
 }
