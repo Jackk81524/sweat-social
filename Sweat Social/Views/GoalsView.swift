@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct GoalsView: View {
-    @State var goals: [Goal] = [
-        Goal(name: "Do 300 Nm of work", numComplete: 290, numTotal: 300),
+    @StateObject var goalsManager = GoalsManager(goals: [
+        Goal(name: "Do 300 Nm of work", numComplete: 299, numTotal: 300),
         Goal(name: "Do 2 hours of cardio", numComplete: 0, numTotal: 2),
         Goal(name: "Go to the gym 4 times this week", numComplete: 2, numTotal: 4),
-    ]
+    ])
     
     var body: some View {
         VStack {
@@ -22,82 +22,85 @@ struct GoalsView: View {
                 .background(Color.black)
                 .foregroundColor(.white)
             
-            Text("Weekly Goals!")
-                .font(.title)
-                .padding()
-            
-            GoalBlock(goal: goals[0])
-            GoalBlock(goal: goals[1])
-            GoalBlock(goal: goals[2])
-            
-            HStack {
-                Button(action: {
-                    goals[0].numComplete -= 10
-                }) {
-                    Text("Decrement 1")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+            ScrollView {
+                Text("Weekly Goals!")
+                    .font(.title)
+                    .padding()
+                
+                ForEach(0..<goalsManager.goals.count, id: \.self) { index in
+                    GoalBlock(goalsManager: goalsManager, goalIndex: index)
                 }
-                Button(action: {
-                    goals[0].numComplete += 1
-                }) {
-                    Text("Increment 1")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+
+                HStack {
+                    Button(action: {
+                        goalsManager.decrementGoal(index: 0)
+                    }) {
+                        Text("Decrement 1")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goalsManager.incrementGoal(index: 0)
+                    }) {
+                        Text("Increment 1")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
+                HStack {
+                    Button(action: {
+                        goalsManager.decrementGoal(index: 1)
+                    }) {
+                        Text("Decrement 2")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goalsManager.incrementGoal(index: 1)
+                    }) {
+                        Text("Increment 2")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                HStack {
+                    Button(action: {
+                        goalsManager.decrementGoal(index: 2)
+                    }) {
+                        Text("Decrement 3")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goalsManager.incrementGoal(index: 2)
+                    }) {
+                        Text("Increment 3")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                
+                Spacer()
             }
-            HStack {
-                Button(action: {
-                    goals[1].numComplete -= 1
-                }) {
-                    Text("Decrement 2")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                Button(action: {
-                    goals[1].numComplete += 1
-                }) {
-                    Text("Increment 2")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            HStack {
-                Button(action: {
-                    goals[2].numComplete -= 1
-                }) {
-                    Text("Decrement 3")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                Button(action: {
-                    goals[2].numComplete += 1
-                }) {
-                    Text("Increment 3")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            
-            Spacer()
+            .navigationBarTitle("Goals Scroll")
             
             
             
@@ -113,6 +116,30 @@ struct GoalsView: View {
         .edgesIgnoringSafeArea(.top)
         .edgesIgnoringSafeArea(.bottom)
         
+    }
+}
+
+class GoalsManager: ObservableObject {
+    @Published var goals: [Goal]
+    
+    init(goals: [Goal]) {
+        self.goals = goals
+    }
+    
+    var allComplete: Bool {
+        goals.allSatisfy { $0.numComplete >= $0.numTotal }
+    }
+    
+    func incrementGoal(index: Int) {
+        if goals.indices.contains(index) {
+            goals[index].numComplete += 1
+        }
+    }
+    
+    func decrementGoal(index: Int) {
+        if goals.indices.contains(index) {
+            goals[index].numComplete -= 1
+        }
     }
 }
 
@@ -138,21 +165,37 @@ struct FooterView: View {
 }
 
 struct GoalBlock: View {
-    var goal: Goal
+    @ObservedObject var goalsManager: GoalsManager
+    var goalIndex: Int
+    let goldColor = Color(red: 0.796, green: 0.746, blue: 0.327)
+    let silverColor = Color(red: 0.592, green: 0.592, blue: 0.592)
+    let rainbowGradient = LinearGradient(gradient: Gradient(colors: [.red, .orange, .yellow]), startPoint: .leading, endPoint: .trailing)
+    let greyGradient = LinearGradient(gradient: Gradient(colors: [Color.gray, Color(red: 0.7, green: 0.7, blue: 0.7)]), startPoint: .top, endPoint: .bottom)
+    let goldGradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color(red: 0.83, green: 0.69, blue: 0.22), // Dark Gold
+            Color(red: 1.0, green: 0.84, blue: 0) // Gold
+        ]),
+        startPoint: .top,
+        endPoint: .bottom)
     
     var body: some View {
+        let numComplete: Float = Float(goalsManager.goals[goalIndex].numComplete)
+        let numTotal: Float = Float(goalsManager.goals[goalIndex].numTotal)
         ZStack(alignment: .topLeading) {
             Rectangle()
-                .fill(.gray)
+                .fill(goalsManager.allComplete ? rainbowGradient :
+                        (numComplete / numTotal >= 1.0) ?
+                      goldGradient : greyGradient)
                 .cornerRadius(10)
             
             // Top Leading
-            Text(self.goal.name)
+            Text(goalsManager.goals[self.goalIndex].name)
                 .padding(.top, 8)
                 .padding(.leading, 8)
             
             // Top Trailing
-            VStack {
+            /*VStack {
                 HStack {
                     Spacer()
                     Text("Top Trailing")
@@ -160,10 +203,10 @@ struct GoalBlock: View {
                         .padding(.trailing, 8)
                 }
                 Spacer()
-            }
+            }*/
             
             // Bottom Leading
-            VStack {
+            /* VStack {
                 Spacer()
                 HStack {
                     Text("Bottom Leading")
@@ -171,14 +214,14 @@ struct GoalBlock: View {
                         .padding(.leading, 8)
                     Spacer()
                 }
-            }
+            }*/
             
             // Bottom Trailing
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
-                    Text(String(self.goal.numComplete) + "/" + String(self.goal.numTotal))
+                    Text(String(numComplete) + "/" + String(numTotal))
                         .padding(.bottom, 8)
                         .padding(.trailing, 8)
                 }
@@ -189,7 +232,7 @@ struct GoalBlock: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    ProgressBar(value: Float(self.goal.numComplete) / Float(self.goal.numTotal))
+                    ProgressBar(value: numComplete / numTotal)
                         .frame(height: 20)
                         .padding(10)
                     Spacer()
