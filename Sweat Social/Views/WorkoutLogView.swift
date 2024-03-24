@@ -8,35 +8,32 @@
 import SwiftUI
 
 struct WorkoutLogView: View {
-
+    @Binding var addForm: Bool
+    @Binding var title: String
+    @Binding var backButton: Bool
+    
     @StateObject var viewModel = WorkoutLogViewModel()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ZStack {
-                    VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout",backButton: false)
-                        
-                        ScrollView {
-                            ForEach(viewModel.workoutList) { group in
-                                WorkoutGroupButtonView(name: group)
-                            }
-                        }
+            ZStack {
+                ScrollView {
+                    ForEach(viewModel.workoutList) { group in
+                        WorkoutGroupButtonView(name: group)
                     }
-
-                    if viewModel.addWorkoutForm {
-                        ZStack {
-                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm,
-                                           mainTitle: "Add Workout",
-                                           placeHolder: "Enter Workout",
-                                           action: viewModel.addWorkout)
-                        }
+                }
+                
+                
+                if addForm {
+                    ZStack {
+                        AddWorkoutView(showAddWorkoutForm: $addForm,
+                                       mainTitle: "Add Workout",
+                                       placeHolder: "Enter Workout",
+                                       action: viewModel.addWorkout)
                     }
-                    
                 }
             }
-            .padding(.top,40)
+            //.padding(.top,40)
             .onAppear{
                 viewModel.fetchWorkouts()
             }
@@ -47,5 +44,5 @@ struct WorkoutLogView: View {
 }
 
 #Preview {
-    WorkoutLogView()
+    WorkoutLogView(addForm: .constant(true))
 }

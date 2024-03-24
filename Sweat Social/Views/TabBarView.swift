@@ -25,7 +25,7 @@ struct TabBar: View {
                     }
                 
                 
-                WorkoutLogView()
+                WorkoutViewManagerView()
                     .tabItem {
                         Label("Log Workout", systemImage: "plus.circle.fill")
                     }

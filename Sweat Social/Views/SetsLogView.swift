@@ -16,41 +16,31 @@ struct SetsLogView: View {
     
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                ZStack {
-                    VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addSetForm, title: "Sets", backButton: true)
-                        
-                        ScrollView {
-                            if let sets = viewModel.sets {
-                                
-                                ForEach(0..<sets.reps.count, id: \.self) { index in
-                                    SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
-                                }
-                            }
-                        }
-                    }
-
-                    if viewModel.addSetForm {
-                        ZStack {
-                            AddSetView(showAddSetForm: $viewModel.addSetForm, action: viewModel.addSet) 
-                        }
-                    }
+        ZStack {
+            ScrollView {
+                if let sets = viewModel.sets {
                     
-                }
-                .onAppear {
-                    viewModel.workout = workout
-                    viewModel.excercise = excercise
-                    viewModel.sets = sets
+                    ForEach(0..<sets.reps.count, id: \.self) { index in
+                        SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
+                    }
                 }
             }
-            .padding(.top,40)
+
+            if viewModel.addSetForm {
+                ZStack {
+                    AddSetView(showAddSetForm: $viewModel.addSetForm, action: viewModel.addSet)
+                }
+            }
+            
+        }
+        .onAppear {
+            viewModel.workout = workout
+            viewModel.excercise = excercise
+            viewModel.sets = sets
         }
         .navigationBarHidden(true)
-        
-        
     }
+        
 }
 
 

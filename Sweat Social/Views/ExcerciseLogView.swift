@@ -15,15 +15,12 @@ struct ExcerciseLogView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack {
-                    WorkoutHeaderView(showAddWorkoutForm: $viewModel.addExcerciseForm, title: workout.id, backButton: true)
-                    
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
-                            ForEach(viewModel.excerciseList) { excercise in
-                                ExcerciseButtonView(workout: workout.id, excercise: excercise.id, action: viewModel.fetchSets)
-                            }
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
+                        ForEach(viewModel.excerciseList) { excercise in
+                            ExcerciseButtonView(workout: workout.id, excercise: excercise.id, action: viewModel.fetchSets)
                         }
+                       
                     }
                 }
                 
@@ -41,6 +38,7 @@ struct ExcerciseLogView: View {
                 viewModel.fetchExcercises()
             }
         }
+        .navigationBarHidden(true)
     }
 }
 

@@ -47,6 +47,7 @@
 		C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A75C02B9BE149008338B6 /* SetsLogView.swift */; };
 		C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */; };
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
+		C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */; };
 		C550D8BB2BAA4B99004AB0C9 /* AddSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
@@ -117,6 +118,7 @@
 		C53A75C02B9BE149008338B6 /* SetsLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsLogView.swift; sourceTree = "<group>"; };
 		C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHeaderView.swift; sourceTree = "<group>"; };
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
+		C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewManagerView.swift; sourceTree = "<group>"; };
 		C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetView.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */,
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
+				C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */,
 				C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */,
 				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
@@ -474,6 +477,7 @@
 				C53935E72BA9D63D003228F9 /* SetsLogViewModel.swift in Sources */,
 				C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */,
 				C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */,
+				C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */,
 				C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */,
 				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				C550D8BB2BAA4B99004AB0C9 /* AddSetView.swift in Sources */,
