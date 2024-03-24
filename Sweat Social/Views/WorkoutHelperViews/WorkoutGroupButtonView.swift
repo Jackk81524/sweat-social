@@ -10,13 +10,13 @@ import SwiftUI
 
 
 struct WorkoutGroupButtonView: View {
-    let name: String
-    let workout: String?
+    let name: WorkoutExcercise
+    /*let workout: String?
     let excercisesListed: Bool
-    @State private var showExcercise = false
+    @State private var showExcercise = false*/
     
     var body: some View {
-        NavigationLink(destination: self.destinationView)
+        NavigationLink(destination: ExcerciseLogView(workout: name))
         {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
@@ -24,10 +24,9 @@ struct WorkoutGroupButtonView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 25)
                             .strokeBorder(Color.black, lineWidth: 2)
-                            //.shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
                     )
                 
-                Text(name)
+                Text(name.id)
                     .foregroundColor(.black)
                     .font(.system(size:16))
                     .fontWeight(.bold)
@@ -38,7 +37,7 @@ struct WorkoutGroupButtonView: View {
         .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle to remove the default button styling
     }
     
-    private var destinationView: some View {
+    /*private var destinationView: some View {
         if excercisesListed {
             return AnyView(SetsLogView(workout:workout ?? "",excercise: name))
         } else {
@@ -48,9 +47,9 @@ struct WorkoutGroupButtonView: View {
                                   addPlaceHolder: "Enter Exercise",
                                      excercisesListed: true))
         }
-    }
+    }*/
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: "Test", workout: "Biceps", excercisesListed: false)
+    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0))
 }

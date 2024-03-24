@@ -10,10 +10,10 @@ import SwiftUI
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
-    let workoutSelected: String?
+    //let workoutSelected: String?
     let mainTitle: String
     let placeHolder: String
-    let action: (String, String?) -> Void
+    let action: (String) -> Void
     
     
     var body: some View {
@@ -53,11 +53,7 @@ struct AddWorkoutView: View {
                         .font(.system(size:22))
                         .padding()
                         .onSubmit {
-                            if let workoutSelected = workoutSelected {
-                                action(workoutSelected,input)
-                            } else {
-                                action(input,nil)
-                            }
+                            action(input)
                             showAddWorkoutForm.toggle()
                         }
                 }
@@ -72,7 +68,7 @@ struct AddWorkoutView: View {
 
 
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true), workoutSelected: "", mainTitle: "Enter workout", placeHolder: "Add excercise") {_,_ in 
-        // Nothing
+    AddWorkoutView(showAddWorkoutForm: .constant(true), mainTitle: "Enter workout", placeHolder: "Add excercise") {_ in 
+        //Nothing
     }
 }

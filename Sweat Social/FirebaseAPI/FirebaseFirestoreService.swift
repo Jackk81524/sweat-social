@@ -33,7 +33,9 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+
         var toAdd = newWorkoutCategory
+        
         
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)

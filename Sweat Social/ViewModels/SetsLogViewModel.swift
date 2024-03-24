@@ -37,6 +37,7 @@ class SetsLogViewModel: ObservableObject {
                     print(error.localizedDescription)
             }
         }
+        fetchSets()
     }
     
     func fetchSets() {

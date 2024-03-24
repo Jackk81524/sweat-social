@@ -8,49 +8,38 @@
 import SwiftUI
 
 struct WorkoutLogView: View {
-    let title: String
-    let workoutSelected: String? // Value if user clicks a workout, and goes to excercise page
-    
-    // Variables on addForm
-    let addMainTitle: String
-    let addPlaceHolder: String
-    
-    let excercisesListed: Bool
-    
-    @StateObject var viewModel : WorkoutLogViewModel
-    
-    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String, excercisesListed: Bool) {
-        self.title = title
-        self.workoutSelected = workoutSelected
-        self.addMainTitle = addMainTitle
-        self.addPlaceHolder = addPlaceHolder
-        self.excercisesListed = excercisesListed
-        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(workout: workoutSelected))
-    }
+
+    @StateObject var viewModel = WorkoutLogViewModel()
     
     var body: some View {
         NavigationStack {
             VStack {
                 ZStack {
                     VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: title)
+                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout")
                         
                         ScrollView {
                             ForEach(viewModel.workoutList) { group in
-                                WorkoutGroupButtonView(name: group.id, workout: workoutSelected, excercisesListed: self.excercisesListed)
+                                WorkoutGroupButtonView(name: group)
                             }
                         }
                     }
 
                     if viewModel.addWorkoutForm {
                         ZStack {
-                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, workoutSelected: workoutSelected, mainTitle: addMainTitle, placeHolder: addPlaceHolder, action: viewModel.addWorkout)
+                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm,
+                                           mainTitle: "Add Workout",
+                                           placeHolder: "Enter Workout",
+                                           action: viewModel.addWorkout)
                         }
                     }
                     
                 }
             }
             .padding(.top,40)
+            .onAppear{
+                viewModel.fetchWorkouts()
+            }
         }
         .navigationBarHidden(true)
         
@@ -58,5 +47,5 @@ struct WorkoutLogView: View {
 }
 
 #Preview {
-    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise", excercisesListed: false)
+    WorkoutLogView()
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct SetsLogView: View {
     let workout: String
     let excercise: String
-    
+    let sets: Sets?
     
     @StateObject var viewModel = SetsLogViewModel()
     
@@ -42,7 +42,7 @@ struct SetsLogView: View {
                 .onAppear {
                     viewModel.workout = workout
                     viewModel.excercise = excercise
-                    viewModel.fetchSets()
+                    viewModel.sets = sets
                 }
             }
             .padding(.top,40)
@@ -55,5 +55,5 @@ struct SetsLogView: View {
 
 
 #Preview {
-    SetsLogView(workout: "Arms", excercise: "Curl")
+    SetsLogView(workout: "Arms", excercise: "Curl", sets: nil)
 }
