@@ -16,7 +16,7 @@ struct WorkoutLogView: View {
             VStack {
                 ZStack {
                     VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout")
+                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: "Your Workout",backButton: false)
                         
                         ScrollView {
                             ForEach(viewModel.workoutList) { group in

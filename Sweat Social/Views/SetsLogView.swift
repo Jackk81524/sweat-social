@@ -20,7 +20,7 @@ struct SetsLogView: View {
             VStack {
                 ZStack {
                     VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addSetForm, title: "Sets")
+                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addSetForm, title: "Sets", backButton: true)
                         
                         ScrollView {
                             if let sets = viewModel.sets {

@@ -16,7 +16,7 @@ struct ExcerciseLogView: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    WorkoutHeaderView(showAddWorkoutForm: $viewModel.addExcerciseForm, title: workout.id)
+                    WorkoutHeaderView(showAddWorkoutForm: $viewModel.addExcerciseForm, title: workout.id, backButton: true)
                     
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
