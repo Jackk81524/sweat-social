@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct WorkoutViewManagerView: View {
-    @State var addForm = false
-    @State var title = "Your Workout"
-    @State var backButton = false
+    @StateObject var viewManagerViewModel = WorkoutViewManagerViewModel()
+    
     
     var body: some View {
         VStack {
-            WorkoutHeaderView(showAddWorkoutForm: $addForm, title: title,backButton: backButton)
+            WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
                 .padding(.top,40)
             
-            WorkoutLogView(addForm: $addForm, title: $title, backButton: $backButton)
+            NavigationStack{
+                WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+            }
+            
+            .navigationBarHidden(true)
+        
         }
     }
 }

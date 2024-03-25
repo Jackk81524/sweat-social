@@ -8,32 +8,29 @@
 import SwiftUI
 
 struct WorkoutLogView: View {
-    @Binding var addForm: Bool
-    @Binding var title: String
-    @Binding var backButton: Bool
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @StateObject var viewModel = WorkoutLogViewModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack{
             ZStack {
                 ScrollView {
                     ForEach(viewModel.workoutList) { group in
-                        WorkoutGroupButtonView(name: group)
+                        WorkoutGroupButtonView(name: group, viewManagerViewModel: viewManagerViewModel)
                     }
                 }
                 
                 
-                if addForm {
+                if viewManagerViewModel.addForm {
                     ZStack {
-                        AddWorkoutView(showAddWorkoutForm: $addForm,
+                        AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
                                        mainTitle: "Add Workout",
                                        placeHolder: "Enter Workout",
                                        action: viewModel.addWorkout)
                     }
                 }
             }
-            //.padding(.top,40)
             .onAppear{
                 viewModel.fetchWorkouts()
             }
@@ -44,5 +41,5 @@ struct WorkoutLogView: View {
 }
 
 #Preview {
-    WorkoutLogView(addForm: .constant(true))
+    WorkoutLogView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }

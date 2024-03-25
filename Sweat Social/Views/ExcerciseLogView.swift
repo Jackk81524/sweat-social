@@ -9,8 +9,13 @@ import SwiftUI
 
 struct ExcerciseLogView: View {
     let workout: WorkoutExcercise
+    @Environment(\.presentationMode) var
+        presentationMode: Binding<PresentationMode>
+    
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @StateObject var viewModel = ExcerciseLogViewModel()
+    @State private var setDismiss = false
     
     var body: some View {
         NavigationStack {
@@ -18,15 +23,15 @@ struct ExcerciseLogView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
                         ForEach(viewModel.excerciseList) { excercise in
-                            ExcerciseButtonView(workout: workout.id, excercise: excercise.id, action: viewModel.fetchSets)
+                            ExcerciseButtonView(workout: workout.id, excercise: excercise.id, viewManagerViewModel: viewManagerViewModel, action: viewModel.fetchSets)
                         }
-                       
+                        
                     }
                 }
                 
-                if viewModel.addExcerciseForm {
+                if viewManagerViewModel.addForm {
                     ZStack {
-                        AddWorkoutView(showAddWorkoutForm: $viewModel.addExcerciseForm,
+                        AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
                                        mainTitle: "Add Excercise",
                                        placeHolder: "Enter Excercise",
                                        action: viewModel.addExcercise)
@@ -35,7 +40,19 @@ struct ExcerciseLogView: View {
             }
             .onAppear {
                 viewModel.workout = workout
+                viewManagerViewModel.backButton = true
+                viewManagerViewModel.title = workout.id
                 viewModel.fetchExcercises()
+            }
+        }
+        .onChange(of: viewManagerViewModel.dismiss) { _ in
+            if(viewManagerViewModel.excerciseDismiss) {
+                viewManagerViewModel.title = "Your Workout"
+                viewManagerViewModel.backButton = false
+                presentationMode.wrappedValue
+                    .dismiss()
+            } else {
+                viewManagerViewModel.excerciseDismiss.toggle()
             }
         }
         .navigationBarHidden(true)
@@ -43,5 +60,5 @@ struct ExcerciseLogView: View {
 }
 
 #Preview {
-    ExcerciseLogView(workout: WorkoutExcercise(id: "Arms", dateAdded: 3600))
+    ExcerciseLogView(workout: WorkoutExcercise(id: "Arms", dateAdded: 3600), viewManagerViewModel: WorkoutViewManagerViewModel())
 }

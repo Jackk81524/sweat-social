@@ -11,12 +11,11 @@ import SwiftUI
 
 struct WorkoutGroupButtonView: View {
     let name: WorkoutExcercise
-    /*let workout: String?
-    let excercisesListed: Bool
-    @State private var showExcercise = false*/
     
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
+
     var body: some View {
-        NavigationLink(destination: ExcerciseLogView(workout: name))
+        NavigationLink(destination: ExcerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel))
         {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
@@ -37,19 +36,8 @@ struct WorkoutGroupButtonView: View {
         .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle to remove the default button styling
     }
     
-    /*private var destinationView: some View {
-        if excercisesListed {
-            return AnyView(SetsLogView(workout:workout ?? "",excercise: name))
-        } else {
-            return AnyView(WorkoutLogView(title: "Your \(name) Exercises",
-                                  workoutSelected: name,
-                                  addMainTitle: "Enter Exercise",
-                                  addPlaceHolder: "Enter Exercise",
-                                     excercisesListed: true))
-        }
-    }*/
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0))
+    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0), viewManagerViewModel: WorkoutViewManagerViewModel())
 }

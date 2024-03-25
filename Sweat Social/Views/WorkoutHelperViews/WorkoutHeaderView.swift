@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct WorkoutHeaderView: View {
-    @Binding var showAddWorkoutForm: Bool
-    let title: String
-    let backButton: Bool
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @Environment(\.presentationMode) private var
         presentationMode: Binding<PresentationMode>
     
     var body: some View {
         HStack{
-            if(backButton){
+            if(viewManagerViewModel.backButton){
                 Button {
-                    presentationMode.wrappedValue
-                        .dismiss()
+                    viewManagerViewModel.dismiss.toggle()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
@@ -34,17 +31,17 @@ struct WorkoutHeaderView: View {
                     .padding()
                     
                 }
+                
             }
+                
             
-            Text(title)
+            Text(viewManagerViewModel.title)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.system(size:24))
-                .padding(.leading, backButton ? 0 : UIScreen.main.bounds.width / 6)
+                .padding(.leading, viewManagerViewModel.backButton ? 0 : UIScreen.main.bounds.width / 6)
             
-            //HStack {
-                //Spacer()
             Button {
-                showAddWorkoutForm.toggle()
+                viewManagerViewModel.addForm.toggle()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)
@@ -58,11 +55,10 @@ struct WorkoutHeaderView: View {
                 .padding()
                 
             }
-           // }
         }
     }
 }
 
 #Preview {
-    WorkoutHeaderView(showAddWorkoutForm: .constant(true), title: "Your workout", backButton: true)
+    WorkoutHeaderView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }

@@ -12,10 +12,12 @@ struct ExcerciseButtonView: View {
     let workout : String
     let excercise: String
     
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
+    
     let action: (String, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
-        NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise, sets: sets)) {
+        NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise, sets: sets, viewManagerViewModel: viewManagerViewModel)) {
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color(hex:0xF4F4F4))
@@ -76,7 +78,7 @@ struct ExcerciseButtonView: View {
 }
 
 #Preview {
-    ExcerciseButtonView(workout: "Arms", excercise: "Barbell Curl") {_,_  in 
+    ExcerciseButtonView(workout: "Arms", excercise: "Barbell Curl", viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
         return
     }
 }

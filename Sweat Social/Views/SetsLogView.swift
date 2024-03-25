@@ -12,38 +12,53 @@ struct SetsLogView: View {
     let excercise: String
     let sets: Sets?
     
+    @Environment(\.presentationMode) var
+        presentationMode: Binding<PresentationMode>
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
+    
     @StateObject var viewModel = SetsLogViewModel()
     
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                if let sets = viewModel.sets {
-                    
-                    ForEach(0..<sets.reps.count, id: \.self) { index in
-                        SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
+        NavigationStack {
+            ZStack {
+                ScrollView {
+                    if let sets = viewModel.sets {
+                        
+                        ForEach(0..<sets.reps.count, id: \.self) { index in
+                            SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
+                        }
                     }
                 }
-            }
-
-            if viewModel.addSetForm {
-                ZStack {
-                    AddSetView(showAddSetForm: $viewModel.addSetForm, action: viewModel.addSet)
+                
+                if viewManagerViewModel.addForm {
+                    ZStack {
+                        AddSetView(showAddSetForm: $viewManagerViewModel.addForm, action: viewModel.addSet)
+                    }
                 }
+                
             }
-            
-        }
-        .onAppear {
-            viewModel.workout = workout
-            viewModel.excercise = excercise
-            viewModel.sets = sets
+            .onAppear {
+                viewModel.workout = workout
+                viewModel.excercise = excercise
+                viewManagerViewModel.title = excercise
+                
+                viewManagerViewModel.backButton = true
+                viewManagerViewModel.excerciseDismiss = false
+                viewModel.sets = sets
+            }
+            .onChange(of: viewManagerViewModel.dismiss) { _ in
+                presentationMode.wrappedValue
+                    .dismiss()
+            }
         }
         .navigationBarHidden(true)
+        
     }
         
 }
 
 
 #Preview {
-    SetsLogView(workout: "Arms", excercise: "Curl", sets: nil)
+    SetsLogView(workout: "Arms", excercise: "Curl", sets: nil, viewManagerViewModel: WorkoutViewManagerViewModel())
 }
