@@ -22,10 +22,10 @@ struct WorkoutHeaderView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundColor(.black)
-                        Text("<-")
+                        Image(systemName: "arrow.left")
                             .foregroundColor(.white)
                             .font(.system(size: 20))
-                            .fontWeight(.bold)
+                            //.fontWeight(.bold)
                     }
                     .frame(width: 39, height: 26)
                     .padding()
