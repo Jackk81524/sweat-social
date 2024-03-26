@@ -17,7 +17,7 @@ struct WorkoutLogView: View {
             ZStack {
                 ScrollView {
                     ForEach(viewModel.workoutList) { group in
-                        WorkoutGroupButtonView(name: group, viewManagerViewModel: viewManagerViewModel)
+                        WorkoutGroupButtonView(name: group, viewManagerViewModel: viewManagerViewModel, action: viewModel.deleteWorkout)
                     }
                 }
                 

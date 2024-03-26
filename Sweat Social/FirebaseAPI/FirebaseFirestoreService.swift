@@ -65,9 +65,29 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 }
             }
         }
-        
     }
     
+    func deleteWorkout(userId: String, workoutToDelete: WorkoutExcercise, exerciseToDelete: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+        print("Here")
+        var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workoutToDelete.id)
+        
+        if let exerciseToDelete = exerciseToDelete {
+            doc = doc.collection(FirebaseFirestoreService.ExcerciseCollection)
+                .document(exerciseToDelete.id)
+        }
+
+        doc.delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+
     func insertSet(userId: String, workout: String, excercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
         
         let document = FirebaseFirestoreService.db

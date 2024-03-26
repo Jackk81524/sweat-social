@@ -13,6 +13,8 @@ struct WorkoutGroupButtonView: View {
     let name: WorkoutExcercise
     
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
+    
+    let action: (WorkoutExcercise) -> Void
 
     var body: some View {
         NavigationLink(destination: ExcerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel))
@@ -29,15 +31,20 @@ struct WorkoutGroupButtonView: View {
                     .foregroundColor(.black)
                     .font(.system(size:16))
                     .fontWeight(.bold)
+                
+                
             }
             .frame(width: 367, height: 51)
             .padding(4)
         }
         .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle to remove the default button styling
+        
     }
     
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0), viewManagerViewModel: WorkoutViewManagerViewModel())
+    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0) , viewManagerViewModel: WorkoutViewManagerViewModel()) { _ in
+    //
+    }
 }

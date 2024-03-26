@@ -69,6 +69,17 @@ class WorkoutLogViewModel: ObservableObject {
         }
     }
     
+    func deleteWorkout(toDelete: WorkoutExcercise) {
+        firestore.deleteWorkout(userId: self.userId, workoutToDelete: toDelete, exerciseToDelete: nil) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            default:
+                return
+            }
+        }
+    }
+    
     private func validate(input: String) -> Bool {
 
         guard input.count >= 3 && input.count <= 20 else {
