@@ -23,7 +23,11 @@ struct ExcerciseLogView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
                         ForEach(viewModel.excerciseList) { excercise in
-                            ExcerciseButtonView(workout: workout.id, excercise: excercise.id, viewManagerViewModel: viewManagerViewModel, action: viewModel.fetchSets)
+                            ExcerciseButtonView(workout: workout.id, 
+                                                excercise: excercise,
+                                                toDelete: $viewModel.toDelete,
+                                                viewManagerViewModel: viewManagerViewModel,
+                                                action: viewModel.fetchSets)
                         }
                         
                     }
@@ -38,6 +42,17 @@ struct ExcerciseLogView: View {
                                        placeHolder: "Enter Excercise",
                                        action: viewModel.addExcercise)
                     }
+                }
+                
+                if let toDelete = viewModel.toDelete {
+                    DeleteConfirmationView(toDelete: toDelete.id,
+                                           toDeleteType: "excercise",
+                                           update: $viewModel.deleteSuccess,
+                                           delete: viewModel.deleteExcercise)
+                    .onChange(of: viewModel.deleteSuccess) { _ in
+                        viewModel.toDelete = nil
+                    }
+                    
                 }
             }
             .onAppear {

@@ -58,11 +58,14 @@ struct AddWorkoutView: View {
                     HStack {
                         Text("Enter: ")
                             .font(.system(size:22))
-                            .offset(x:50)
+                            .offset(x:20)
                         
                         TextField(placeHolder, text: $input)
-                            .offset(x:100)
+                            .offset(x:30)
                             .font(.system(size:22))
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth:180)
+                            .lineLimit(nil)
                             .padding()
                             .onSubmit {
                                 action(input)
@@ -71,6 +74,7 @@ struct AddWorkoutView: View {
                                 showAddWorkoutForm.toggle()
                             }
                     }
+                    
                     .offset(y:25)
                 }
                 

@@ -12,11 +12,8 @@ struct SetButtonView: View {
     let weight: Int
     let setNum: Int
     
-    /*init(rep: Int, weight: Int, setNum: Int) {
-        self.setNum = setNum
-        self.rep = rep
-        self.weight = weight
-    }*/
+    @Binding var toDelete: Int?
+    
     
     var body: some View {
         ZStack {
@@ -65,11 +62,14 @@ struct SetButtonView: View {
             }
         )
         .padding(2)
+        .onLongPressGesture(minimumDuration: 0.7) {
+            toDelete = setNum-1
+        }
 
         
     }
 }
 
 #Preview {
-    SetButtonView(reps: 10, weight: 10, setNum: 1)
+    SetButtonView(reps: 10, weight: 10, setNum: 1, toDelete: .constant(nil))
 }

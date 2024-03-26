@@ -1,0 +1,88 @@
+//
+//  DeleteConfirmationView.swift
+//  Sweat Social
+//
+//  Created by Jack.Knox on 2024-03-26.
+//
+
+import SwiftUI
+
+struct DeleteConfirmationView: View {
+    let toDelete: String
+    let toDeleteType: String
+    @Binding var update: Bool
+    let delete: () -> Void
+    
+    @State var message : String = ""
+    
+    var body: some View {
+        ZStack {
+            ZStack(alignment: .topLeading){
+                RoundedRectangle(cornerRadius: 16,style:.continuous)
+                    .strokeBorder(Color.black,lineWidth:2)
+                    .background(Color.white)
+                    .foregroundStyle(.white)
+                    .frame(width: 350, height: 270)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16, style: .circular)
+                        .frame(width: 350, height: 100)
+                        .foregroundStyle(.black)
+                    Rectangle()
+                        .frame(width:350, height: 20)
+                        .foregroundStyle(.black)
+                        .offset(y:40)
+                }
+                
+            }
+            
+            VStack {
+
+                Text(message)
+                    .font(.system(size:22))
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .bold()
+                    .frame(width:320)
+                    .offset(y:-40)
+                
+                Button {
+                    delete()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 32)
+                            .foregroundColor(.black)
+                        Text("Confirm")
+                            .foregroundColor(.white)
+                            .font(.system(size:16))
+                            .fontWeight(.bold)
+                    }
+                    .frame(width: 141, height: 45)
+                }
+                
+                Button {
+                    update.toggle()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 32)
+                            .foregroundColor(.black)
+                        Text("Cancel")
+                            .foregroundColor(.white)
+                            .font(.system(size:16))
+                            .fontWeight(.bold)
+                    }
+                    .frame(width: 141, height: 45)
+                }
+            }
+        }
+        .onAppear {
+            message = (toDeleteType == "Set") ? "Are you sure you want to delete Set \(toDelete)?" : "Are you sure you want to delete the \(toDeleteType), \(toDelete)?"
+        }
+        
+    }
+}
+
+#Preview {
+    DeleteConfirmationView(toDelete: "Arms", toDeleteType: "Workout", update: .constant(true)) {
+    // Delete
+    }
+}

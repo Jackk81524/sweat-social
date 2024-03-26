@@ -17,7 +17,9 @@ struct WorkoutLogView: View {
             ZStack {
                 ScrollView {
                     ForEach(viewModel.workoutList) { group in
-                        WorkoutGroupButtonView(name: group, viewManagerViewModel: viewManagerViewModel, action: viewModel.deleteWorkout)
+                        WorkoutGroupButtonView(name: group,
+                                               toDelete: $viewModel.toDelete,
+                                               viewManagerViewModel: viewManagerViewModel)
                     }
                 }
                 
@@ -31,6 +33,17 @@ struct WorkoutLogView: View {
                                        placeHolder: "Enter Workout",
                                        action: viewModel.addWorkout)
                     }
+                }
+                
+                if let toDelete = viewModel.toDelete {
+                    DeleteConfirmationView(toDelete: toDelete.id,
+                                           toDeleteType: "workout",
+                                           update: $viewModel.deleteSuccess,
+                                           delete: viewModel.deleteWorkout)
+                    .onChange(of: viewModel.deleteSuccess) { _ in
+                        viewModel.toDelete = nil
+                    }
+                    
                 }
             }
             .onAppear{

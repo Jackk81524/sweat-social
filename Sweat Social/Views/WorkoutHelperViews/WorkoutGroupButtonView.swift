@@ -12,13 +12,18 @@ import SwiftUI
 struct WorkoutGroupButtonView: View {
     let name: WorkoutExcercise
     
+    @Binding var toDelete: WorkoutExcercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
+    @State private var navigate = false
+    @State private var longPress = false
     
-    let action: (WorkoutExcercise) -> Void
-
     var body: some View {
-        NavigationLink(destination: ExcerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel))
-        {
+        Button {
+            if !self.longPress {
+                self.navigate = true
+            }
+            self.longPress = false
+        } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(Color(hex: 0xF4F4F4))
@@ -32,19 +37,29 @@ struct WorkoutGroupButtonView: View {
                     .font(.system(size:16))
                     .fontWeight(.bold)
                 
-                
             }
             .frame(width: 367, height: 51)
             .padding(4)
         }
-        .buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle to remove the default button styling
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.7)
+                .onEnded { _ in
+                    self.longPress = true
+                    toDelete = name
+                }
+        )
+        .buttonStyle(PlainButtonStyle())
         
+        NavigationLink(destination: ExcerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
+            EmptyView()
+                .frame(width:0, height: 0)
+                .hidden()
+        }
+
     }
     
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0) , viewManagerViewModel: WorkoutViewManagerViewModel()) { _ in
-    //
-    }
+    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0), toDelete: .constant(WorkoutExcercise(id: "Arms", dateAdded: 10.0)), viewManagerViewModel: WorkoutViewManagerViewModel())
 }

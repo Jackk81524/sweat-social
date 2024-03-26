@@ -14,6 +14,8 @@ class WorkoutLogViewModel: ObservableObject {
     @Published var addWorkoutForm = false
     @Published var workoutList: [WorkoutExcercise] = []
     @Published var errorMessage = ""
+    @Published var toDelete: WorkoutExcercise? = nil
+    @Published var deleteSuccess = false
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -69,12 +71,17 @@ class WorkoutLogViewModel: ObservableObject {
         }
     }
     
-    func deleteWorkout(toDelete: WorkoutExcercise) {
+    func deleteWorkout() {
+        guard let toDelete = toDelete else {
+            return
+        }
+        
         firestore.deleteWorkout(userId: self.userId, workoutToDelete: toDelete, exerciseToDelete: nil) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
             default:
+                self?.toDelete = nil
                 return
             }
         }
@@ -82,8 +89,8 @@ class WorkoutLogViewModel: ObservableObject {
     
     private func validate(input: String) -> Bool {
 
-        guard input.count >= 3 && input.count <= 20 else {
-            self.errorMessage = "Input must be between 3 and 20 characters."
+        guard input.count >= 3 && input.count <= 30 else {
+            self.errorMessage = "Input must be between 3 and 30 characters."
             return false
             
         }

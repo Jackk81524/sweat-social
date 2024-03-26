@@ -25,9 +25,13 @@ struct SetsLogView: View {
                 ScrollView {
                     if let sets = viewModel.sets {
                         
-                        ForEach(0..<sets.reps.count, id: \.self) { index in
-                            SetButtonView(reps: sets.reps[index], weight: sets.weight[index], setNum: index+1)
+                        ForEach(0..<sets.weight.count, id: \.self) { index in
+                            SetButtonView(reps: sets.reps[index],
+                                          weight: sets.weight[index],
+                                          setNum: index+1,
+                                          toDelete: $viewModel.toDelete)
                         }
+                        
                     }
                 }
                 
@@ -40,6 +44,15 @@ struct SetsLogView: View {
                     }
                 }
                 
+                if let toDelete = viewModel.toDelete {
+                    DeleteConfirmationView(toDelete: String(toDelete+1),
+                                           toDeleteType: "Set", update: $viewModel.deleteSuccess,
+                                           delete: viewModel.deleteSet)
+                    .onChange(of: viewModel.deleteSuccess) { _ in
+                        viewModel.toDelete = nil
+                    }
+                }
+                
             }
             .onAppear {
                 viewModel.workout = workout
@@ -49,6 +62,7 @@ struct SetsLogView: View {
                 viewManagerViewModel.backButton = true
                 viewManagerViewModel.excerciseDismiss = false
                 viewModel.sets = sets
+                
             }
             .onChange(of: viewManagerViewModel.dismiss) { _ in
                 presentationMode.wrappedValue

@@ -35,6 +35,7 @@
 		C532A8222BAF8C3B00E672B4 /* ExcerciseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */; };
 		C532A8242BAF8F0100E672B4 /* ExcerciseLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */; };
 		C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */; };
+		C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */; };
 		C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */; };
 		C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */; };
 		C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */; };
@@ -107,6 +108,7 @@
 		C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogView.swift; sourceTree = "<group>"; };
 		C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogViewModel.swift; sourceTree = "<group>"; };
 		C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseButtonView.swift; sourceTree = "<group>"; };
+		C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
 		C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				C53935EA2BA9F3E4003228F9 /* SetButtonView.swift */,
 				C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */,
 				C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */,
+				C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */,
 			);
 			path = WorkoutHelperViews;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
 				C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */,
+				C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);

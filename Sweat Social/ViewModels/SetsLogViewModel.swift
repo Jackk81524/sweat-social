@@ -15,6 +15,8 @@ class SetsLogViewModel: ObservableObject {
     @Published var excercise: String = ""
     @Published var sets: Sets? = nil
     @Published var errorMessage = ""
+    @Published var toDelete: Int? = nil
+    @Published var deleteSuccess = false
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -46,6 +48,24 @@ class SetsLogViewModel: ObservableObject {
             }
         }
         fetchSets()
+    }
+    
+    func deleteSet() {
+        guard let toDelete = toDelete else {
+            return
+        }
+        
+        firestore.deleteSet(userId: self.userId, workout: self.workout, excercise: self.excercise, index: toDelete) { [weak self] result in
+            guard self != nil else {
+                return
+            }
+            
+            if case let .failure(error) = result {
+                print(error.localizedDescription)
+            } else {
+                self?.toDelete = nil
+            }
+        }
     }
     
     func fetchSets() {

@@ -10,14 +10,23 @@ import SwiftUI
 struct ExcerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
-    let excercise: String
+    let excercise: WorkoutExcercise
     
+    @Binding var toDelete: WorkoutExcercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
+    @State private var navigate = false
+    @State private var longPress = false
     let action: (String, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
-        NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise, sets: sets, viewManagerViewModel: viewManagerViewModel)) {
+        //NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise, sets: sets, viewManagerViewModel: viewManagerViewModel)) {
+        Button{
+            if !self.longPress {
+                self.navigate = true
+            }
+            self.longPress = false
+        } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(Color(hex:0xF4F4F4))
@@ -27,10 +36,10 @@ struct ExcerciseButtonView: View {
                     )
                     .frame(width: 153, height: 191)
                 VStack {
-                    Text(excercise)
+                    Text(excercise.id)
                         .foregroundColor(.black)
-                        .font(.system(size:22))
-                        .fontWeight(.bold)
+                        .font(.system(size:20))
+                        //.fontWeight(.bold)
                         .padding()
                         
                     Spacer()
@@ -41,14 +50,14 @@ struct ExcerciseButtonView: View {
                                     .foregroundColor(.black)
                                     .font(.system(size:16))
                                     .padding()
-                            } else {
+                            } else if sets.reps.count != 0{
                                 Text("\(sets.reps.count) Sets")
                                     .foregroundColor(.black)
                                     .font(.system(size:16))
                                     .padding()
                             }
                        
-                            ForEach(0..<min(sets.reps.count,3), id: \.self) { index in
+                            ForEach(0..<min(sets.weight.count,3), id: \.self) { index in
                                 Text("\(sets.weight[index]) lbs, \(sets.reps[index]) reps")
                                     .foregroundColor(.black)
                                     .font(.system(size:16))
@@ -65,20 +74,38 @@ struct ExcerciseButtonView: View {
                         
                     }
                 }
+                
+                NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
+                    EmptyView()
+                        .frame(width:0, height: 0)
+                        .hidden()
+                }
             }
             .frame(width: 153, height: 191)
             .padding(4)
         }
         .onAppear{
-            action(excercise) { result in
+            action(excercise.id) { result in
                 sets = result
             }
+            
         }
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.7)
+                .onEnded { _ in
+                    self.longPress = true
+                    toDelete = excercise
+                }
+        )
+        
+        
     }
 }
 
 #Preview {
-    ExcerciseButtonView(workout: "Arms", excercise: "Barbell Curl", viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
+    ExcerciseButtonView(workout: "Arms", excercise: WorkoutExcercise(id: "Arms", dateAdded: 10.0),
+                        toDelete: .constant(WorkoutExcercise(id: "Arms", dateAdded: 10.0)),
+                        viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
         return
     }
 }

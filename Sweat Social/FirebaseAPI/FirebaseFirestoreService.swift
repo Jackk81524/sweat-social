@@ -68,7 +68,6 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func deleteWorkout(userId: String, workoutToDelete: WorkoutExcercise, exerciseToDelete: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
-        print("Here")
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
@@ -130,6 +129,51 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
+    func deleteSet(userId: String, workout: String, excercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+        let document = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workout)
+            .collection(FirebaseFirestoreService.ExcerciseCollection)
+            .document(excercise)
+        
+        document.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard var setInfo = documentSnapshot?.data() else {
+                print("Unknown Error")
+                return
+            }
+            
+            if var weightList = setInfo["Weight"] as? [Int], var repsList = setInfo["Reps"] as? [Int] {
+                // Lists exist, append new values
+                weightList.remove(at: index)
+                repsList.remove(at: index)
+                
+                document.setData(["Weight": weightList], merge: true) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+                
+                document.setData(["Reps": repsList], merge: true) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+            } else {
+                completion(.failure(UnknownError()))
+            }
+        }
+    }
+    
     func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void){
         
         var collection = FirebaseFirestoreService.db
@@ -169,7 +213,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         var sets: Sets? = nil
         
-        var document = FirebaseFirestoreService.db
+        let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
