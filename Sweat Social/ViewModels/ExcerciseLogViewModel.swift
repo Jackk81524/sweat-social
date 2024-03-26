@@ -14,6 +14,7 @@ class ExcerciseLogViewModel: ObservableObject {
     @Published var addExcerciseForm = false
     @Published var excerciseList: [WorkoutExcercise] = []
     @Published var workout: WorkoutExcercise? = nil
+    @Published var errorMessage = ""
     
     
     private let firestore: FirestoreProtocol
@@ -29,12 +30,16 @@ class ExcerciseLogViewModel: ObservableObject {
     
     
     func addExcercise(excerciseName: String){
+        guard validate(input: excerciseName) else {
+            return
+        }
+        
         let dateAdded = Date().timeIntervalSince1970
         
         let newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
         
         guard let workout = self.workout else {
-            print("No workout provided")
+            print("No workout provided.")
             return
         }
         
@@ -43,10 +48,12 @@ class ExcerciseLogViewModel: ObservableObject {
             
             if case let .failure(error) = result {
                 if error is WorkoutExists {
-                    print("This workout already exists")
+                    self?.errorMessage = "This excercise already exists."
                 } else {
-                    print(error.localizedDescription)
+                    self?.errorMessage = error.localizedDescription
                 }
+            } else {
+                self?.errorMessage = ""
             }
         }
         
@@ -86,4 +93,22 @@ class ExcerciseLogViewModel: ObservableObject {
         }
     }
     
+    private func validate(input: String) -> Bool {
+
+        guard input.count >= 3 && input.count <= 20 else {
+            self.errorMessage = "Input must be between 3 and 20 characters."
+            return false
+            
+        }
+        
+        let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+        guard input.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil else {
+            self.errorMessage = "Invalid characters in input."
+            return false
+        }
+
+        
+        return true
+        
+    }
 }

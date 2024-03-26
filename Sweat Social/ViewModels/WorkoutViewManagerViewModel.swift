@@ -14,6 +14,8 @@ class WorkoutViewManagerViewModel: ObservableObject {
     
     @Published var dismiss = false
     @Published var excerciseDismiss = true
+    @Published var errorMessage = ""
     
     init() {}
+    
 }

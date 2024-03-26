@@ -10,6 +10,8 @@ import SwiftUI
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
+    @Binding var errorMessage: String
+    @Binding var workoutList: [WorkoutExcercise]
     //let workoutSelected: String?
     let mainTitle: String
     let placeHolder: String
@@ -43,19 +45,33 @@ struct AddWorkoutView: View {
                     .bold()
                     .offset(y:-40)
                 
-                HStack {
-                    Text("Enter: ")
-                        .font(.system(size:22))
-                        .offset(x:50)
+                ZStack {
+                    if errorMessage != "" && errorMessage != "nil"{
+                        Text(errorMessage)
+                            .frame(width:300)
+                            .font(.system(size:18))
+                            .multilineTextAlignment(.center)
+                            .offset(y:-20)
+                        
+                    }
                     
-                    TextField(placeHolder, text: $input)
-                        .offset(x:100)
-                        .font(.system(size:22))
-                        .padding()
-                        .onSubmit {
-                            action(input)
-                            showAddWorkoutForm.toggle()
-                        }
+                    HStack {
+                        Text("Enter: ")
+                            .font(.system(size:22))
+                            .offset(x:50)
+                        
+                        TextField(placeHolder, text: $input)
+                            .offset(x:100)
+                            .font(.system(size:22))
+                            .padding()
+                            .onSubmit {
+                                action(input)
+                            }
+                            .onChange(of: workoutList.count) { _ in
+                                showAddWorkoutForm.toggle()
+                            }
+                    }
+                    .offset(y:25)
                 }
                 
             }
@@ -68,7 +84,7 @@ struct AddWorkoutView: View {
 
 
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true), mainTitle: "Enter workout", placeHolder: "Add excercise") {_ in 
+    AddWorkoutView(showAddWorkoutForm: .constant(true), errorMessage: .constant(""), workoutList: .constant([]), mainTitle: "Enter workout", placeHolder: "Add excercise") {_ in
         //Nothing
     }
 }

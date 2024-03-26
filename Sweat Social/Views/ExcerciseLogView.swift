@@ -32,6 +32,8 @@ struct ExcerciseLogView: View {
                 if viewManagerViewModel.addForm {
                     ZStack {
                         AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
+                                       errorMessage: $viewModel.errorMessage,
+                                       workoutList: $viewModel.excerciseList,
                                        mainTitle: "Add Excercise",
                                        placeHolder: "Enter Excercise",
                                        action: viewModel.addExcercise)

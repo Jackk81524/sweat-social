@@ -13,6 +13,7 @@ class WorkoutLogViewModel: ObservableObject {
     @Published var userId: String
     @Published var addWorkoutForm = false
     @Published var workoutList: [WorkoutExcercise] = []
+    @Published var errorMessage = ""
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -27,7 +28,11 @@ class WorkoutLogViewModel: ObservableObject {
     }
     
     
-    func addWorkout(workoutName: String){
+    func addWorkout(workoutName: String) {
+        guard validate(input: workoutName) else {
+            return
+        }
+        
         let dateAdded = Date().timeIntervalSince1970
         
         let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
@@ -37,12 +42,18 @@ class WorkoutLogViewModel: ObservableObject {
             
             if case let .failure(error) = result {
                 if error is WorkoutExists {
-                    print("This workout already exists")
+                    self?.errorMessage = "This workout already exists."
+                    return
                 } else {
-                    print(error.localizedDescription)
+                    self?.errorMessage = error.localizedDescription
+                    return
                 }
+            } else {
+                self?.errorMessage = ""
             }
         }
+        //self.errorMessage = ""
+        
     }
     
     func fetchWorkouts() {
@@ -56,6 +67,25 @@ class WorkoutLogViewModel: ObservableObject {
             }
             
         }
+    }
+    
+    private func validate(input: String) -> Bool {
+
+        guard input.count >= 3 && input.count <= 20 else {
+            self.errorMessage = "Input must be between 3 and 20 characters."
+            return false
+            
+        }
+        
+        let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+        guard input.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil else {
+            self.errorMessage = "Invalid characters in input."
+            return false
+        }
+
+        
+        return true
+        
     }
     
     

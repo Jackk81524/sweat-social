@@ -14,6 +14,7 @@ class SetsLogViewModel: ObservableObject {
     @Published var workout: String = ""
     @Published var excercise: String = ""
     @Published var sets: Sets? = nil
+    @Published var errorMessage = ""
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -26,15 +27,22 @@ class SetsLogViewModel: ObservableObject {
     }
     
     
-    func addSet(repsInput: Int, weightInput: Int){
+    func addSet(repsInput: String, weightInput: String){
+        guard validate(input: repsInput) && validate(input: weightInput) else {
+            return
+        }
+         
+        guard let reps = Int(repsInput), let weight = Int(weightInput) else {
+            return
+        }
         
-        firestore.insertSet(userId: self.userId, workout: self.workout, excercise: self.excercise, reps: repsInput, weight: weightInput) { [weak self] result in
+        firestore.insertSet(userId: self.userId, workout: self.workout, excercise: self.excercise, reps: Int(reps), weight: Int(weight)) { [weak self] result in
             guard self != nil else {
                 return
             }
             
             if case let .failure(error) = result {
-                    print(error.localizedDescription)
+                self?.errorMessage = error.localizedDescription
             }
         }
         fetchSets()
@@ -49,6 +57,21 @@ class SetsLogViewModel: ObservableObject {
                 self?.sets = sets
             }
         }
+    }
+    
+    private func validate(input: String) -> Bool {
+        guard input.rangeOfCharacter(from: CharacterSet.letters.inverted) != nil else {
+            self.errorMessage = "Only numeric characters allowewd."
+            return false
+        }
+        
+        guard input.count <= 3 else {
+            self.errorMessage = "Input must be at most a 3 digit number."
+            return false
+        }
+        
+        return true
+        
     }
     
     
