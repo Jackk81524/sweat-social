@@ -9,27 +9,27 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+// View model for workout log view
 class WorkoutLogViewModel: ObservableObject {
     @Published var userId: String
-    @Published var addWorkoutForm = false
-    @Published var workoutList: [WorkoutExcercise] = []
+    @Published var addWorkoutForm = false // Controls add workout popup
+    @Published var workoutList: [WorkoutExcercise] = [] // List of workouts
     @Published var errorMessage = ""
-    @Published var toDelete: WorkoutExcercise? = nil
-    @Published var deleteSuccess = false
+    @Published var toDelete: WorkoutExcercise? = nil // Workout pending deletion, also controls popup
+    @Published var deleteSuccess = false // Helps control deletion confirm popup
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
-    //private let workout: String?
     
+    // Iniitalize firestore and auth
     init(auth: AuthProtocol = FirebaseAuthService(),
          firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
         self.firestore = firestore
-        //self.workout = workout
         self.userId = auth.currentUser
     }
     
-    
+    // Add workout
     func addWorkout(workoutName: String) {
         guard validate(input: workoutName) else {
             return
@@ -54,7 +54,6 @@ class WorkoutLogViewModel: ObservableObject {
                 self?.errorMessage = ""
             }
         }
-        //self.errorMessage = ""
         
     }
     

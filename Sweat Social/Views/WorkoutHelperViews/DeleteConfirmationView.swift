@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+// Delete confirmations screen, used across all three views
 struct DeleteConfirmationView: View {
     let toDelete: String
-    let toDeleteType: String
+    let toDeleteType: String // Used to edit display message
     @Binding var update: Bool
     let delete: () -> Void
     
@@ -43,8 +44,9 @@ struct DeleteConfirmationView: View {
                     .multilineTextAlignment(.center)
                     .bold()
                     .frame(width:320)
-                    .offset(y:-40)
+                    .offset(y:-30)
                 
+                // Confirmation button, calles delete function passed in from viewModel
                 Button {
                     delete()
                 } label: {
@@ -59,6 +61,7 @@ struct DeleteConfirmationView: View {
                     .frame(width: 141, height: 45)
                 }
                 
+                // Cancel button, toggles update variable which dismisses the popup
                 Button {
                     update.toggle()
                 } label: {
@@ -75,7 +78,7 @@ struct DeleteConfirmationView: View {
             }
         }
         .onAppear {
-            message = (toDeleteType == "Set") ? "Are you sure you want to delete Set \(toDelete)?" : "Are you sure you want to delete the \(toDeleteType), \(toDelete)?"
+            message = (toDeleteType == "Set") ? "Are you sure you want to delete Set \(toDelete)?" : "Are you sure you want to delete the \(toDeleteType), \(toDelete)?" // Sets appropriate title
         }
         
     }

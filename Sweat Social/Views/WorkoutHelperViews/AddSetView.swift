@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Similar to add workout view, but multiple fields when adding a set
 struct AddSetView: View {
     @State private var inputWeight = ""
     @State private var inputReps = ""
@@ -45,6 +46,7 @@ struct AddSetView: View {
                     .offset(y:-45)
                 
                 ZStack {
+                    // Perform input validation, display error message on failure
                     if errorMessage != "" {
                         Text(errorMessage)
                             .frame(width:320)
@@ -76,13 +78,16 @@ struct AddSetView: View {
                             .font(.system(size:22))
                             .padding()
                             .onSubmit {
+                                // Only submittable if input weight and input reps are not empty
                                 if !inputWeight.isEmpty && !inputReps.isEmpty {
-                                        action(inputWeight,inputReps)
+                                        action(inputReps,inputWeight)
                                     
+                                } else {
+                                    errorMessage = "Please fill in both fields."
                                 }
                             }
                             .onChange(of: setList?.reps.count) { _ in
-                                    showAddSetForm.toggle()
+                                    showAddSetForm.toggle() // dismiss popup on succesful add
                             }
                     }
                     .offset(y: 50)

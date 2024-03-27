@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View to display the sets for an excercise
 struct SetsLogView: View {
     let workout: String
     let excercise: String
@@ -22,9 +23,10 @@ struct SetsLogView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                // Scroll view to display sets if they exist
                 ScrollView {
                     if let sets = viewModel.sets {
-                        
+                        // Sets are stored as two lists, one of weight and one of reps. Grab the ith index of each and display it
                         ForEach(0..<sets.weight.count, id: \.self) { index in
                             SetButtonView(reps: sets.reps[index],
                                           weight: sets.weight[index],
@@ -35,6 +37,7 @@ struct SetsLogView: View {
                     }
                 }
                 
+                // Display add set popup if add button pressed
                 if viewManagerViewModel.addForm {
                     ZStack {
                         AddSetView(showAddSetForm: $viewManagerViewModel.addForm,
@@ -44,6 +47,7 @@ struct SetsLogView: View {
                     }
                 }
                 
+                //Display delete confirmation popup if a set is held
                 if let toDelete = viewModel.toDelete {
                     DeleteConfirmationView(toDelete: String(toDelete+1),
                                            toDeleteType: "Set", update: $viewModel.deleteSuccess,
@@ -64,6 +68,7 @@ struct SetsLogView: View {
                 viewModel.sets = sets
                 
             }
+            // Back button logic
             .onChange(of: viewManagerViewModel.dismiss) { _ in
                 presentationMode.wrappedValue
                     .dismiss()

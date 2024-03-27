@@ -8,6 +8,9 @@
 import Foundation
 import FirebaseFirestore
 
+// This contains the functions used to communicate with firestore
+// Allows for dependency injection
+// Purpose of each function should be self explanatory based on name
 class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
     static var userCollection = "users"

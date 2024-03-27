@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Popup view for excercise and workout screen. Takes input  variables to differentiate
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
@@ -39,12 +40,15 @@ struct AddWorkoutView: View {
             }
 
             VStack {
+                
+                // Variable title, based on workout or excercise view
                 Text(mainTitle)
                     .font(.system(size:26))
                     .foregroundStyle(.white)
                     .bold()
                     .offset(y:-40)
                 
+                // Perform validation and display error message if it exists
                 ZStack {
                     if errorMessage != "" && errorMessage != "nil"{
                         Text(errorMessage)
@@ -68,10 +72,10 @@ struct AddWorkoutView: View {
                             .lineLimit(nil)
                             .padding()
                             .onSubmit {
-                                action(input)
+                                action(input) // Triggers add workout, passed in from viewmodel
                             }
                             .onChange(of: workoutList.count) { _ in
-                                showAddWorkoutForm.toggle()
+                                showAddWorkoutForm.toggle() // Remove popup
                             }
                     }
                     

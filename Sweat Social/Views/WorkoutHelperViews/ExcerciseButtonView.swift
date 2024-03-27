@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// View of excercise button, also previews the sets
 struct ExcerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
@@ -20,7 +21,7 @@ struct ExcerciseButtonView: View {
     let action: (String, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
-        //NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise, sets: sets, viewManagerViewModel: viewManagerViewModel)) {
+        // Logic to trigger delete screen if held, or if tapped, go to set view
         Button{
             if !self.longPress {
                 self.navigate = true
@@ -43,6 +44,7 @@ struct ExcerciseButtonView: View {
                         .padding()
                         
                     Spacer()
+                    // Appropriately display sets in a preview, if they exist
                     if let sets = sets {
                         VStack{
                             if sets.reps.count == 1 {
@@ -75,6 +77,7 @@ struct ExcerciseButtonView: View {
                     }
                 }
                 
+                // Navigates to set view if button is clicked
                 NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
                     EmptyView()
                         .frame(width:0, height: 0)
@@ -85,11 +88,13 @@ struct ExcerciseButtonView: View {
             .padding(4)
         }
         .onAppear{
+            // Trigger fetch on the excercises sets
             action(excercise.id) { result in
                 sets = result
             }
             
         }
+        // Logic to detetct a hold on button
         .simultaneousGesture(
             LongPressGesture(minimumDuration: 0.7)
                 .onEnded { _ in

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Excercise log view, displays excercises for a certain workout and gives a preview of its sets
 struct ExcerciseLogView: View {
     let workout: WorkoutExcercise
     @Environment(\.presentationMode) var
@@ -21,6 +22,7 @@ struct ExcerciseLogView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
+                    // Displays the excercise buttons in two columns.
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
                         ForEach(viewModel.excerciseList) { excercise in
                             ExcerciseButtonView(workout: workout.id, 
@@ -32,7 +34,7 @@ struct ExcerciseLogView: View {
                         
                     }
                 }
-                
+                // Display add excercise form if button is clicked
                 if viewManagerViewModel.addForm {
                     ZStack {
                         AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
@@ -44,24 +46,26 @@ struct ExcerciseLogView: View {
                     }
                 }
                 
+                // If excercise is held, displays delete confirmation form
                 if let toDelete = viewModel.toDelete {
                     DeleteConfirmationView(toDelete: toDelete.id,
                                            toDeleteType: "excercise",
                                            update: $viewModel.deleteSuccess,
                                            delete: viewModel.deleteExcercise)
                     .onChange(of: viewModel.deleteSuccess) { _ in
-                        viewModel.toDelete = nil
+                        viewModel.toDelete = nil // On cancel, dismiss screen
                     }
                     
                 }
             }
-            .onAppear {
+            .onAppear { // Initialize values and excercises
                 viewModel.workout = workout
                 viewManagerViewModel.backButton = true
                 viewManagerViewModel.title = workout.id
                 viewModel.fetchExcercises()
             }
         }
+        // This triggers if back button is pressed. Excercise dismiss is additional logic to ensure that if the set view is dismissed, it displays excercise view, and not workout view.
         .onChange(of: viewManagerViewModel.dismiss) { _ in
             if(viewManagerViewModel.excerciseDismiss) {
                 viewManagerViewModel.title = "Your Workout"

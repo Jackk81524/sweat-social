@@ -10,11 +10,15 @@ import SwiftUI
 struct WorkoutHeaderView: View {
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
+    /*
     @Environment(\.presentationMode) private var
         presentationMode: Binding<PresentationMode>
+     */
     
     var body: some View {
         HStack{
+            // Checks to see if back button should be displayed. WorkoutLog will not have it, as it is the first screen
+            // View for back button
             if(viewManagerViewModel.backButton){
                 Button {
                     viewManagerViewModel.dismiss.toggle()
@@ -34,12 +38,13 @@ struct WorkoutHeaderView: View {
                 
             }
                 
-            
+            // Displays title in top center of the screen. Controller by viewManagerViewModel
             Text(viewManagerViewModel.title)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.system(size:24))
                 .padding(.leading, viewManagerViewModel.backButton ? 0 : UIScreen.main.bounds.width / 6)
             
+            // Add button, toggle the add form variable which will display a popup on respective view
             Button {
                 viewManagerViewModel.addForm.toggle()
             } label: {

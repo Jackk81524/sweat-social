@@ -9,20 +9,21 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+//View model for excercise log view
 class ExcerciseLogViewModel: ObservableObject {
     @Published var userId: String
-    @Published var addExcerciseForm = false
-    @Published var excerciseList: [WorkoutExcercise] = []
-    @Published var workout: WorkoutExcercise? = nil
+    @Published var addExcerciseForm = false // Controls add excercise popup
+    @Published var excerciseList: [WorkoutExcercise] = [] // Excercises to display
+    @Published var workout: WorkoutExcercise? = nil // Associated workout
     @Published var errorMessage = ""
-    @Published var toDelete: WorkoutExcercise? = nil
-    @Published var deleteSuccess = false
+    @Published var toDelete: WorkoutExcercise? = nil // Excercise pending deletion, also controls confirmation popup
+    @Published var deleteSuccess = false // dismisses popup
     
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
     
-    
+    // Initilize firebase auth and firestore
     init(auth: AuthProtocol = FirebaseAuthService(),
          firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
@@ -30,8 +31,9 @@ class ExcerciseLogViewModel: ObservableObject {
         self.userId = auth.currentUser
     }
     
-    
+    // Adds excercise using firestore api
     func addExcercise(excerciseName: String){
+        // Validates input
         guard validate(input: excerciseName) else {
             return
         }
@@ -61,6 +63,7 @@ class ExcerciseLogViewModel: ObservableObject {
         
     }
     
+    // Fetch excercise calling firestore api
     func fetchExcercises() {
         guard let workout = self.workout else {
             print("No workout provided")
@@ -78,6 +81,7 @@ class ExcerciseLogViewModel: ObservableObject {
         }
     }
     
+    // Delete excercise using firestore api
     func deleteExcercise() {
         guard let toDelete = toDelete, let workout = workout else {
             return
@@ -94,6 +98,7 @@ class ExcerciseLogViewModel: ObservableObject {
         }
     }
     
+    // Fetch sets using firestore api
     func fetchSets(excercise: String, completion: @escaping (Sets?) -> Void) {
         guard let workout = self.workout else {
             print("No workout provided")
@@ -111,6 +116,7 @@ class ExcerciseLogViewModel: ObservableObject {
         }
     }
     
+    // Private func to validate input
     private func validate(input: String) -> Bool {
 
         guard input.count >= 3 && input.count <= 30 else {

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// Variables used largely to control the header, and its associated buttons: Add and back
+// No functions currently
 class WorkoutViewManagerViewModel: ObservableObject {
     @Published var addForm = false
     @Published var title = "Your Workout"
