@@ -11,12 +11,13 @@ import SwiftUI
 // Main purpose is to have one header view. Leads to better UI and also more abstracted code
 struct WorkoutViewManagerView: View {
     @StateObject var viewManagerViewModel = WorkoutViewManagerViewModel()
+    let padding: CGFloat
     
     var body: some View {
         VStack {
             //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
             WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
-                .padding(.top,40)
+                .padding(.top,padding)
             
             //Beginning of workout navigation stack, first is the Workout log view.
             NavigationStack{
@@ -30,5 +31,5 @@ struct WorkoutViewManagerView: View {
 }
 
 #Preview {
-    WorkoutViewManagerView()
+    WorkoutViewManagerView(padding: 0)
 }

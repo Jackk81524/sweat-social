@@ -19,13 +19,13 @@ struct TabBar: View {
                     }
                     .badge(3)
                 
-                Text("Calender")
+                CalendarView()
                     .tabItem {
                         Label("Calender", systemImage: "calendar")
                     }
                 
                 
-                WorkoutViewManagerView()
+                WorkoutViewManagerView(padding: 40)
                     .tabItem {
                         Label("Log Workout", systemImage: "plus.circle.fill")
                     }

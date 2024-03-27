@@ -116,6 +116,15 @@
         "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
         "version" : "1.25.2"
       }
+    },
+    {
+      "identity" : "weeklycalendar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mlballack/WeeklyCalendar.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0f6e99815c7b7376b7cf0a3a583b36e25cb99db8"
+      }
     }
   ],
   "version" : 2
