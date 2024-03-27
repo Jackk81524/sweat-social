@@ -64,6 +64,8 @@ struct SetButtonView: View {
         .padding(2)
         .onLongPressGesture(minimumDuration: 0.7) { // Delete popup triggered on hold
             toDelete = setNum-1
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
         }
 
         

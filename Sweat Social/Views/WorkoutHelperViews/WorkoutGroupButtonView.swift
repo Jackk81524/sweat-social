@@ -49,6 +49,8 @@ struct WorkoutGroupButtonView: View {
                 .onEnded { _ in
                     self.longPress = true
                     toDelete = name
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
                 }
         )
         .buttonStyle(PlainButtonStyle())

@@ -100,6 +100,8 @@ struct ExcerciseButtonView: View {
                 .onEnded { _ in
                     self.longPress = true
                     toDelete = excercise
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
                 }
         )
         
