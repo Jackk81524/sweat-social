@@ -9,51 +9,57 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+// View model for workout log view
 class WorkoutLogViewModel: ObservableObject {
     @Published var userId: String
-    @Published var addWorkoutForm = false
-    @Published var workoutList: [WorkoutExcercise] = []
+    @Published var addWorkoutForm = false // Controls add workout popup
+    @Published var workoutList: [WorkoutExcercise] = [] // List of workouts
+    @Published var errorMessage = ""
+    @Published var toDelete: WorkoutExcercise? = nil // Workout pending deletion, also controls popup
+    @Published var deleteSuccess = false // Helps control deletion confirm popup
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
-    private let workout: String?
     
-    init(workout: String?,auth: AuthProtocol = FirebaseAuthService(),
+    // Iniitalize firestore and auth
+    init(auth: AuthProtocol = FirebaseAuthService(),
          firestore: FirestoreProtocol = FirebaseFirestoreService()) {
         self.auth = auth
         self.firestore = firestore
-        self.workout = workout
         self.userId = auth.currentUser
-        fetchWorkouts(userId: userId,workout: workout)
     }
     
-    
-    func addWorkout(workoutName: String,excerciseName:String? = nil){
+    // Add workout
+    func addWorkout(workoutName: String) {
+        guard validate(input: workoutName) else {
+            return
+        }
+        
         let dateAdded = Date().timeIntervalSince1970
         
         let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
-        var newExcercise: WorkoutExcercise? = nil
         
-        if let excerciseName = excerciseName {
-            newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
-        }
-        
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: newExcercise) { [weak self] result in
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: nil) { [weak self] result in
             guard self != nil else { return }
             
             if case let .failure(error) = result {
                 if error is WorkoutExists {
-                    print("This workout already exists")
+                    self?.errorMessage = "This workout already exists."
+                    return
                 } else {
-                    print(error.localizedDescription)
+                    self?.errorMessage = error.localizedDescription
+                    return
                 }
+            } else {
+                self?.errorMessage = ""
             }
         }
+        
     }
     
-    func fetchWorkouts(userId: String, workout: String? = nil) {
+    func fetchWorkouts() {
         
-        firestore.fetchWorkouts(userId: userId, workout: workout) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: nil) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -62,6 +68,41 @@ class WorkoutLogViewModel: ObservableObject {
             }
             
         }
+    }
+    
+    func deleteWorkout() {
+        guard let toDelete = toDelete else {
+            return
+        }
+        
+        firestore.deleteWorkout(userId: self.userId, workoutToDelete: toDelete, exerciseToDelete: nil) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            default:
+                self?.toDelete = nil
+                return
+            }
+        }
+    }
+    
+    private func validate(input: String) -> Bool {
+
+        guard input.count >= 3 && input.count <= 30 else {
+            self.errorMessage = "Input must be between 3 and 30 characters."
+            return false
+            
+        }
+        
+        let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+        guard input.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil else {
+            self.errorMessage = "Invalid characters in input."
+            return false
+        }
+
+        
+        return true
+        
     }
     
     

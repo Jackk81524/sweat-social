@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+// Popup view for excercise and workout screen. Takes input  variables to differentiate
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
-    let workoutSelected: String?
+    @Binding var errorMessage: String
+    @Binding var workoutList: [WorkoutExcercise]
+    //let workoutSelected: String?
     let mainTitle: String
     let placeHolder: String
-    let action: (String, String?) -> Void
+    let action: (String) -> Void
     
     
     var body: some View {
@@ -37,29 +40,46 @@ struct AddWorkoutView: View {
             }
 
             VStack {
+                
+                // Variable title, based on workout or excercise view
                 Text(mainTitle)
                     .font(.system(size:26))
                     .foregroundStyle(.white)
                     .bold()
                     .offset(y:-40)
                 
-                HStack {
-                    Text("Enter: ")
-                        .font(.system(size:22))
-                        .offset(x:50)
+                // Perform validation and display error message if it exists
+                ZStack {
+                    if errorMessage != "" && errorMessage != "nil"{
+                        Text(errorMessage)
+                            .frame(width:300)
+                            .font(.system(size:18))
+                            .multilineTextAlignment(.center)
+                            .offset(y:-20)
+                        
+                    }
                     
-                    TextField(placeHolder, text: $input)
-                        .offset(x:100)
-                        .font(.system(size:22))
-                        .padding()
-                        .onSubmit {
-                            if let workoutSelected = workoutSelected {
-                                action(workoutSelected,input)
-                            } else {
-                                action(input,nil)
+                    HStack {
+                        Text("Enter: ")
+                            .font(.system(size:22))
+                            .offset(x:20)
+                        
+                        TextField(placeHolder, text: $input)
+                            .offset(x:30)
+                            .font(.system(size:22))
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth:180)
+                            .lineLimit(nil)
+                            .padding()
+                            .onSubmit {
+                                action(input) // Triggers add workout, passed in from viewmodel
                             }
-                            showAddWorkoutForm.toggle()
-                        }
+                            .onChange(of: workoutList.count) { _ in
+                                showAddWorkoutForm.toggle() // Remove popup
+                            }
+                    }
+                    
+                    .offset(y:25)
                 }
                 
             }
@@ -72,7 +92,7 @@ struct AddWorkoutView: View {
 
 
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true), workoutSelected: "", mainTitle: "Enter workout", placeHolder: "Add excercise") {_,_ in 
-        // Nothing
+    AddWorkoutView(showAddWorkoutForm: .constant(true), errorMessage: .constant(""), workoutList: .constant([]), mainTitle: "Enter workout", placeHolder: "Add excercise") {_ in
+        //Nothing
     }
 }

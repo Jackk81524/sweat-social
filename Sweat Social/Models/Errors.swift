@@ -14,6 +14,7 @@ struct InvalidUserError: Error {
 enum CustomErrors: Error {
     case noCurrentUser
     case existingWorkout
+    case unknownError
 }
 
 struct NoCurrentUser: Error {
@@ -22,4 +23,8 @@ struct NoCurrentUser: Error {
 
 struct WorkoutExists: Error {
     let message = "This workout category already exists"
+}
+
+struct UnknownError: Error {
+    let message = "Unknown cause of Error"
 }

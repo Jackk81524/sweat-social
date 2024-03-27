@@ -28,9 +28,14 @@
 		C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2332B76B75B00346B27 /* FirebaseAuth */; };
 		C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C528A2352B76B75B00346B27 /* FirebaseFirestore */; };
 		C528A23C2B76B9E900346B27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528A23B2B76B9E900346B27 /* User.swift */; };
+		C531534D2BB1C73000604987 /* WorkoutViewManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531534C2BB1C73000604987 /* WorkoutViewManagerViewModel.swift */; };
 		C531FD392B8BD7C3005CE16C /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD382B8BD7C3005CE16C /* Workout.swift */; };
 		C531FD3B2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531FD3A2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift */; };
 		C5329ACC2B96731F00D8ED3D /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5329ACB2B96731F00D8ED3D /* Errors.swift */; };
+		C532A8222BAF8C3B00E672B4 /* ExcerciseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */; };
+		C532A8242BAF8F0100E672B4 /* ExcerciseLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */; };
+		C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */; };
+		C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */; };
 		C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */; };
 		C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */; };
 		C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */; };
@@ -44,6 +49,7 @@
 		C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53A75C02B9BE149008338B6 /* SetsLogView.swift */; };
 		C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */; };
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
+		C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */; };
 		C550D8BB2BAA4B99004AB0C9 /* AddSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
 		C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A0D2B741EF400F898EA /* LoginView.swift */; };
@@ -95,9 +101,14 @@
 		C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutLogViewModel.swift; sourceTree = "<group>"; };
 		C528A23B2B76B9E900346B27 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C5304A142B83BE3B00DA755E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Other/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C531534C2BB1C73000604987 /* WorkoutViewManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewManagerViewModel.swift; sourceTree = "<group>"; };
 		C531FD382B8BD7C3005CE16C /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		C531FD3A2B8BFCC0005CE16C /* WorkoutGroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutGroupButtonView.swift; sourceTree = "<group>"; };
 		C5329ACB2B96731F00D8ED3D /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogView.swift; sourceTree = "<group>"; };
+		C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogViewModel.swift; sourceTree = "<group>"; };
+		C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseButtonView.swift; sourceTree = "<group>"; };
+		C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
 		C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		C536A1F32B7D13D900079DCC /* AuthTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldView.swift; sourceTree = "<group>"; };
@@ -111,6 +122,7 @@
 		C53A75C02B9BE149008338B6 /* SetsLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsLogView.swift; sourceTree = "<group>"; };
 		C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHeaderView.swift; sourceTree = "<group>"; };
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
+		C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewManagerView.swift; sourceTree = "<group>"; };
 		C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetView.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C5766A0D2B741EF400F898EA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -240,6 +252,8 @@
 				C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */,
 				C53935EA2BA9F3E4003228F9 /* SetButtonView.swift */,
 				C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */,
+				C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */,
+				C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */,
 			);
 			path = WorkoutHelperViews;
 			sourceTree = "<group>";
@@ -270,6 +284,8 @@
 				C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */,
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
+				C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */,
+				C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */,
 				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
@@ -286,10 +302,12 @@
 			children = (
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
+				C531534C2BB1C73000604987 /* WorkoutViewManagerViewModel.swift */,
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
 				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
 				C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */,
 				C53935E62BA9D63D003228F9 /* SetsLogViewModel.swift */,
+				C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -464,11 +482,15 @@
 				C53935EB2BA9F3E4003228F9 /* SetButtonView.swift in Sources */,
 				C53935E72BA9D63D003228F9 /* SetsLogViewModel.swift in Sources */,
 				C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */,
+				C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */,
+				C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */,
 				C5F38B2B2B8952D80033B5C6 /* AddWorkoutView.swift in Sources */,
+				C531534D2BB1C73000604987 /* WorkoutViewManagerViewModel.swift in Sources */,
 				C527F1BF2B89235A00D0934F /* WorkoutLogView.swift in Sources */,
 				C550D8BB2BAA4B99004AB0C9 /* AddSetView.swift in Sources */,
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C507850C2B90DB5F00555C57 /* Protocol.swift in Sources */,
+				C532A8222BAF8C3B00E672B4 /* ExcerciseLogView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
 				C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */,
 				0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */,
@@ -483,12 +505,14 @@
 				C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */,
 				C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */,
 				C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */,
+				C532A8242BAF8F0100E672B4 /* ExcerciseLogViewModel.swift in Sources */,
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
 				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
 				C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */,
+				C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);

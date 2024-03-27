@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+// Similar to add workout view, but multiple fields when adding a set
 struct AddSetView: View {
     @State private var inputWeight = ""
     @State private var inputReps = ""
     @Binding var showAddSetForm: Bool
+    @Binding var errorMessage: String
+    @Binding var setList: Sets?
     
-    let action: (Int, Int) -> Void
+    let action: (String, String) -> Void
     
     
     var body: some View {
@@ -40,40 +43,56 @@ struct AddSetView: View {
                     .font(.system(size:26))
                     .foregroundStyle(.white)
                     .bold()
-                    .offset(y:-5)
-                 
-                HStack {
-                    Text("Weight: ")
-                        .font(.system(size:22))
-                        .offset(x:50)
-                    
-                    TextField("Weight", text: $inputWeight)
-                        .offset(x:100)
-                        .font(.system(size:22))
-                        .padding()
-                }
-                .offset(y:10)
+                    .offset(y:-45)
                 
-                HStack {
-                    Text("Reps: ")
-                        .font(.system(size:22))
-                        .offset(x:50)
+                ZStack {
+                    // Perform input validation, display error message on failure
+                    if errorMessage != "" {
+                        Text(errorMessage)
+                            .frame(width:320)
+                            .font(.system(size:18))
+                            .multilineTextAlignment(.center)
+                            .offset(y:-25)
+                    }
                     
-                    TextField("Reps", text: $inputReps)
-                        .offset(x:120)
-                        .font(.system(size:22))
-                        .padding()
-                        .onSubmit {
-                            if !inputWeight.isEmpty && !inputReps.isEmpty {
-                                if let intWeight = Int(inputWeight), let intReps = Int(inputReps) {
-                                    action(intWeight,intReps)
+                    HStack {
+                        Text("Weight: ")
+                            .font(.system(size:22))
+                            .offset(x:50)
+                        
+                        TextField("Weight", text: $inputWeight)
+                            .offset(x:100)
+                            .font(.system(size:22))
+                            .padding()
+                    }
+                    .offset(y:10)
+                    
+                    
+                    HStack {
+                        Text("Reps: ")
+                            .font(.system(size:22))
+                            .offset(x:50)
+                        
+                        TextField("Reps", text: $inputReps)
+                            .offset(x:120)
+                            .font(.system(size:22))
+                            .padding()
+                            .onSubmit {
+                                // Only submittable if input weight and input reps are not empty
+                                if !inputWeight.isEmpty && !inputReps.isEmpty {
+                                        action(inputReps,inputWeight)
+                                    
+                                } else {
+                                    errorMessage = "Please fill in both fields."
                                 }
-                                
                             }
-                            showAddSetForm.toggle()
-                        }
+                            .onChange(of: setList?.reps.count) { _ in
+                                    showAddSetForm.toggle() // dismiss popup on succesful add
+                            }
+                    }
+                    .offset(y: 50)
                 }
-                
+                    
             }
             
       
@@ -83,7 +102,7 @@ struct AddSetView: View {
 }
 
 #Preview {
-    AddSetView(showAddSetForm: .constant(true)){_,_ in
+    AddSetView(showAddSetForm: .constant(true), errorMessage: .constant(""), setList: .constant(nil)){_,_ in
         
     }
 }

@@ -25,14 +25,11 @@ struct TabBar: View {
                     }
                 
                 
-                WorkoutLogView(title: "Your Workout",
-                               workoutSelected: nil,
-                               addMainTitle:"Add Workout Category",
-                               addPlaceHolder: "Enter workout category",
-                               excercisesListed: false)
+                WorkoutViewManagerView()
                     .tabItem {
                         Label("Log Workout", systemImage: "plus.circle.fill")
                     }
+                    
                 
                 GoalsView()
                     .tabItem {
