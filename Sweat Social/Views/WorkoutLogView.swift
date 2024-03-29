@@ -7,50 +7,51 @@
 
 import SwiftUI
 
+// This is the main workout category log view.
 struct WorkoutLogView: View {
-    let title: String
-    let workoutSelected: String? // Value if user clicks a workout, and goes to excercise page
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel // viewModel to control header
     
-    // Variables on addForm
-    let addMainTitle: String
-    let addPlaceHolder: String
-    
-    let excercisesListed: Bool
-    
-    @StateObject var viewModel : WorkoutLogViewModel
-    
-    init(title: String, workoutSelected: String?, addMainTitle: String, addPlaceHolder: String, excercisesListed: Bool) {
-        self.title = title
-        self.workoutSelected = workoutSelected
-        self.addMainTitle = addMainTitle
-        self.addPlaceHolder = addPlaceHolder
-        self.excercisesListed = excercisesListed
-        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(workout: workoutSelected))
-    }
+    @StateObject var viewModel = WorkoutLogViewModel() // viewModel to manage workout log
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                ZStack {
-                    VStack {
-                        WorkoutHeaderView(showAddWorkoutForm: $viewModel.addWorkoutForm, title: title)
-                        
-                        ScrollView {
-                            ForEach(viewModel.workoutList) { group in
-                                WorkoutGroupButtonView(name: group.id, workout: workoutSelected, excercisesListed: self.excercisesListed)
-                            }
-                        }
+        NavigationStack{
+            ZStack {
+                // Create a scroll view of workout buttons
+                ScrollView {
+                    ForEach(viewModel.workoutList) { group in
+                        WorkoutGroupButtonView(name: group,
+                                               toDelete: $viewModel.toDelete,
+                                               viewManagerViewModel: viewManagerViewModel)
                     }
-
-                    if viewModel.addWorkoutForm {
-                        ZStack {
-                            AddWorkoutView(showAddWorkoutForm: $viewModel.addWorkoutForm, workoutSelected: workoutSelected, mainTitle: addMainTitle, placeHolder: addPlaceHolder, action: viewModel.addWorkout)
-                        }
+                }
+                
+                // Check to see if add form is clicked, and display form if so
+                if viewManagerViewModel.addForm {
+                    ZStack {
+                        AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
+                                       errorMessage: $viewModel.errorMessage,
+                                       workoutList: $viewModel.workoutList,
+                                       mainTitle: "Add Workout",
+                                       placeHolder: "Enter Workout",
+                                       action: viewModel.addWorkout)
+                    }
+                }
+                
+                // Check to see if delete is enabled, and show confirm screen if so
+                if let toDelete = viewModel.toDelete {
+                    DeleteConfirmationView(toDelete: toDelete.id,
+                                           toDeleteType: "workout",
+                                           update: $viewModel.deleteSuccess,
+                                           delete: viewModel.deleteWorkout)
+                    .onChange(of: viewModel.deleteSuccess) { _ in
+                        viewModel.toDelete = nil // This removes popup if cancel is pressed
                     }
                     
                 }
             }
-            .padding(.top,40)
+            .onAppear{
+                viewModel.fetchWorkouts()
+            }
         }
         .navigationBarHidden(true)
         
@@ -58,5 +59,5 @@ struct WorkoutLogView: View {
 }
 
 #Preview {
-    WorkoutLogView(title: "Your Workout", workoutSelected: nil, addMainTitle: "Enter workout", addPlaceHolder: "Add Excercise", excercisesListed: false)
+    WorkoutLogView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }

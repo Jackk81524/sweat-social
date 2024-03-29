@@ -8,39 +8,45 @@
 import SwiftUI
 
 struct WorkoutHeaderView: View {
-    @Binding var showAddWorkoutForm: Bool
-    let title: String
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
+    /*
     @Environment(\.presentationMode) private var
         presentationMode: Binding<PresentationMode>
+     */
     
     var body: some View {
         HStack{
-            Button {
-                presentationMode.wrappedValue
-                    .dismiss()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundColor(.black)
-                    Text("<-")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
+            // Checks to see if back button should be displayed. WorkoutLog will not have it, as it is the first screen
+            // View for back button
+            if(viewManagerViewModel.backButton){
+                Button {
+                    viewManagerViewModel.dismiss.toggle()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundColor(.black)
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            //.fontWeight(.bold)
+                    }
+                    .frame(width: 39, height: 26)
+                    .padding()
+                    
                 }
-                .frame(width: 39, height: 26)
-                .padding()
                 
             }
-            
-            Text(title)
+                
+            // Displays title in top center of the screen. Controller by viewManagerViewModel
+            Text(viewManagerViewModel.title)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.system(size:24))
+                .padding(.leading, viewManagerViewModel.backButton ? 0 : UIScreen.main.bounds.width / 6)
             
-            //HStack {
-                //Spacer()
+            // Add button, toggle the add form variable which will display a popup on respective view
             Button {
-                showAddWorkoutForm.toggle()
+                viewManagerViewModel.addForm.toggle()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)
@@ -54,11 +60,10 @@ struct WorkoutHeaderView: View {
                 .padding()
                 
             }
-           // }
         }
     }
 }
 
 #Preview {
-    WorkoutHeaderView(showAddWorkoutForm: .constant(true), title: "Your workout")
+    WorkoutHeaderView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }

@@ -8,6 +8,9 @@
 import Foundation
 import FirebaseFirestore
 
+// This contains the functions used to communicate with firestore
+// Allows for dependency injection
+// Purpose of each function should be self explanatory based on name
 class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
     static var userCollection = "users"
@@ -33,7 +36,9 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+
         var toAdd = newWorkoutCategory
+        
         
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
@@ -63,9 +68,28 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 }
             }
         }
-        
     }
     
+    func deleteWorkout(userId: String, workoutToDelete: WorkoutExcercise, exerciseToDelete: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+        var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workoutToDelete.id)
+        
+        if let exerciseToDelete = exerciseToDelete {
+            doc = doc.collection(FirebaseFirestoreService.ExcerciseCollection)
+                .document(exerciseToDelete.id)
+        }
+
+        doc.delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+
     func insertSet(userId: String, workout: String, excercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
         
         let document = FirebaseFirestoreService.db
@@ -104,6 +128,51 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 } else {
                     completion(.success(()))
                 }
+            }
+        }
+    }
+    
+    func deleteSet(userId: String, workout: String, excercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+        let document = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(workout)
+            .collection(FirebaseFirestoreService.ExcerciseCollection)
+            .document(excercise)
+        
+        document.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard var setInfo = documentSnapshot?.data() else {
+                print("Unknown Error")
+                return
+            }
+            
+            if var weightList = setInfo["Weight"] as? [Int], var repsList = setInfo["Reps"] as? [Int] {
+                // Lists exist, append new values
+                weightList.remove(at: index)
+                repsList.remove(at: index)
+                
+                document.setData(["Weight": weightList], merge: true) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+                
+                document.setData(["Reps": repsList], merge: true) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+            } else {
+                completion(.failure(UnknownError()))
             }
         }
     }
@@ -147,7 +216,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         var sets: Sets? = nil
         
-        var document = FirebaseFirestoreService.db
+        let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
