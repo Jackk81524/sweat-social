@@ -15,7 +15,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
     static var db = Firestore.firestore()
     static var userCollection = "users"
     static var WorkoutCategoriesCollection = "Workout Categories"
-    static var ExcerciseCollection = "Excercises"
+    static var ExerciseCollection = "Exercises"
+    static var LoggedWorkouts = "Logged Workouts"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newUser = User(id: userId,
@@ -35,7 +36,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
     }
     
-    func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+    func insertWorkout(userId: String,newWorkoutCategory: WorkoutExercise, newExercise: WorkoutExercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
 
         var toAdd = newWorkoutCategory
         
@@ -45,10 +46,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(newWorkoutCategory.id)
         
-        if let newExcercise = newExcercise {
-            toAdd = newExcercise
-            doc = doc.collection(FirebaseFirestoreService.ExcerciseCollection)
-                .document(newExcercise.id)
+        if let newExercise = newExercise {
+            toAdd = newExercise
+            doc = doc.collection(FirebaseFirestoreService.ExerciseCollection)
+                .document(newExercise.id)
         }
         
         doc.getDocument { (document, error) in
@@ -70,14 +71,14 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
-    func deleteWorkout(userId: String, workoutToDelete: WorkoutExcercise, exerciseToDelete: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+    func deleteWorkout(userId: String, workoutToDelete: WorkoutExercise, exerciseToDelete: WorkoutExercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(workoutToDelete.id)
         
         if let exerciseToDelete = exerciseToDelete {
-            doc = doc.collection(FirebaseFirestoreService.ExcerciseCollection)
+            doc = doc.collection(FirebaseFirestoreService.ExerciseCollection)
                 .document(exerciseToDelete.id)
         }
 
@@ -90,15 +91,15 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
 
-    func insertSet(userId: String, workout: String, excercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+    func insertSet(userId: String, workout: String, exercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
         
         let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(workout)
-            .collection(FirebaseFirestoreService.ExcerciseCollection)
-            .document(excercise)
+            .collection(FirebaseFirestoreService.ExerciseCollection)
+            .document(exercise)
         
         document.getDocument { (documentSnapshot, error) in
             if let error = error {
@@ -132,14 +133,14 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
-    func deleteSet(userId: String, workout: String, excercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+    func deleteSet(userId: String, workout: String, exercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void){
         let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(workout)
-            .collection(FirebaseFirestoreService.ExcerciseCollection)
-            .document(excercise)
+            .collection(FirebaseFirestoreService.ExerciseCollection)
+            .document(exercise)
         
         document.getDocument { (documentSnapshot, error) in
             if let error = error {
@@ -177,7 +178,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
-    func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void){
+    func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void){
         
         var collection = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
@@ -186,7 +187,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         if let workout = workout {
             collection = collection.document(workout)
-                .collection(FirebaseFirestoreService.ExcerciseCollection)
+                .collection(FirebaseFirestoreService.ExerciseCollection)
         }
         
         collection.addSnapshotListener { (querySnapshot, error) in
@@ -199,10 +200,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 return
             }
             
-            let workoutList: [WorkoutExcercise] = documents.compactMap { document in
+            let workoutList: [WorkoutExercise] = documents.compactMap { document in
                 if let id = document["id"] as? String,
                    let dateAdded = document["dateAdded"] as? TimeInterval  {
-                    return WorkoutExcercise(id: id, dateAdded: dateAdded)
+                    return WorkoutExercise(id: id, dateAdded: dateAdded)
                 }
                 return nil
             }
@@ -212,7 +213,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
     }
     
-    func fetchSets(userId: String, workout: String, excercise: String, completion: @escaping (Result<Sets?, Error>) -> Void){
+    func fetchSets(userId: String, workout: String, exercise: String, completion: @escaping (Result<Sets?, Error>) -> Void){
         
         var sets: Sets? = nil
         
@@ -221,8 +222,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
             .document(workout)
-            .collection(FirebaseFirestoreService.ExcerciseCollection)
-            .document(excercise)
+            .collection(FirebaseFirestoreService.ExerciseCollection)
+            .document(exercise)
         
         document.addSnapshotListener { (documentSnapshot, error) in
             if let error = error {
@@ -244,4 +245,106 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
     }
     
+    func logWorkout(userId: String, completion: @escaping (Result<Void?, Error>) -> Void) {
+        let dateAdded = Date().timeIntervalSince1970
+        
+        let fetchCollection = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+         
+        let logData = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.LoggedWorkouts)
+            .document(String(dateAdded))
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+         
+        fetchCollection.getDocuments { (fetchedData, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard let documents = fetchedData?.documents else {
+                completion(.failure(CustomErrors.emptyWorkout))
+                return
+            }
+            
+            var dataToLog: [[String: Any]] = []
+            
+            self.formatLogData(documents) { result in
+                switch result {
+                case .success(let data):
+                    dataToLog = data
+                default:
+                    return
+                }
+                print(dataToLog)
+            }
+            
+            //print(dataToLog)
+            for data in dataToLog {
+                //print(data)
+                logData.addDocument(data: data) { error in
+                    if let error = error {
+                        print("here1")
+                        completion(.failure(error))
+                    } else {
+                        print("here2")
+                        completion(.success(()))
+                    }
+                }
+            }
+        }
+    }
+         
+    private func formatLogData(_ fetchedData: [QueryDocumentSnapshot], completion: @escaping (Result<[[String: Any]], Error>) -> Void) {
+        var formattedData: [[String: Any]] = []
+        
+        for document in fetchedData {
+            var workoutData: [String: Any] = [:] // Initialize data for a single workout
+            
+            let categoryID = document.documentID
+            let categoryData = document.data()
+            
+            workoutData["categoryID"] = categoryID
+            workoutData["categoryData"] = categoryData
+            
+            var exercisesData: [[String: Any]] = [] // Initialize data for exercises
+            
+            let exercisesCollection = document.reference.collection("Exercises")
+            
+            exercisesCollection.getDocuments { (exercisesCollectionDocuments, error) in
+                if let error = error {
+                    print("Error fetching exercises:", error)
+                    completion(.failure(error))
+                    return // Return or handle the error
+                }
+                
+                if let exercises = exercisesCollectionDocuments{
+                    //print(exercises)
+                    for exerciseDocument in exercises.documents {
+                        let exerciseID = exerciseDocument.documentID
+                        var exerciseData = exerciseDocument.data()
+                        print(exerciseData)
+                        
+                        exerciseData["exerciseID"] = exerciseID
+                        
+                        exercisesData.append(exerciseData)
+                    }
+                }
+                
+                workoutData["exercises"] = exercisesData // Assign exercises data to workout data
+                
+                formattedData.append(workoutData) // Append formatted workout data to the main array
+                
+                // Check if this is the last document to complete formatting
+                if formattedData.count == fetchedData.count {
+                    completion(.success(formattedData)) // Return formatted data
+                }
+            }
+        }
+    }
+
+
 }
+

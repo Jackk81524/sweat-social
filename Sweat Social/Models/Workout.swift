@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct WorkoutExcercise: Codable, Identifiable {
+struct WorkoutExercise: Codable, Identifiable {
     let id: String
     let dateAdded: TimeInterval
 }
 
-/*struct Excercise: Codable {
+/*struct Exercise: Codable {
     let id: String
     let dateAdded: TimeInterval
     //var sets: [Set]?
@@ -23,3 +23,4 @@ struct Sets: Codable {
     let reps: [Int]
     let weight: [Int]
 }
+

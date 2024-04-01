@@ -10,9 +10,9 @@ import SwiftUI
 
 // View for workout buttons seen on workout log screen
 struct WorkoutGroupButtonView: View {
-    let name: WorkoutExcercise
+    let name: WorkoutExercise
     
-    @Binding var toDelete: WorkoutExcercise?
+    @Binding var toDelete: WorkoutExercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     @State private var navigate = false
     @State private var longPress = false
@@ -56,7 +56,7 @@ struct WorkoutGroupButtonView: View {
         .buttonStyle(PlainButtonStyle())
         
         // Navigate to next view on tap
-        NavigationLink(destination: ExcerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
+        NavigationLink(destination: ExerciseLogView(workout: name, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
             EmptyView()
                 .frame(width:0, height: 0)
                 .hidden()
@@ -67,5 +67,5 @@ struct WorkoutGroupButtonView: View {
 }
 
 #Preview {
-    WorkoutGroupButtonView(name: WorkoutExcercise(id: "Arms", dateAdded: 10.0), toDelete: .constant(WorkoutExcercise(id: "Arms", dateAdded: 10.0)), viewManagerViewModel: WorkoutViewManagerViewModel())
+    WorkoutGroupButtonView(name: WorkoutExercise(id: "Arms", dateAdded: 10.0), toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)), viewManagerViewModel: WorkoutViewManagerViewModel())
 }

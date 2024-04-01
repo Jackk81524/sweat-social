@@ -1,5 +1,5 @@
 //
-//  ExcerciseLogViewModel.swift
+//  ExerciseLogViewModel.swift
 //  Sweat Social
 //
 //  Created by Jack.Knox on 2024-03-23.
@@ -9,14 +9,14 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-//View model for excercise log view
-class ExcerciseLogViewModel: ObservableObject {
+//View model for exercise log view
+class ExerciseLogViewModel: ObservableObject {
     @Published var userId: String
-    @Published var addExcerciseForm = false // Controls add excercise popup
-    @Published var excerciseList: [WorkoutExcercise] = [] // Excercises to display
-    @Published var workout: WorkoutExcercise? = nil // Associated workout
+    @Published var addExerciseForm = false // Controls add exercise popup
+    @Published var exerciseList: [WorkoutExercise] = [] // Exercises to display
+    @Published var workout: WorkoutExercise? = nil // Associated workout
     @Published var errorMessage = ""
-    @Published var toDelete: WorkoutExcercise? = nil // Excercise pending deletion, also controls confirmation popup
+    @Published var toDelete: WorkoutExercise? = nil // Exercise pending deletion, also controls confirmation popup
     @Published var deleteSuccess = false // dismisses popup
     
     
@@ -31,28 +31,28 @@ class ExcerciseLogViewModel: ObservableObject {
         self.userId = auth.currentUser
     }
     
-    // Adds excercise using firestore api
-    func addExcercise(excerciseName: String){
+    // Adds exercise using firestore api
+    func addExercise(exerciseName: String){
         // Validates input
-        guard validate(input: excerciseName) else {
+        guard validate(input: exerciseName) else {
             return
         }
         
         let dateAdded = Date().timeIntervalSince1970
         
-        let newExcercise = WorkoutExcercise(id: excerciseName, dateAdded: dateAdded)
+        let newExercise = WorkoutExercise(id: exerciseName, dateAdded: dateAdded)
         
         guard let workout = self.workout else {
             print("No workout provided.")
             return
         }
         
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: workout, newExcercise: newExcercise) { [weak self] result in
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: workout, newExercise: newExercise) { [weak self] result in
             guard self != nil else { return }
             
             if case let .failure(error) = result {
                 if error is WorkoutExists {
-                    self?.errorMessage = "This excercise already exists."
+                    self?.errorMessage = "This exercise already exists."
                 } else {
                     self?.errorMessage = error.localizedDescription
                 }
@@ -63,8 +63,8 @@ class ExcerciseLogViewModel: ObservableObject {
         
     }
     
-    // Fetch excercise calling firestore api
-    func fetchExcercises() {
+    // Fetch exercise calling firestore api
+    func fetchExercises() {
         guard let workout = self.workout else {
             print("No workout provided")
             return
@@ -74,15 +74,15 @@ class ExcerciseLogViewModel: ObservableObject {
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
-            case .success(let excerciseList):
-                self?.excerciseList = excerciseList
+            case .success(let exerciseList):
+                self?.exerciseList = exerciseList
             }
             
         }
     }
     
-    // Delete excercise using firestore api
-    func deleteExcercise() {
+    // Delete exercise using firestore api
+    func deleteExercise() {
         guard let toDelete = toDelete, let workout = workout else {
             return
         }
@@ -99,14 +99,14 @@ class ExcerciseLogViewModel: ObservableObject {
     }
     
     // Fetch sets using firestore api
-    func fetchSets(excercise: String, completion: @escaping (Sets?) -> Void) {
+    func fetchSets(exercise: String, completion: @escaping (Sets?) -> Void) {
         guard let workout = self.workout else {
             print("No workout provided")
             completion(nil)
             return
         }
         
-        firestore.fetchSets(userId: self.userId, workout: workout.id, excercise: excercise) { result in
+        firestore.fetchSets(userId: self.userId, workout: workout.id, exercise: exercise) { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

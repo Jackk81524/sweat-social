@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// View Controller for the entire workout view stack. Constists of WorkoutView, ExcerciseView, and SetView
+// View Controller for the entire workout view stack. Constists of WorkoutView, ExerciseView, and SetView
 // Main purpose is to have one header view. Leads to better UI and also more abstracted code
 struct WorkoutViewManagerView: View {
     @StateObject var viewManagerViewModel = WorkoutViewManagerViewModel()
@@ -19,8 +19,26 @@ struct WorkoutViewManagerView: View {
                 .padding(.top,40)
             
             //Beginning of workout navigation stack, first is the Workout log view.
-            NavigationStack{
-                WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+            
+            ZStack {
+                NavigationStack{
+                    WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+                }
+                
+                Button {
+                    viewManagerViewModel.logWorkout()
+                } label: {
+                    ZStack {
+                        Ellipse()
+                            .foregroundColor(.black)
+                        Text("Log")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24))
+                    }
+                    .frame(width: 70, height: 70)
+                    .padding()
+                }
+                .offset(x: 135, y:200)
             }
             
             .navigationBarHidden(true)
