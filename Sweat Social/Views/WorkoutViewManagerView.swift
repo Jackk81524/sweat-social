@@ -25,6 +25,10 @@ struct WorkoutViewManagerView: View {
                     WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
                 }
                 
+                if(viewManagerViewModel.splitsForm){
+                    SplitsFormView(splits: viewManagerViewModel.splits, add: viewManagerViewModel.addSplit)
+                }
+                
                 Button {
                     viewManagerViewModel.logWorkout()
                 } label: {
@@ -40,9 +44,11 @@ struct WorkoutViewManagerView: View {
                 }
                 .offset(x: 135, y:200)
             }
-            
             .navigationBarHidden(true)
         
+        }
+        .onAppear {
+            viewManagerViewModel.fetchSplits()
         }
     }
 }

@@ -33,6 +33,10 @@ protocol FirestoreProtocol {
     
     func fetchSets(userId: String, workout: String, exercise: String, completion: @escaping (Result<Sets?, Error>) -> Void)
     
+    func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void)
+    
+    func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void)
+    
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], completion: @escaping (Error?) -> Void)
     
 }

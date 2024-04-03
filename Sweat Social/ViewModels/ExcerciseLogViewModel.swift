@@ -51,7 +51,7 @@ class ExerciseLogViewModel: ObservableObject {
             guard self != nil else { return }
             
             if case let .failure(error) = result {
-                if error is WorkoutExists {
+                if error is EntryExists {
                     self?.errorMessage = "This exercise already exists."
                 } else {
                     self?.errorMessage = error.localizedDescription

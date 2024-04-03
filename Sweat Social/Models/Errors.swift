@@ -22,8 +22,8 @@ struct NoCurrentUser: Error {
     let message = "No current user"
 }
 
-struct WorkoutExists: Error {
-    let message = "This workout category already exists"
+struct EntryExists: Error {
+    let message = "This entryalready exists"
 }
 
 struct UnknownError: Error {

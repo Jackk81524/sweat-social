@@ -18,6 +18,7 @@ class WorkoutLogViewModel: ObservableObject {
     @Published var toDelete: WorkoutExercise? = nil // Workout pending deletion, also controls popup
     @Published var deleteSuccess = false // Helps control deletion confirm popup
     
+    
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
     
@@ -43,7 +44,7 @@ class WorkoutLogViewModel: ObservableObject {
             guard self != nil else { return }
             
             if case let .failure(error) = result {
-                if error is WorkoutExists {
+                if error is EntryExists {
                     self?.errorMessage = "This workout already exists."
                     return
                 } else {

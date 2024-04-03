@@ -12,11 +12,11 @@ struct WorkoutExercise: Codable, Identifiable {
     let dateAdded: TimeInterval
 }
 
-/*struct Exercise: Codable {
+struct Split: Codable, Identifiable {
     let id: String
     let dateAdded: TimeInterval
-    //var sets: [Set]?
-}*/
+    let workouts: [String]
+}
 
 struct Sets: Codable {
     //let id: String

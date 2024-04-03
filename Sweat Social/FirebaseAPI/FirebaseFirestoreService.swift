@@ -17,6 +17,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
     static var WorkoutCategoriesCollection = "Workout Categories"
     static var ExerciseCollection = "Exercises"
     static var LoggedWorkouts = "Logged Workouts"
+    static var Splits = "Splits"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
         let newUser = User(id: userId,
@@ -57,7 +58,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 completion(.failure(error))
                 return
             } else if let document = document, document.exists {
-                completion(.failure(WorkoutExists()))
+                completion(.failure(EntryExists()))
                 return
             } else {
                 doc.setData(toAdd.asDictionary()) { error in
@@ -245,6 +246,57 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
     }
     
+    func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void) {
+        var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.Splits)
+            .document(split.id)
+        
+        doc.getDocument { (document, error) in
+            if let error = error {
+                completion(error)
+                return
+            } else if let document = document, document.exists {
+                completion(EntryExists())
+                return
+            } else {
+                doc.setData(split.asDictionary()) { error in
+                    if let error = error {
+                        completion(error)
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void){
+        var collection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.Splits)
+        
+        collection.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                completion(.success([]))
+                return
+            }
+            
+            let splitsList: [Split] = documents.compactMap { document in
+                if let id = document["id"] as? String,
+                   let dateAdded = document["dateAdded"] as? TimeInterval,
+                   let workouts = document["workouts"] as? [String] {
+                    return Split(id: id, dateAdded: dateAdded, workouts: workouts)
+                }
+                return nil
+            }
+            
+            completion(.success(splitsList))
+        }
+    }
+    
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], completion: @escaping (Error?) -> Void) {
         let dateLogged = Date().timeIntervalSince1970
         
@@ -275,7 +327,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 completion(error)
                 return
             } else if let document = document, document.exists {
-                completion(WorkoutExists())
+                completion(EntryExists())
             } else {
                 currentDoc.setData(workout.asDictionary()) { error in
                     if let error = error {
