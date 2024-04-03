@@ -22,6 +22,9 @@ struct WorkoutLogView: View {
                         WorkoutGroupButtonView(name: group,
                                                toDelete: $viewModel.toDelete,
                                                viewManagerViewModel: viewManagerViewModel)
+                        .onAppear {viewManagerViewModel.workoutsToLog.append(group)}
+                        
+                        
                     }
                 }
                 

@@ -245,106 +245,147 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
     }
     
-    func logWorkout(userId: String, completion: @escaping (Result<Void?, Error>) -> Void) {
-        let dateAdded = Date().timeIntervalSince1970
+    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], completion: @escaping (Error?) -> Void) {
+        let dateLogged = Date().timeIntervalSince1970
         
+        let logCollection = FirebaseFirestoreService.db
+            .collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.LoggedWorkouts)
+            .document(String(dateLogged))
+            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+        
+        workoutsToLog.forEach { workout in
+            logWorkout(logCollection: logCollection, workout: workout, userId: userId) { error in
+                if error != nil {
+                    completion(error)
+                }
+            }
+        }
+        
+        
+    }
+    
+    private func logWorkout(logCollection: CollectionReference, workout: WorkoutExercise, userId: String, completion: @escaping (Error?) -> Void) {
+        
+        let currentDoc = logCollection.document(workout.id)
+        
+        currentDoc.getDocument { (document, error) in
+            if let error = error {
+                completion(error)
+                return
+            } else if let document = document, document.exists {
+                completion(WorkoutExists())
+            } else {
+                currentDoc.setData(workout.asDictionary()) { error in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        self.logExercise(workout: workout,
+                                         userId: userId,
+                                         logCollection: currentDoc.collection(FirebaseFirestoreService.ExerciseCollection)) { error in
+                            if error != nil {
+                                completion(error)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Different than other fetch because it does not add snapshot listener, it musts fetches documents a single time
+    // Purpose is for logging. "singleFetch" intended to mean fetch once, rather than adding listener
+    private func logExercise(workout: WorkoutExercise, userId: String, logCollection: CollectionReference, completion: @escaping (Error?) -> Void) {
         let fetchCollection = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
-         
-        let logData = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
-            .document(userId)
-            .collection(FirebaseFirestoreService.LoggedWorkouts)
-            .document(String(dateAdded))
-            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
-         
-        fetchCollection.getDocuments { (fetchedData, error) in
+            .document(workout.id)
+            .collection(FirebaseFirestoreService.ExerciseCollection)
+
+        fetchCollection.getDocuments { (querySnapshot, error) in
             if let error = error {
-                completion(.failure(error))
+                completion(error)
             }
             
-            guard let documents = fetchedData?.documents else {
-                completion(.failure(CustomErrors.emptyWorkout))
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             
-            var dataToLog: [[String: Any]] = []
+            let exerciseList: [WorkoutExercise] = documents.compactMap { document in
+                if let id = document["id"] as? String,
+                   let dateAdded = document["dateAdded"] as? TimeInterval  {
+                    return WorkoutExercise(id: id, dateAdded: dateAdded)
+                }
+                return nil
+            }
             
-            self.formatLogData(documents) { result in
-                switch result {
-                case .success(let data):
-                    dataToLog = data
-                default:
+            exerciseList.forEach { exercise in
+                var logDoc = logCollection.document(exercise.id)
+                logDoc.getDocument { (document, error) in
+                    if let error = error {
+                        completion(error)
+                    } else if let document = document, document.exists {
+                        // Continue
+                    } else {
+                        logDoc.setData(exercise.asDictionary()) { error in
+                            if let error = error {
+                                completion(error)
+                            } else {
+                                self.logSets(fetchDocument: fetchCollection.document(exercise.id), logDocument: logDoc) { error in
+                                    if error != nil{
+                                        completion(error)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func logSets(fetchDocument: DocumentReference, logDocument: DocumentReference, completion: @escaping (Error?) -> Void) {
+        var sets: Sets? = nil
+        
+        fetchDocument.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                completion(error)
+            }
+            
+            guard let setInfo = documentSnapshot?.data() else {
+                print("Unknown Error")
+                return
+            }
+            
+            if let reps = setInfo["Reps"] as? [Int],
+               let weight = setInfo["Weight"] as? [Int] {
+                sets = Sets(reps: reps,weight: weight)
+            }
+            
+            logDocument.getDocument { (documentSnapshot, error) in
+                if let error = error {
+                    completion(error)
+                }
+                
+                guard var setInfo = documentSnapshot?.data() else {
+                    completion(UnknownError())
                     return
                 }
-                print(dataToLog)
-            }
-            
-            //print(dataToLog)
-            for data in dataToLog {
-                //print(data)
-                logData.addDocument(data: data) { error in
+                
+                if let sets = sets {
+                    setInfo["Weight"] = sets.weight
+                    setInfo["Reps"] = sets.reps
+                }
+                
+                logDocument.setData(setInfo) { error in
                     if let error = error {
-                        print("here1")
-                        completion(.failure(error))
-                    } else {
-                        print("here2")
-                        completion(.success(()))
+                        completion(error)
                     }
                 }
             }
         }
     }
-         
-    private func formatLogData(_ fetchedData: [QueryDocumentSnapshot], completion: @escaping (Result<[[String: Any]], Error>) -> Void) {
-        var formattedData: [[String: Any]] = []
-        
-        for document in fetchedData {
-            var workoutData: [String: Any] = [:] // Initialize data for a single workout
-            
-            let categoryID = document.documentID
-            let categoryData = document.data()
-            
-            workoutData["categoryID"] = categoryID
-            workoutData["categoryData"] = categoryData
-            
-            var exercisesData: [[String: Any]] = [] // Initialize data for exercises
-            
-            let exercisesCollection = document.reference.collection("Exercises")
-            
-            exercisesCollection.getDocuments { (exercisesCollectionDocuments, error) in
-                if let error = error {
-                    print("Error fetching exercises:", error)
-                    completion(.failure(error))
-                    return // Return or handle the error
-                }
-                
-                if let exercises = exercisesCollectionDocuments{
-                    //print(exercises)
-                    for exerciseDocument in exercises.documents {
-                        let exerciseID = exerciseDocument.documentID
-                        var exerciseData = exerciseDocument.data()
-                        print(exerciseData)
-                        
-                        exerciseData["exerciseID"] = exerciseID
-                        
-                        exercisesData.append(exerciseData)
-                    }
-                }
-                
-                workoutData["exercises"] = exercisesData // Assign exercises data to workout data
-                
-                formattedData.append(workoutData) // Append formatted workout data to the main array
-                
-                // Check if this is the last document to complete formatting
-                if formattedData.count == fetchedData.count {
-                    completion(.success(formattedData)) // Return formatted data
-                }
-            }
-        }
-    }
-
-
 }
 

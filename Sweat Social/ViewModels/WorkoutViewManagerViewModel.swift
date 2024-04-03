@@ -18,6 +18,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var dismiss = false
     @Published var exerciseDismiss = true
     @Published var errorMessage = ""
+    @Published var workoutsToLog: [WorkoutExercise] = []
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -31,15 +32,15 @@ class WorkoutViewManagerViewModel: ObservableObject {
     }
     
     func logWorkout(){
-        firestore.logWorkout(userId: self.userId) { [weak self] result in
+        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: workoutsToLog) { [weak self] error in
             guard self != nil else { return }
             
-            if case let .failure(error) = result {
+            if error != nil {
                 if error is WorkoutExists {
                     self?.errorMessage = "You already logged a workout today."
                     return
                 } else {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error?.localizedDescription ?? ""
                     return
                 }
             } else {
