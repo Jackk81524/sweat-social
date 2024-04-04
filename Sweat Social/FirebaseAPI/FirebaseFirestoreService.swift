@@ -269,6 +269,21 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
+    func deleteSplit(userId: String, splitToDelete: String, completion: @escaping (Error?) -> Void){
+        let doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection(FirebaseFirestoreService.Splits)
+            .document(splitToDelete)
+        
+        doc.delete { error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void){
         var collection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)

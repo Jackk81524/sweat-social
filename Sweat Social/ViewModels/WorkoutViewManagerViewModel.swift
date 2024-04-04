@@ -14,6 +14,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var addForm = false
     @Published var title = "Your Workout"
     @Published var backButton = false
+    @Published var workouts: [WorkoutExercise] = []
     
     @Published var dismiss = false
     @Published var exerciseDismiss = true
@@ -21,6 +22,8 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var workoutsToLog: [WorkoutExercise] = []
     @Published var splitsForm = false
     @Published var splits: [Split] = []
+    @Published var splitToDelete = ""
+    @Published var splitCancelled = false
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -59,6 +62,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
             case .success(let splits):
                 self?.splits = splits
             }
+
              
         }
     }
@@ -74,6 +78,18 @@ class WorkoutViewManagerViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteSplit() {
+        firestore.deleteSplit(userId: self.userId, splitToDelete: self.splitToDelete) { error in
+            if error != nil{
+                self.errorMessage = error?.localizedDescription ?? "Error entering split"
+            }
+            print("test")
+            self.splitToDelete = ""
+            
+        }
+    }
+
     
     
     

@@ -25,8 +25,20 @@ struct WorkoutViewManagerView: View {
                     WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
                 }
                 
-                if(viewManagerViewModel.splitsForm){
-                    SplitsFormView(splits: viewManagerViewModel.splits, add: viewManagerViewModel.addSplit)
+                if(viewManagerViewModel.splitsForm && viewManagerViewModel.splitToDelete == ""){
+                    SplitsFormView(splits: viewManagerViewModel.splits,
+                                   workouts: $viewManagerViewModel.workouts,
+                                   splitToDelete: $viewManagerViewModel.splitToDelete,
+                                   add: viewManagerViewModel.addSplit)
+                    
+                } else if (viewManagerViewModel.splitToDelete != "") {
+                    DeleteConfirmationView(toDelete: viewManagerViewModel.splitToDelete,
+                                           toDeleteType: "Split",
+                                           update: $viewManagerViewModel.splitCancelled,
+                                           delete: viewManagerViewModel.deleteSplit)
+                    .onChange(of: viewManagerViewModel.splitCancelled) { _ in
+                        viewManagerViewModel.splitToDelete = ""
+                    }
                 }
                 
                 Button {

@@ -55,6 +55,9 @@ struct WorkoutLogView: View {
             .onAppear{
                 viewModel.fetchWorkouts()
             }
+            .onChange(of: viewModel.workoutList.count) { _ in
+                viewManagerViewModel.workouts = viewModel.workoutList
+            }
         }
         .navigationBarHidden(true)
         
