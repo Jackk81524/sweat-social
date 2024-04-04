@@ -8,17 +8,11 @@
 import SwiftUI
 
 struct SplitsFormView: View {
-    @State var addSplit = false
     @State var title = "Your Split"
     @State var expandSplit = false
     @State var splitName = ""
     
-    let splits: [Split]
-    @Binding var workouts: [WorkoutExercise]
-    @Binding var splitToDelete: String
-    
-    
-    let add: (Split) -> Void
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     var body: some View {
         
@@ -36,7 +30,7 @@ struct SplitsFormView: View {
                         //.frame(width:320)
                     Spacer()
                     Button{
-                        addSplit.toggle()
+                        viewManagerViewModel.addSplitForm.toggle()
                     } label: {
                         Text("+")
                             .font(.system(size:28))
@@ -48,15 +42,15 @@ struct SplitsFormView: View {
                 .padding()
                 .offset(y:20)
                 
-                if(addSplit){
-                    AddSplitView(workouts: $workouts,showAddForm: $addSplit, add: add)
+                if(viewManagerViewModel.addSplitForm){
+                    AddSplitView(workouts: $viewManagerViewModel.workouts,showAddForm: $viewManagerViewModel.addSplitForm, add: viewManagerViewModel.addSplit)
                         .offset(y:55)
                     
                     Spacer()
                 } else {
                     ScrollView{
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
-                            ForEach(splits) { split in
+                            ForEach(viewManagerViewModel.splits) { split in
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 5)
                                         .fill(Color(hex:0xF4F4F4))
@@ -68,7 +62,7 @@ struct SplitsFormView: View {
                                         .simultaneousGesture(
                                             LongPressGesture(minimumDuration: 0.7)
                                                 .onEnded { _ in
-                                                    splitToDelete = split.id
+                                                    viewManagerViewModel.splitToDelete = split.id
                                                     
                                                     let generator = UIImpactFeedbackGenerator(style: .medium)
                                                     generator.impactOccurred()
@@ -118,7 +112,5 @@ struct SplitsFormView: View {
 }
 
 #Preview {
-    SplitsFormView(splits: [], workouts: .constant([]),splitToDelete: .constant("Test")) { _ in
-    //
-    }
+    SplitsFormView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }

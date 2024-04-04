@@ -26,10 +26,7 @@ struct WorkoutViewManagerView: View {
                 }
                 
                 if(viewManagerViewModel.splitsForm && viewManagerViewModel.splitToDelete == ""){
-                    SplitsFormView(splits: viewManagerViewModel.splits,
-                                   workouts: $viewManagerViewModel.workouts,
-                                   splitToDelete: $viewManagerViewModel.splitToDelete,
-                                   add: viewManagerViewModel.addSplit)
+                    SplitsFormView(viewManagerViewModel: viewManagerViewModel)
                     
                 } else if (viewManagerViewModel.splitToDelete != "") {
                     DeleteConfirmationView(toDelete: viewManagerViewModel.splitToDelete,
@@ -41,8 +38,12 @@ struct WorkoutViewManagerView: View {
                     }
                 }
                 
+                if(viewManagerViewModel.logWorkoutForm) {
+                    LogWorkoutFormView(viewManagerViewModel: viewManagerViewModel)
+                }
+                
                 Button {
-                    viewManagerViewModel.logWorkout()
+                    viewManagerViewModel.logWorkoutForm.toggle()
                 } label: {
                     ZStack {
                         Ellipse()

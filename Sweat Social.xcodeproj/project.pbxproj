@@ -18,6 +18,8 @@
 		0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE924602B7D8A23006F65F4 /* TabBarView.swift */; };
 		0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */; };
 		0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */; };
+		C503B6CA2BBEE9A10069C6C6 /* LogWorkoutFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C503B6C92BBEE9A10069C6C6 /* LogWorkoutFormView.swift */; };
+		C503B6CC2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C503B6CB2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift */; };
 		C507850C2B90DB5F00555C57 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507850B2B90DB5F00555C57 /* Protocol.swift */; };
 		C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507850F2B90E61400555C57 /* FirebaseAuthService.swift */; };
 		C50785122B90F58500555C57 /* RegisterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50785112B90F58400555C57 /* RegisterTests.swift */; };
@@ -95,6 +97,8 @@
 		0BE924602B7D8A23006F65F4 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTabView.swift; sourceTree = "<group>"; };
 		0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		C503B6C92BBEE9A10069C6C6 /* LogWorkoutFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWorkoutFormView.swift; sourceTree = "<group>"; };
+		C503B6CB2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRoundedRectangleView.swift; sourceTree = "<group>"; };
 		C507850B2B90DB5F00555C57 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		C507850F2B90E61400555C57 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		C50785112B90F58400555C57 /* RegisterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTests.swift; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 				C526F8842BBDC0A4008E1606 /* SplitsFormView.swift */,
 				C526F8862BBDC368008E1606 /* FormTemplateView.swift */,
 				C53F5E722BBE3432007F4632 /* AddSplitView.swift */,
+				C503B6CB2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift */,
+				C503B6C92BBEE9A10069C6C6 /* LogWorkoutFormView.swift */,
 			);
 			path = WorkoutHelperViews;
 			sourceTree = "<group>";
@@ -501,9 +507,11 @@
 				0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */,
 				C507850C2B90DB5F00555C57 /* Protocol.swift in Sources */,
 				C532A8222BAF8C3B00E672B4 /* ExcerciseLogView.swift in Sources */,
+				C503B6CC2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
 				C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */,
 				0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */,
+				C503B6CA2BBEE9A10069C6C6 /* LogWorkoutFormView.swift in Sources */,
 				C528A23C2B76B9E900346B27 /* User.swift in Sources */,
 				C531FD392B8BD7C3005CE16C /* Workout.swift in Sources */,
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,

@@ -63,10 +63,12 @@ struct AddSplitView: View {
                 }
                 .frame(width: 300, height:45)
             }
+            
             if(selectedWorkouts.count > 0){
                 Text("Your Split:")
                     .foregroundStyle(.black)
                     .font(.system(size:20))
+                    .bold()
                 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5),GridItem(.flexible(), spacing: 5)], spacing: 5) {
                     ForEach(selectedWorkouts, id: \.self) { workout in

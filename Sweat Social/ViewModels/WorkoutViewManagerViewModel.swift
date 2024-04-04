@@ -19,11 +19,14 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var dismiss = false
     @Published var exerciseDismiss = true
     @Published var errorMessage = ""
-    @Published var workoutsToLog: [WorkoutExercise] = []
+    @Published var workoutsToLog: [String] = []
     @Published var splitsForm = false
     @Published var splits: [Split] = []
     @Published var splitToDelete = ""
     @Published var splitCancelled = false
+    @Published var addSplitForm = false
+    @Published var logWorkoutForm = false
+    @Published var logMessage = ""
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -37,7 +40,11 @@ class WorkoutViewManagerViewModel: ObservableObject {
     }
     
     func logWorkout(){
-        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: workoutsToLog) { [weak self] error in
+        let formattedWorkoutsToLog = workouts.filter { workout in
+            return workoutsToLog.contains(workout.id)
+        }
+        print(formattedWorkoutsToLog)
+        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage) { [weak self] error in
             guard self != nil else { return }
             
             if error != nil {
@@ -50,9 +57,13 @@ class WorkoutViewManagerViewModel: ObservableObject {
                 }
             } else {
                 self?.errorMessage = ""
+                self?.workoutsToLog = []
+                self?.logMessage = ""
+                self?.logWorkoutForm.toggle()
             }
         }
     }
+    
     
     func fetchSplits() {
         firestore.fetchSplits(userId: self.userId) { [weak self] result in

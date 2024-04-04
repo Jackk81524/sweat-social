@@ -312,25 +312,36 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
-    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], completion: @escaping (Error?) -> Void) {
-        let dateLogged = Date().timeIntervalSince1970
+    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void) {
+        let dateLogged = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let logCollection = FirebaseFirestoreService.db
+        let logDoc = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.LoggedWorkouts)
-            .document(String(dateLogged))
-            .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+            .document(dateFormatter.string(from:dateLogged))
         
         workoutsToLog.forEach { workout in
-            logWorkout(logCollection: logCollection, workout: workout, userId: userId) { error in
+            logWorkout(logCollection: logDoc.collection(FirebaseFirestoreService.WorkoutCategoriesCollection), workout: workout, userId: userId) { error in
                 if error != nil {
                     completion(error)
                 }
             }
         }
         
-        
+        if let logMessage = logMessage {
+            let formattedMessage: [String: String] = [
+                "logMessage": logMessage
+            ]
+            
+            logDoc.setData(formattedMessage) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     private func logWorkout(logCollection: CollectionReference, workout: WorkoutExercise, userId: String, completion: @escaping (Error?) -> Void) {
@@ -353,6 +364,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
                                          logCollection: currentDoc.collection(FirebaseFirestoreService.ExerciseCollection)) { error in
                             if error != nil {
                                 completion(error)
+                            } else{
+                                completion(nil)
                             }
                         }
                     }
@@ -403,6 +416,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
                                 self.logSets(fetchDocument: fetchCollection.document(exercise.id), logDocument: logDoc) { error in
                                     if error != nil{
                                         completion(error)
+                                    } else {
+                                        completion(nil)
                                     }
                                 }
                             }
@@ -449,6 +464,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 logDocument.setData(setInfo) { error in
                     if let error = error {
                         completion(error)
+                    } else {
+                        completion(nil)
                     }
                 }
             }
