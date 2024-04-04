@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ProfileView: View {
+    @StateObject var viewModel = ProfileViewModel()
     var body: some View {
-        PhotoSelector()
+        VStack {
+            text("John Smith")
+            
+            displayImageFromURL(urlString: viewModel.profilePictureURL)
+            
+            PhotoPicker(onImageSelected: viewModel.storeProfilePictureImageInDatabase)
+        }
     }
 }
 
