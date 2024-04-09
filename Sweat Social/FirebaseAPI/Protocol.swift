@@ -29,6 +29,13 @@ protocol FirestoreProtocol {
     
     func fetchSets(userId: String, workout: String, excercise: String, completion: @escaping (Result<Sets?, Error>) -> Void)
     
+    func fetchUser(userId: String, completion: @escaping (Result<User?, Error>) -> Void)
+    
+    func followUser(currentUserId: String, targetUserId: String, completion: @escaping (Result<Void?, Error>) -> Void)
+    
+    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
+    
+    func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void)
     
 }
 

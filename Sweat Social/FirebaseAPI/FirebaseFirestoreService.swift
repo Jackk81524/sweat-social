@@ -32,6 +32,32 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
     }
     
+    func fetchUser(userId: String, completion: @escaping (Result<User?, Error>) -> Void) {
+        
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .getDocument { (documentSnapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                guard let document = documentSnapshot, document.exists,
+                      let id = document["id"] as? String,
+                      let name = document["name"] as? String,
+                      let email = document["email"] as? String,
+                      let joined = document["joined"] as? TimeInterval else {
+                    completion(.success(nil))
+                    return
+                }
+                
+                let user = User(id: id, name: name, email: email, joined: joined)
+                completion(.success(user))
+            }
+        
+        
+        
+    }
+    
     func insertWorkout(userId: String,newWorkoutCategory: WorkoutExcercise, newExcercise: WorkoutExcercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
         var toAdd = newWorkoutCategory
         
@@ -173,6 +199,68 @@ class FirebaseFirestoreService : FirestoreProtocol {
             completion(.success(sets))
         }
         
+    }
+    
+    func followUser(currentUserId: String, targetUserId: String, completion: @escaping (Result<Void?, Error>) -> Void) {
+            let followingDocument = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+                .document(currentUserId)
+                .collection("following")
+                .document(targetUserId)
+            
+            let followersDocument = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+                .document(targetUserId)
+                .collection("followers")
+                .document(currentUserId)
+            
+            // Add the target user to the current user's "following" collection
+            followingDocument.setData(["userId": targetUserId]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                // Add the current user to the target user's "followers" collection
+                followersDocument.setData(["userId": currentUserId]) { error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
+                }
+            }
+        }
+        
+        func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+            let followingCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+                .document(userId)
+                .collection("following")
+            
+            followingCollection.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    let followingIds = querySnapshot?.documents.map { $0.documentID }
+                    completion(.success(followingIds ?? []))
+                }
+            }
+        }
+    
+    func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void) {
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .whereField("name", isGreaterThanOrEqualTo: query)
+            .whereField("name", isLessThan: query + "\u{f8ff}")
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                let users = snapshot?.documents.compactMap { document -> User? in
+                    try? document.data(as: User.self)
+                }
+                
+                completion(.success(users ?? []))
+            }
     }
     
 }
