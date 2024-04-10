@@ -57,9 +57,9 @@ class WorkoutLogViewModel: ObservableObject {
         
     }
     
-    func fetchWorkouts() {
+    func fetchWorkouts(date: Date?) {
         
-        firestore.fetchWorkouts(userId: self.userId, workout: nil) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: nil, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

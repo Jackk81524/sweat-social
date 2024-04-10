@@ -29,9 +29,15 @@ protocol FirestoreProtocol {
     
     func deleteSet(userId: String, workout: String, excercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void)
     
+<<<<<<< Updated upstream
     func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExcercise], Error>) -> Void)
     
     func fetchSets(userId: String, workout: String, excercise: String, completion: @escaping (Result<Sets?, Error>) -> Void)
+=======
+    func fetchWorkouts(userId: String, workout: String?, date: Date?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void)
+    
+    func fetchSets(userId: String, workout: String, exercise: String, date: Date?, completion: @escaping (Result<Sets?, Error>) -> Void)
+>>>>>>> Stashed changes
     
     
 }

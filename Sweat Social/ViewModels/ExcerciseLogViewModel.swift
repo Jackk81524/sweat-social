@@ -63,14 +63,19 @@ class ExcerciseLogViewModel: ObservableObject {
         
     }
     
+<<<<<<< Updated upstream
     // Fetch excercise calling firestore api
     func fetchExcercises() {
+=======
+    // Fetch exercise calling firestore api
+    func fetchExercises(date: Date?) {
+>>>>>>> Stashed changes
         guard let workout = self.workout else {
             print("No workout provided")
             return
         }
         
-        firestore.fetchWorkouts(userId: self.userId, workout: workout.id) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: workout.id, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -99,14 +104,22 @@ class ExcerciseLogViewModel: ObservableObject {
     }
     
     // Fetch sets using firestore api
+<<<<<<< Updated upstream
     func fetchSets(excercise: String, completion: @escaping (Sets?) -> Void) {
+=======
+    func fetchSets(exercise: String, date: Date?, completion: @escaping (Sets?) -> Void) {
+>>>>>>> Stashed changes
         guard let workout = self.workout else {
             print("No workout provided")
             completion(nil)
             return
         }
         
+<<<<<<< Updated upstream
         firestore.fetchSets(userId: self.userId, workout: workout.id, excercise: excercise) { result in
+=======
+        firestore.fetchSets(userId: self.userId, workout: workout.id, exercise: exercise, date: date) { result in
+>>>>>>> Stashed changes
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

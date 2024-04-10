@@ -11,14 +11,19 @@ import SwiftUI
 struct ExcerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
+<<<<<<< Updated upstream
     let excercise: WorkoutExcercise
+=======
+    let exercise: WorkoutExercise
+    let date: Date?
+>>>>>>> Stashed changes
     
     @Binding var toDelete: WorkoutExcercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @State private var navigate = false
     @State private var longPress = false
-    let action: (String, @escaping (Sets?) -> Void) -> ()
+    let action: (String, Date?, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
         // Logic to trigger delete screen if held, or if tapped, go to set view
@@ -88,8 +93,13 @@ struct ExcerciseButtonView: View {
             .padding(4)
         }
         .onAppear{
+<<<<<<< Updated upstream
             // Trigger fetch on the excercises sets
             action(excercise.id) { result in
+=======
+            // Trigger fetch on the exercises sets
+            action(exercise.id, date) { result in
+>>>>>>> Stashed changes
                 sets = result
             }
             
@@ -110,9 +120,15 @@ struct ExcerciseButtonView: View {
 }
 
 #Preview {
+<<<<<<< Updated upstream
     ExcerciseButtonView(workout: "Arms", excercise: WorkoutExcercise(id: "Arms", dateAdded: 10.0),
                         toDelete: .constant(WorkoutExcercise(id: "Arms", dateAdded: 10.0)),
                         viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
+=======
+    ExerciseButtonView(workout: "Arms", exercise: WorkoutExercise(id: "Arms", dateAdded: 10.0), date: nil,
+                       toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)),
+                       viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_,_   in
+>>>>>>> Stashed changes
         return
     }
 }

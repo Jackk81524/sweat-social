@@ -49,9 +49,19 @@ struct WorkoutLogView: View {
                     
                 }
             }
-            .onAppear{
-                viewModel.fetchWorkouts()
+            .onAppear {
+                viewModel.fetchWorkouts(date: viewManagerViewModel.date)
             }
+            .onChange(of: viewManagerViewModel.date){ date in
+                viewModel.fetchWorkouts(date: date)
+            }
+<<<<<<< Updated upstream
+=======
+            .onChange(of: viewModel.workoutList.count) { _ in
+                viewManagerViewModel.workouts = viewModel.workoutList
+            }
+            
+>>>>>>> Stashed changes
         }
         .navigationBarHidden(true)
         

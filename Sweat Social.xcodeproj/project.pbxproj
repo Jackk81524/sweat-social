@@ -35,6 +35,10 @@
 		C532A8222BAF8C3B00E672B4 /* ExcerciseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */; };
 		C532A8242BAF8F0100E672B4 /* ExcerciseLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */; };
 		C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */; };
+		C532B4052BC6D7F300D69525 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532B4042BC6D7F200D69525 /* CalendarView.swift */; };
+		C532B40A2BC6EB3200D69525 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532B4092BC6EB3200D69525 /* CalendarHeaderView.swift */; };
+		C532B40D2BC6F4DC00D69525 /* WeeklyCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = C532B40C2BC6F4DC00D69525 /* WeeklyCalendar */; };
+		C532B40F2BC6F88500D69525 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532B40E2BC6F88500D69525 /* Util.swift */; };
 		C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */; };
 		C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */; };
 		C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */; };
@@ -110,6 +114,9 @@
 		C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogView.swift; sourceTree = "<group>"; };
 		C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseLogViewModel.swift; sourceTree = "<group>"; };
 		C532A8252BAF99BF00E672B4 /* ExcerciseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseButtonView.swift; sourceTree = "<group>"; };
+		C532B4042BC6D7F200D69525 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		C532B4092BC6EB3200D69525 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		C532B40E2BC6F88500D69525 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		C5344EEE2BB30A3A00DF4936 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
 		C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -140,7 +147,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< Updated upstream
 				C54131122BB467A90040AC15 /* WeeklyCalendar in Frameworks */,
+=======
+				C532B40D2BC6F4DC00D69525 /* WeeklyCalendar in Frameworks */,
+>>>>>>> Stashed changes
 				C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */,
 				C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */,
 			);
@@ -262,6 +273,14 @@
 			path = WorkoutHelperViews;
 			sourceTree = "<group>";
 		};
+		C532B4082BC6D8BA00D69525 /* CalendarHelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				C532B4092BC6EB3200D69525 /* CalendarHeaderView.swift */,
+			);
+			path = CalendarHelperViews;
+			sourceTree = "<group>";
+		};
 		C536A1F02B7D128200079DCC /* AuthHelperViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +297,7 @@
 			children = (
 				C5C5611D2B87D83100DBD76D /* GoogleService-Info.plist */,
 				C536A1FC2B7D2C4600079DCC /* Extensions.swift */,
+				C532B40E2BC6F88500D69525 /* Util.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -285,19 +305,24 @@
 		C5766A032B7418A400F898EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C532B4082BC6D8BA00D69525 /* CalendarHelperViews */,
 				C531FD3C2B8C00C6005CE16C /* WorkoutHelperViews */,
 				C536A1F02B7D128200079DCC /* AuthHelperViews */,
 				0B6E8B102B6A9D0600455CB3 /* ContentView.swift */,
 				C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */,
-				C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */,
 				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
+				C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 				C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */,
 				C53A75C02B9BE149008338B6 /* SetsLogView.swift */,
+<<<<<<< Updated upstream
 				C54131132BB467CE0040AC15 /* CalendarView.swift */,
+=======
+				C532B4042BC6D7F200D69525 /* CalendarView.swift */,
+>>>>>>> Stashed changes
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,7 +387,11 @@
 			packageProductDependencies = (
 				C528A2332B76B75B00346B27 /* FirebaseAuth */,
 				C528A2352B76B75B00346B27 /* FirebaseFirestore */,
+<<<<<<< Updated upstream
 				C54131112BB467A90040AC15 /* WeeklyCalendar */,
+=======
+				C532B40C2BC6F4DC00D69525 /* WeeklyCalendar */,
+>>>>>>> Stashed changes
 			);
 			productName = "Sweat Social";
 			productReference = 0B6E8B0B2B6A9D0600455CB3 /* Sweat Social.app */;
@@ -438,7 +467,11 @@
 			mainGroup = 0B6E8B022B6A9D0600455CB3;
 			packageReferences = (
 				C528A2322B76B75B00346B27 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+<<<<<<< Updated upstream
 				C54131102BB467A80040AC15 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */,
+=======
+				C532B40B2BC6F4DC00D69525 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */,
+>>>>>>> Stashed changes
 			);
 			productRefGroup = 0B6E8B0C2B6A9D0600455CB3 /* Products */;
 			projectDirPath = "";
@@ -517,11 +550,14 @@
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
 				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
+				C532B40F2BC6F88500D69525 /* Util.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
 				C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */,
 				C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,
+				C532B4052BC6D7F300D69525 /* CalendarView.swift in Sources */,
+				C532B40A2BC6EB3200D69525 /* CalendarHeaderView.swift in Sources */,
 				0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,7 +917,11 @@
 				minimumVersion = 10.21.0;
 			};
 		};
+<<<<<<< Updated upstream
 		C54131102BB467A80040AC15 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */ = {
+=======
+		C532B40B2BC6F4DC00D69525 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */ = {
+>>>>>>> Stashed changes
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mlballack/WeeklyCalendar.git";
 			requirement = {
@@ -902,9 +942,15 @@
 			package = C528A2322B76B75B00346B27 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
+<<<<<<< Updated upstream
 		C54131112BB467A90040AC15 /* WeeklyCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C54131102BB467A80040AC15 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */;
+=======
+		C532B40C2BC6F4DC00D69525 /* WeeklyCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C532B40B2BC6F4DC00D69525 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */;
+>>>>>>> Stashed changes
 			productName = WeeklyCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */

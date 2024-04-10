@@ -67,6 +67,7 @@ struct SetsLogView: View {
                 viewManagerViewModel.excerciseDismiss = false
                 viewModel.sets = sets
                 
+                
             }
             // Back button logic
             .onChange(of: viewManagerViewModel.dismiss) { _ in

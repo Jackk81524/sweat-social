@@ -83,8 +83,13 @@ class SetsLogViewModel: ObservableObject {
     }
     
     // Calls firestore api to fetch sets
+<<<<<<< Updated upstream
     func fetchSets() {
         firestore.fetchSets(userId: self.userId, workout: self.workout, excercise: self.excercise) { [weak self] result in
+=======
+    func fetchSets(date: Date? = nil) {
+        firestore.fetchSets(userId: self.userId, workout: self.workout, exercise: self.exercise, date: date) { [weak self] result in
+>>>>>>> Stashed changes
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
