@@ -13,11 +13,10 @@ import FirebaseFirestore
 class WorkoutLogViewModel: ObservableObject {
     @Published var userId: String
     @Published var addWorkoutForm = false // Controls add workout popup
-    @Published var workoutList: [WorkoutExercise] = [] // List of workouts
+    @Published var workoutList: [WorkoutExcercise] = [] // List of workouts
     @Published var errorMessage = ""
-    @Published var toDelete: WorkoutExercise? = nil // Workout pending deletion, also controls popup
+    @Published var toDelete: WorkoutExcercise? = nil // Workout pending deletion, also controls popup
     @Published var deleteSuccess = false // Helps control deletion confirm popup
-    
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -38,13 +37,13 @@ class WorkoutLogViewModel: ObservableObject {
         
         let dateAdded = Date().timeIntervalSince1970
         
-        let newWorkout = WorkoutExercise(id: workoutName, dateAdded: dateAdded)
+        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
         
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExercise: nil) { [weak self] result in
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: nil) { [weak self] result in
             guard self != nil else { return }
             
             if case let .failure(error) = result {
-                if error is EntryExists {
+                if error is WorkoutExists {
                     self?.errorMessage = "This workout already exists."
                     return
                 } else {
@@ -58,9 +57,9 @@ class WorkoutLogViewModel: ObservableObject {
         
     }
     
-    func fetchWorkouts() {
+    func fetchWorkouts(date: Date?) {
         
-        firestore.fetchWorkouts(userId: self.userId, workout: nil) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: nil, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

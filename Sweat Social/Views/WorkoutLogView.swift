@@ -22,9 +22,6 @@ struct WorkoutLogView: View {
                         WorkoutGroupButtonView(name: group,
                                                toDelete: $viewModel.toDelete,
                                                viewManagerViewModel: viewManagerViewModel)
-                        
-                        
-                        
                     }
                 }
                 
@@ -52,8 +49,11 @@ struct WorkoutLogView: View {
                     
                 }
             }
-            .onAppear{
-                viewModel.fetchWorkouts()
+            .onAppear {
+                viewModel.fetchWorkouts(date: viewManagerViewModel.date)
+            }
+            .onChange(of: viewManagerViewModel.date){ date in
+                viewModel.fetchWorkouts(date: date)
             }
             .onChange(of: viewModel.workoutList.count) { _ in
                 viewManagerViewModel.workouts = viewModel.workoutList
@@ -67,3 +67,4 @@ struct WorkoutLogView: View {
 #Preview {
     WorkoutLogView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }
+

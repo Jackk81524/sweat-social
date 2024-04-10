@@ -14,12 +14,12 @@ class SetsLogViewModel: ObservableObject {
     @Published var userId: String
     @Published var addSetForm = false // Var to trigger add set popup
     @Published var workout: String = "" // Workout associated with the set
-    @Published var exercise: String = "" // Exercise associated with the set
+    @Published var excercise: String = "" // Excercise associated with the set
     @Published var sets: Sets? = nil // Sets to display in view
     @Published var errorMessage = ""
     @Published var toDelete: Int? = nil // If delete is triggered, this value is updated, which displays confirmation view
     @Published var deleteSuccess = false // Used to dismiss delete popup
-    @Published var firstFetch = true // Used to minimize number of calls to firestore, pass in sets from exercise view, and initialize snapshot on first add or delete
+    @Published var firstFetch = true // Used to minimize number of calls to firestore, pass in sets from excercise view, and initialize snapshot on first add or delete
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -43,7 +43,7 @@ class SetsLogViewModel: ObservableObject {
             return
         }
         // Calls firestore to add set
-        firestore.insertSet(userId: self.userId, workout: self.workout, exercise: self.exercise, reps: Int(reps), weight: Int(weight)) { [weak self] result in
+        firestore.insertSet(userId: self.userId, workout: self.workout, excercise: self.excercise, reps: Int(reps), weight: Int(weight)) { [weak self] result in
             guard self != nil else {
                 return
             }
@@ -66,7 +66,7 @@ class SetsLogViewModel: ObservableObject {
             return
         }
         
-        firestore.deleteSet(userId: self.userId, workout: self.workout, exercise: self.exercise, index: toDelete) { [weak self] result in
+        firestore.deleteSet(userId: self.userId, workout: self.workout, excercise: self.excercise, index: toDelete) { [weak self] result in
             guard self != nil else {
                 return
             }
@@ -83,8 +83,8 @@ class SetsLogViewModel: ObservableObject {
     }
     
     // Calls firestore api to fetch sets
-    func fetchSets() {
-        firestore.fetchSets(userId: self.userId, workout: self.workout, exercise: self.exercise) { [weak self] result in
+    func fetchSets(date: Date? = nil) {
+        firestore.fetchSets(userId: self.userId, workout: self.workout, exercise: self.exercise, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -112,4 +112,3 @@ class SetsLogViewModel: ObservableObject {
     
     
 }
-

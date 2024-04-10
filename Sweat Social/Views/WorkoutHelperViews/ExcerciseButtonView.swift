@@ -1,5 +1,5 @@
 //
-//  ExerciseButtonView.swift
+//  ExcerciseButtonView.swift
 //  Sweat Social
 //
 //  Created by Jack.Knox on 2024-03-23.
@@ -7,18 +7,20 @@
 
 import SwiftUI
 
-// View of exercise button, also previews the sets
-struct ExerciseButtonView: View {
+// View of excercise button, also previews the sets
+struct ExcerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
+
     let exercise: WorkoutExercise
-    
-    @Binding var toDelete: WorkoutExercise?
+    let date: Date?
+
+    @Binding var toDelete: WorkoutExcercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @State private var navigate = false
     @State private var longPress = false
-    let action: (String, @escaping (Sets?) -> Void) -> ()
+    let action: (String, Date?, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
         // Logic to trigger delete screen if held, or if tapped, go to set view
@@ -37,7 +39,7 @@ struct ExerciseButtonView: View {
                     )
                     .frame(width: 153, height: 191)
                 VStack {
-                    Text(exercise.id)
+                    Text(excercise.id)
                         .foregroundColor(.black)
                         .font(.system(size:20))
                         //.fontWeight(.bold)
@@ -78,7 +80,7 @@ struct ExerciseButtonView: View {
                 }
                 
                 // Navigates to set view if button is clicked
-                NavigationLink(destination: SetsLogView(workout: workout, exercise: exercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
+                NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
                     EmptyView()
                         .frame(width:0, height: 0)
                         .hidden()
@@ -89,7 +91,7 @@ struct ExerciseButtonView: View {
         }
         .onAppear{
             // Trigger fetch on the exercises sets
-            action(exercise.id) { result in
+            action(exercise.id, date) { result in
                 sets = result
             }
             
@@ -99,7 +101,7 @@ struct ExerciseButtonView: View {
             LongPressGesture(minimumDuration: 0.7)
                 .onEnded { _ in
                     self.longPress = true
-                    toDelete = exercise
+                    toDelete = excercise
                     let generator = UIImpactFeedbackGenerator(style: .medium)
                     generator.impactOccurred()
                 }
@@ -110,9 +112,9 @@ struct ExerciseButtonView: View {
 }
 
 #Preview {
-    ExerciseButtonView(workout: "Arms", exercise: WorkoutExercise(id: "Arms", dateAdded: 10.0),
-                        toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)),
-                        viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
+    ExerciseButtonView(workout: "Arms", exercise: WorkoutExercise(id: "Arms", dateAdded: 10.0), date: nil,
+                       toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)),
+                       viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_,_   in
         return
     }
 }
