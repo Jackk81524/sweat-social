@@ -13,9 +13,9 @@ import FirebaseFirestore
 class WorkoutLogViewModel: ObservableObject {
     @Published var userId: String
     @Published var addWorkoutForm = false // Controls add workout popup
-    @Published var workoutList: [WorkoutExcercise] = [] // List of workouts
+    @Published var workoutList: [WorkoutExercise] = [] // List of workouts
     @Published var errorMessage = ""
-    @Published var toDelete: WorkoutExcercise? = nil // Workout pending deletion, also controls popup
+    @Published var toDelete: WorkoutExercise? = nil // Workout pending deletion, also controls popup
     @Published var deleteSuccess = false // Helps control deletion confirm popup
     
     private let firestore: FirestoreProtocol
@@ -37,13 +37,13 @@ class WorkoutLogViewModel: ObservableObject {
         
         let dateAdded = Date().timeIntervalSince1970
         
-        let newWorkout = WorkoutExcercise(id: workoutName, dateAdded: dateAdded)
+        let newWorkout = WorkoutExercise(id: workoutName, dateAdded: dateAdded)
         
-        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExcercise: nil) { [weak self] result in
+        firestore.insertWorkout(userId: self.userId, newWorkoutCategory: newWorkout, newExercise: nil) { [weak self] result in
             guard self != nil else { return }
             
             if case let .failure(error) = result {
-                if error is WorkoutExists {
+                if error is EntryExists {
                     self?.errorMessage = "This workout already exists."
                     return
                 } else {

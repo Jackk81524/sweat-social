@@ -10,12 +10,13 @@ import Foundation
 // Variables used largely to control the header, and its associated buttons: Add and back
 // No functions currently
 class WorkoutViewManagerViewModel: ObservableObject {
+    @Published var userId: String
     @Published var addForm = false
     @Published var title = "Your Workout"
     @Published var backButton = false
-    
+    @Published var workouts: [WorkoutExercise] = []
     @Published var dismiss = false
-    @Published var excerciseDismiss = true
+    @Published var exerciseDismiss = true
     @Published var errorMessage = ""
 
     @Published var workoutsToLog: [String] = []

@@ -12,6 +12,7 @@ struct SetButtonView: View {
     let reps: Int
     let weight: Int
     let setNum: Int
+    @Binding var date: Date?
     
     @Binding var toDelete: Int?
     
@@ -63,9 +64,11 @@ struct SetButtonView: View {
         )
         .padding(2)
         .onLongPressGesture(minimumDuration: 0.7) { // Delete popup triggered on hold
-            toDelete = setNum-1
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
+            if(date == nil) {
+                toDelete = setNum-1
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+            }
         }
 
         
@@ -73,5 +76,5 @@ struct SetButtonView: View {
 }
 
 #Preview {
-    SetButtonView(reps: 10, weight: 10, setNum: 1, toDelete: .constant(nil))
+    SetButtonView(reps: 10, weight: 10, setNum: 1, date: .constant(nil), toDelete: .constant(nil))
 }

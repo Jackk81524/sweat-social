@@ -1,5 +1,5 @@
 //
-//  ExcerciseButtonView.swift
+//  ExerciseButtonView.swift
 //  Sweat Social
 //
 //  Created by Jack.Knox on 2024-03-23.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-// View of excercise button, also previews the sets
-struct ExcerciseButtonView: View {
+// View of exercise button, also previews the sets
+struct ExerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
 
     let exercise: WorkoutExercise
     let date: Date?
 
-    @Binding var toDelete: WorkoutExcercise?
+    @Binding var toDelete: WorkoutExercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @State private var navigate = false
@@ -39,7 +39,7 @@ struct ExcerciseButtonView: View {
                     )
                     .frame(width: 153, height: 191)
                 VStack {
-                    Text(excercise.id)
+                    Text(exercise.id)
                         .foregroundColor(.black)
                         .font(.system(size:20))
                         //.fontWeight(.bold)
@@ -80,7 +80,7 @@ struct ExcerciseButtonView: View {
                 }
                 
                 // Navigates to set view if button is clicked
-                NavigationLink(destination: SetsLogView(workout: workout, excercise: excercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
+                NavigationLink(destination: SetsLogView(workout: workout, exercise: exercise.id, sets: sets, viewManagerViewModel: viewManagerViewModel), isActive: $navigate) {
                     EmptyView()
                         .frame(width:0, height: 0)
                         .hidden()
@@ -100,10 +100,12 @@ struct ExcerciseButtonView: View {
         .simultaneousGesture(
             LongPressGesture(minimumDuration: 0.7)
                 .onEnded { _ in
-                    self.longPress = true
-                    toDelete = excercise
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
+                    if viewManagerViewModel.date == nil {
+                        self.longPress = true
+                        toDelete = exercise
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                    }
                 }
         )
         
