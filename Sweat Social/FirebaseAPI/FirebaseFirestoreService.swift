@@ -181,10 +181,12 @@ class FirebaseFirestoreService : FirestoreProtocol {
     
     func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void){
         
+        
         var collection = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
+
         
         if let workout = workout {
             collection = collection.document(workout)
@@ -325,9 +327,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         
         workoutsToLog.forEach { workout in
             logWorkout(logCollection: logDoc.collection(FirebaseFirestoreService.WorkoutCategoriesCollection), workout: workout, userId: userId) { error in
-                if error != nil {
-                    completion(error)
-                }
+                completion(error)
             }
         }
         

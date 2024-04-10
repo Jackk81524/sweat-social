@@ -43,7 +43,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
         let formattedWorkoutsToLog = workouts.filter { workout in
             return workoutsToLog.contains(workout.id)
         }
-        print(formattedWorkoutsToLog)
+
         firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage) { [weak self] error in
             guard self != nil else { return }
             

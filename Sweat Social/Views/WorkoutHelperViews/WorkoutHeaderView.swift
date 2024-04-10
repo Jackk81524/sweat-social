@@ -10,11 +10,6 @@ import SwiftUI
 struct WorkoutHeaderView: View {
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
-    /*
-    @Environment(\.presentationMode) private var
-        presentationMode: Binding<PresentationMode>
-     */
-    
     var body: some View {
         HStack{
             // Checks to see if back button should be displayed. WorkoutLog will not have it, as it is the first screen
