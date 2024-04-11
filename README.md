@@ -14,7 +14,7 @@ The project is organized as follows:
 ├── Sweat Social              # The main source files for the app
 │    ├── FirebaseAPI          # Modules for interacting with Firebase database
 │    ├── Models               # Contains data structures
-│    ├── ViewModels           # Contains helper classes for views
+│    ├── ViewModels           # Contains backend logic and helper classes for views
 │    └── Views                # Contains the views themselves
 ├── Sweat SocialTests         # Automated tests
 ├── Sweat SocialUITests       # UI tests
