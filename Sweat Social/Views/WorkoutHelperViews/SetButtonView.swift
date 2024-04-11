@@ -7,16 +7,14 @@
 
 import SwiftUI
 
+// View for the individual set display
 struct SetButtonView: View {
     let reps: Int
     let weight: Int
     let setNum: Int
     
-    /*init(rep: Int, weight: Int, setNum: Int) {
-        self.setNum = setNum
-        self.rep = rep
-        self.weight = weight
-    }*/
+    @Binding var toDelete: Int?
+    
     
     var body: some View {
         ZStack {
@@ -27,7 +25,6 @@ struct SetButtonView: View {
                         .strokeBorder(Color.black, lineWidth: 2)
                 )
                 .frame(width: 367, height: 90)
-                //.padding(4)
 
             HStack {
                 ZStack {
@@ -52,24 +49,29 @@ struct SetButtonView: View {
         .overlay(
             VStack {
                 HStack {
-                    Text("Weight: \(weight)")
+                    Text("Weight: \(weight)") // List weight var
                         .font(.system(size:20))
                     
                 }
                 .padding(2)
                 HStack {
                     Text("Reps: \(reps)")
-                        .font(.system(size:20))
+                        .font(.system(size:20)) // List rep var
                 }
                 .padding(2)
             }
         )
         .padding(2)
+        .onLongPressGesture(minimumDuration: 0.7) { // Delete popup triggered on hold
+            toDelete = setNum-1
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
 
         
     }
 }
 
 #Preview {
-    SetButtonView(reps: 10, weight: 10, setNum: 1)
+    SetButtonView(reps: 10, weight: 10, setNum: 1, toDelete: .constant(nil))
 }
