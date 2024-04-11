@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// View to display the sets for an excercise
+// View to display the sets for an exercise
 struct SetsLogView: View {
     let workout: String
-    let excercise: String
+    let exercise: String
     let sets: Sets?
     
     @Environment(\.presentationMode) var
@@ -60,11 +60,11 @@ struct SetsLogView: View {
             }
             .onAppear {
                 viewModel.workout = workout
-                viewModel.excercise = excercise
-                viewManagerViewModel.title = excercise
+                viewModel.exercise = exercise
+                viewManagerViewModel.title = exercise
                 
                 viewManagerViewModel.backButton = true
-                viewManagerViewModel.excerciseDismiss = false
+                viewManagerViewModel.exerciseDismiss = false
                 viewModel.sets = sets
                 
             }
@@ -82,5 +82,5 @@ struct SetsLogView: View {
 
 
 #Preview {
-    SetsLogView(workout: "Arms", excercise: "Curl", sets: nil, viewManagerViewModel: WorkoutViewManagerViewModel())
+    SetsLogView(workout: "Arms", exercise: "Curl", sets: nil, viewManagerViewModel: WorkoutViewManagerViewModel())
 }

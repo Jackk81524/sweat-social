@@ -15,16 +15,21 @@ enum CustomErrors: Error {
     case noCurrentUser
     case existingWorkout
     case unknownError
+    case emptyWorkout
 }
 
 struct NoCurrentUser: Error {
     let message = "No current user"
 }
 
-struct WorkoutExists: Error {
-    let message = "This workout category already exists"
+struct EntryExists: Error {
+    let message = "This entryalready exists"
 }
 
 struct UnknownError: Error {
     let message = "Unknown cause of Error"
+}
+
+struct EmptyWorkout: Error {
+    let message = "Your Workout is Empty"
 }

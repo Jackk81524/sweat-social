@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// Popup view for excercise and workout screen. Takes input  variables to differentiate
+// Popup view for exercise and workout screen. Takes input  variables to differentiate
 struct AddWorkoutView: View {
     @State private var input = ""
     @Binding var showAddWorkoutForm: Bool
     @Binding var errorMessage: String
-    @Binding var workoutList: [WorkoutExcercise]
+    @Binding var workoutList: [WorkoutExercise]
     //let workoutSelected: String?
     let mainTitle: String
     let placeHolder: String
@@ -21,27 +21,11 @@ struct AddWorkoutView: View {
     
     var body: some View {
         ZStack {
-            ZStack(alignment: .topLeading){
-                RoundedRectangle(cornerRadius: 16,style:.continuous)
-                    .strokeBorder(Color.black,lineWidth:2)
-                    .background(Color.white)
-                    .foregroundStyle(.white)
-                    .frame(width: 350, height: 270)
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16, style: .circular)
-                        .frame(width: 350, height: 100)
-                        .foregroundStyle(.black)
-                    Rectangle()
-                        .frame(width:350, height: 20)
-                        .foregroundStyle(.black)
-                        .offset(y:40)
-                }
-                    
-            }
+            FormTemplateView(height: 270)
 
             VStack {
                 
-                // Variable title, based on workout or excercise view
+                // Variable title, based on workout or exercise view
                 Text(mainTitle)
                     .font(.system(size:26))
                     .foregroundStyle(.white)
@@ -92,7 +76,7 @@ struct AddWorkoutView: View {
 
 
 #Preview {
-    AddWorkoutView(showAddWorkoutForm: .constant(true), errorMessage: .constant(""), workoutList: .constant([]), mainTitle: "Enter workout", placeHolder: "Add excercise") {_ in
+    AddWorkoutView(showAddWorkoutForm: .constant(true), errorMessage: .constant(""), workoutList: .constant([]), mainTitle: "Enter workout", placeHolder: "Add exercise") {_ in
         //Nothing
     }
 }

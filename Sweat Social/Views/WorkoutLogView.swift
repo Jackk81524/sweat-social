@@ -22,6 +22,9 @@ struct WorkoutLogView: View {
                         WorkoutGroupButtonView(name: group,
                                                toDelete: $viewModel.toDelete,
                                                viewManagerViewModel: viewManagerViewModel)
+                        
+                        
+                        
                     }
                 }
                 
@@ -51,6 +54,9 @@ struct WorkoutLogView: View {
             }
             .onAppear{
                 viewModel.fetchWorkouts()
+            }
+            .onChange(of: viewModel.workoutList.count) { _ in
+                viewManagerViewModel.workouts = viewModel.workoutList
             }
         }
         .navigationBarHidden(true)
