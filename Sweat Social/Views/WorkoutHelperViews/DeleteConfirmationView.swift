@@ -18,23 +18,7 @@ struct DeleteConfirmationView: View {
     
     var body: some View {
         ZStack {
-            ZStack(alignment: .topLeading){
-                RoundedRectangle(cornerRadius: 16,style:.continuous)
-                    .strokeBorder(Color.black,lineWidth:2)
-                    .background(Color.white)
-                    .foregroundStyle(.white)
-                    .frame(width: 350, height: 270)
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16, style: .circular)
-                        .frame(width: 350, height: 100)
-                        .foregroundStyle(.black)
-                    Rectangle()
-                        .frame(width:350, height: 20)
-                        .foregroundStyle(.black)
-                        .offset(y:40)
-                }
-                
-            }
+            FormTemplateView(height: 270)
             
             VStack {
 
