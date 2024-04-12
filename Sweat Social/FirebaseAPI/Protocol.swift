@@ -37,7 +37,7 @@ protocol FirestoreProtocol {
     
     func followUser(currentUserId: String, targetUserId: String, completion: @escaping (Result<Void?, Error>) -> Void)
     
-    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
+    func fetchFollowStatus(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
     
     func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void)
 

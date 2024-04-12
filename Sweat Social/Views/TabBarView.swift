@@ -53,7 +53,7 @@ struct TabBar: View {
                         
                     }
                 
-                ProfileView()
+                SelfProfileView()
                     .tabItem {
                         Label("Profile", systemImage: "person.fill")
                     }

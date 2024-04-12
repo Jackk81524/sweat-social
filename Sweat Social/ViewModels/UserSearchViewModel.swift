@@ -54,10 +54,10 @@ class UserSearchViewModel: ObservableObject {
         }
     }
     
-    func fetchFollowing() {
+    func fetchFollowStatus() {
             guard let userId = Auth.auth().currentUser?.uid else { return }
             
-            firestoreService.fetchFollowing(userId: userId) { [weak self] result in
+            firestoreService.fetchFollowStatus(userId: userId) { [weak self] result in
                 switch result {
                 case .success(let followingIds):
                     self?.followingUserIds = Set(followingIds)
@@ -66,7 +66,4 @@ class UserSearchViewModel: ObservableObject {
                 }
             }
         }
-
-
-
 }

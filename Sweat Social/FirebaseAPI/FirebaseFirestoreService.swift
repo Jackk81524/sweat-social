@@ -326,20 +326,20 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
         
-        func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
-            let followingCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
-                .document(userId)
-                .collection("following")
-            
-            followingCollection.getDocuments { (querySnapshot, error) in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    let followingIds = querySnapshot?.documents.map { $0.documentID }
-                    completion(.success(followingIds ?? []))
-                }
+    func fetchFollowStatus(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followingCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("following")
+        
+        followingCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followingIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followingIds ?? []))
             }
         }
+    }
     
     func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void) {
         FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)

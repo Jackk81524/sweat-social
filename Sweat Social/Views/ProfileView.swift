@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct SelfProfileView: View {
     
     let name: String
     @StateObject var viewModel: ProfileViewModel
@@ -158,7 +158,7 @@ struct UserProfileView: View {
         }
         .padding()
         .onAppear {
-            viewModel.fetchFollowing()
+            viewModel.fetchFollowStatus()
         }
     }
 }

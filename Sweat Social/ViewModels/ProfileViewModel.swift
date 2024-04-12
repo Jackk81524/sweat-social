@@ -45,8 +45,8 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func fetchFollowing() {
-        firestore.fetchFollowing(userId: self.userId) { [weak self] result in
+    func fetchFollowStatus() {
+        firestore.fetchFollowStatus(userId: self.userId) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
