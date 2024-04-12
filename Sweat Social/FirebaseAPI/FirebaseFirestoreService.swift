@@ -560,5 +560,36 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
         }
     }
+    
+    func fetchFollowers(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followersCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("followers")
+        
+        followersCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followerIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followerIds ?? []))
+            }
+        }
+    }
+    
+    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followersCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("following")
+        
+        followersCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followerIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followerIds ?? []))
+            }
+        }
+    }
+
 }
 
