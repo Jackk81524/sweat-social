@@ -155,6 +155,12 @@ struct UserProfileView: View {
                     .background(viewModel.followingUserIds.contains(user.id) ? Color.green : Color.blue)
                     .cornerRadius(10)
             }
+            
+            if viewModel.followingUserIds.contains(user.id) {
+                NavigationStack{
+                    FriendWorkoutView(userId: user.id)
+                }
+            }
         }
         .padding()
         .onAppear {
