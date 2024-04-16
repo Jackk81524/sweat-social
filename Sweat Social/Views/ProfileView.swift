@@ -18,8 +18,7 @@ struct SelfProfileView: View {
     }
     
     var body: some View {
-        
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 if let user = viewModel.user {
                     VStack {
@@ -45,7 +44,7 @@ struct SelfProfileView: View {
                                 Spacer()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .foregroundStyle(.black)
-
+                                
                             }
                             .padding()
                             .background(Color.gray.opacity(0.1))
@@ -60,14 +59,14 @@ struct SelfProfileView: View {
                                 Spacer()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .foregroundStyle(.black)
-
+                                
                             }
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
                         }
                         .padding(.horizontal)
-                    
+                        
                         NavigationLink(destination: UserSearchView()) {
                             Text("Search Users")
                                 .padding()
@@ -106,7 +105,7 @@ struct UserSearchView: View {
                 .onSubmit {
                     viewModel.performSearch(query: viewModel.searchQuery)
                 }
-
+            
             List(viewModel.searchResults) { user in
                 NavigationLink(destination: UserProfileView(user: user, viewModel: viewModel)) {
                     HStack {
@@ -128,15 +127,23 @@ struct UserSearchView: View {
 
 
 struct UserProfileView: View {
-    let user: User
+    var user: User
     @ObservedObject var viewModel: UserSearchViewModel
+    @StateObject var viewManagerViewModel : WorkoutViewManagerViewModel
+    
+    init(user: User, viewModel: UserSearchViewModel) {
+        self.user = user
+        self.viewModel = viewModel
+        self._viewManagerViewModel = StateObject(wrappedValue: WorkoutViewManagerViewModel(userId: user.id))
+    }
+    
 
     var body: some View {
         VStack(spacing: 20) {
             Text(user.name)
                 .font(.title)
                 .fontWeight(.bold)
-
+            
             Text(user.email)
                 .font(.subheadline)
             
@@ -157,12 +164,23 @@ struct UserProfileView: View {
             }
             
             if viewModel.followingUserIds.contains(user.id) {
-                NavigationStack{
-                    FriendWorkoutView(userId: user.id)
+                VStack {
+                    //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
+                    WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
+                        .padding(.top,20)
+                    
+                    NavigationStack{
+                        WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+                    }
+                    .frame(width: UIScreen.main.bounds.width)
+                }
+                .onAppear {
+                    viewManagerViewModel.allowEditing = false
                 }
             }
         }
         .padding()
+        
         .onAppear {
             viewModel.fetchFollowStatus()
         }

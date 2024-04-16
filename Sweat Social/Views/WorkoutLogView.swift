@@ -11,7 +11,13 @@ import SwiftUI
 struct WorkoutLogView: View {
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel // viewModel to control header
     
-    @StateObject var viewModel = WorkoutLogViewModel() // viewModel to manage workout log
+    @StateObject var viewModel: WorkoutLogViewModel // viewModel to manage workout log
+    
+    init(viewManagerViewModel: WorkoutViewManagerViewModel) {
+        self.viewManagerViewModel = viewManagerViewModel
+        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(userId: viewManagerViewModel.userId))
+        
+    }
     
     var body: some View {
         NavigationStack{
@@ -22,8 +28,6 @@ struct WorkoutLogView: View {
                         WorkoutGroupButtonView(name: group,
                                                toDelete: $viewModel.toDelete,
                                                viewManagerViewModel: viewManagerViewModel)
-                        
-                        
                         
                     }
                 }
