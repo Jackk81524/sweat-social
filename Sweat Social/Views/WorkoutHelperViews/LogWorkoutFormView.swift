@@ -53,6 +53,9 @@ struct LogWorkoutFormView: View {
                             }
                             
                         }
+                        .onChange(of: selectedSplit) { _ in
+                            viewManagerViewModel.errorMessage = ""
+                        }
                         .frame(width: 300, height:45)
                         .padding()
                     }
@@ -80,8 +83,8 @@ struct LogWorkoutFormView: View {
                         if(viewManagerViewModel.errorMessage == "" && (selectedSplit > -1 && selectedSplit < viewManagerViewModel.splits.count)) {
                             Button {
                                 viewManagerViewModel.workoutsToLog = viewManagerViewModel.splits[selectedSplit].workouts
-                                
                                 viewManagerViewModel.logWorkout()
+                                
                             } label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 32)
@@ -107,6 +110,9 @@ struct LogWorkoutFormView: View {
             
         }
         .offset(y:-75)
+        .onAppear {
+            viewManagerViewModel.errorMessage = ""
+        }
     }
 }
 

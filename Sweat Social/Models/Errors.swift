@@ -23,7 +23,7 @@ struct NoCurrentUser: Error {
 }
 
 struct EntryExists: Error {
-    let message = "This entryalready exists"
+    let message = "This entry already exists"
 }
 
 struct UnknownError: Error {

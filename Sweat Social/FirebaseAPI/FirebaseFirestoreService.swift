@@ -326,7 +326,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
     
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void) {
         let dateLogged = Date()
-        
+
         let logDoc = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
@@ -350,6 +350,8 @@ class FirebaseFirestoreService : FirestoreProtocol {
                 }
             }
         }
+        
+        completion(nil)
     }
     
     private func logWorkout(logCollection: CollectionReference, workout: WorkoutExercise, userId: String, completion: @escaping (Error?) -> Void) {
@@ -360,8 +362,6 @@ class FirebaseFirestoreService : FirestoreProtocol {
             if let error = error {
                 completion(error)
                 return
-            } else if let document = document, document.exists {
-                completion(EntryExists())
             } else {
                 currentDoc.setData(workout.asDictionary()) { error in
                     if let error = error {
@@ -410,12 +410,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
             
             exerciseList.forEach { exercise in
-                var logDoc = logCollection.document(exercise.id)
+                let logDoc = logCollection.document(exercise.id)
                 logDoc.getDocument { (document, error) in
                     if let error = error {
                         completion(error)
-                    } else if let document = document, document.exists {
-                        // Continue
                     } else {
                         logDoc.setData(exercise.asDictionary()) { error in
                             if let error = error {

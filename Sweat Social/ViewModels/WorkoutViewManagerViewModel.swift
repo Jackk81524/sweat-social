@@ -51,13 +51,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
             guard self != nil else { return }
             
             if error != nil {
-                if error is EntryExists {
-                    self?.errorMessage = "You already logged a workout today."
-                    return
-                } else {
-                    self?.errorMessage = error?.localizedDescription ?? ""
-                    return
-                }
+                    self?.errorMessage = error?.localizedDescription ?? "Unknown Error"
             } else {
                 self?.errorMessage = ""
                 self?.workoutsToLog = []
