@@ -25,6 +25,15 @@ struct CalendarView: View {
                     }
             }
             
+            if(viewManagerViewModel.workouts.count == 0) {
+                if let date = viewManagerViewModel.date {
+                    Text("No Workouts Logged on \(dateToStringHeader(date: date))")
+                        .font(.system(size:18))
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+            }
+            
             NavigationStack{
                 WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
             }
