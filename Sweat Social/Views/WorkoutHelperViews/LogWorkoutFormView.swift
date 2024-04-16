@@ -83,6 +83,7 @@ struct LogWorkoutFormView: View {
                         if(viewManagerViewModel.errorMessage == "" && (selectedSplit > -1 && selectedSplit < viewManagerViewModel.splits.count)) {
                             Button {
                                 viewManagerViewModel.workoutsToLog = viewManagerViewModel.splits[selectedSplit].workouts
+                                viewManagerViewModel.splitToLog = viewManagerViewModel.splits[selectedSplit].id
                                 viewManagerViewModel.logWorkout()
                                 
                             } label: {

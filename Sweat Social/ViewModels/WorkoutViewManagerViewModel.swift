@@ -27,6 +27,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var addSplitForm = false
     @Published var logWorkoutForm = false
     @Published var logMessage = ""
+    @Published var splitToLog = ""
     @Published var date: Date? = nil
     @Published var calendarForm = false
     @Published var calendarButton = false
@@ -47,7 +48,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
             return workoutsToLog.contains(workout.id)
         }
 
-        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage) { [weak self] error in
+        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage,splitName: self.splitToLog) { [weak self] error in
             guard self != nil else { return }
             
             if error != nil {
@@ -56,6 +57,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
                 self?.errorMessage = ""
                 self?.workoutsToLog = []
                 self?.logMessage = ""
+                self?.splitToLog = ""
                 self?.logWorkoutForm.toggle()
             }
         }

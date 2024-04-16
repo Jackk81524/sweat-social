@@ -324,7 +324,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
-    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void) {
+    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, splitName: String, completion: @escaping (Error?) -> Void) {
         let dateLogged = Date()
 
         let logDoc = FirebaseFirestoreService.db
@@ -339,17 +339,20 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
         }
         
+        var data: [String: String] = [:]
+        
         if let logMessage = logMessage {
-            let formattedMessage: [String: String] = [
-                "logMessage": logMessage
-            ]
-            
-            logDoc.setData(formattedMessage) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
+            data["logMessage"] = logMessage
+        }
+
+        data["splitName"] = splitName
+        
+        logDoc.setData(data) { error in
+            if let error = error {
+                print(error.localizedDescription)
             }
         }
+        
         
         completion(nil)
     }

@@ -39,7 +39,7 @@ protocol FirestoreProtocol {
     
     func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void)
     
-    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void)
+    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, splitName: String, completion: @escaping (Error?) -> Void)
     
     
 }
