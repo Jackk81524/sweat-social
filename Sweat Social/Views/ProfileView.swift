@@ -10,10 +10,14 @@ import SwiftUI
 struct SelfProfileView: View {
     
     let name: String
+    @StateObject var followingViewModel = FollowingViewModel()
+    @StateObject var followersViewModel = FollowersViewModel()
     @StateObject var viewModel: ProfileViewModel
     
     init() {
         self._viewModel = StateObject(wrappedValue: ProfileViewModel())
+        self._followingViewModel = StateObject(wrappedValue: FollowingViewModel())
+        self._followersViewModel = StateObject(wrappedValue: FollowersViewModel())
         self.name = ""
     }
     
@@ -37,35 +41,40 @@ struct SelfProfileView: View {
                         }
                         .padding([.bottom, .horizontal])
                         
-                        NavigationLink(destination: AnotherView()) {
+                        NavigationLink(destination: FollowersView(viewModel: followersViewModel)) {
                             HStack {
                                 Text("Followers")
                                     .foregroundStyle(.black)
                                 Spacer()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .foregroundStyle(.black)
-                                
                             }
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
                         }
                         .padding(.horizontal)
+                        .onAppear {
+                            followersViewModel.fetchFollowers(userId: viewModel.userId)
+                        }
                         
-                        NavigationLink(destination: AnotherView()) {
+                        NavigationLink(destination: FollowingView(viewModel: followingViewModel)) {
                             HStack {
                                 Text("Following")
                                     .foregroundStyle(.black)
                                 Spacer()
                                 Image(systemName: "arrow.right.circle.fill")
                                     .foregroundStyle(.black)
-                                
                             }
                             .padding()
                             .background(Color.gray.opacity(0.1))
                             .cornerRadius(8)
                         }
                         .padding(.horizontal)
+
+                        .onAppear {
+                            followingViewModel.fetchFollowing(userId: viewModel.userId)
+                        }
                         
                         NavigationLink(destination: UserSearchView()) {
                             Text("Search Users")
@@ -85,12 +94,44 @@ struct SelfProfileView: View {
     }
 }
 
-struct AnotherView: View {
+struct FollowersView: View {
+    @ObservedObject var viewModel: FollowersViewModel
+
     var body: some View {
-        Text("Another View")
-            .navigationTitle("Another View")
+        List(viewModel.followers) { user in
+            NavigationLink(destination: UserProfileView(user: user, viewModel: UserSearchViewModel())) {
+                VStack(alignment: .leading) {
+                    Text(user.name)
+                        .fontWeight(.bold)
+                    Text(user.email)
+                        .font(.caption)
+                }
+                Spacer()
+            }
+        }
+        .navigationTitle("Followers")
     }
 }
+
+struct FollowingView: View {
+    @ObservedObject var viewModel: FollowingViewModel
+
+    var body: some View {
+        List(viewModel.following) { user in
+            NavigationLink(destination: UserProfileView(user: user, viewModel: UserSearchViewModel())) {
+                VStack(alignment: .leading) {
+                    Text(user.name)
+                        .fontWeight(.bold)
+                    Text(user.email)
+                        .font(.caption)
+                }
+                Spacer()
+            }
+        }
+        .navigationTitle("Following")
+    }
+}
+
 
 struct UserSearchView: View {
     @ObservedObject var viewModel = UserSearchViewModel()
