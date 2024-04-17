@@ -49,5 +49,9 @@ protocol FirestoreProtocol {
     
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void)
     
+    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
+    
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void)
+    
 }
 

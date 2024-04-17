@@ -590,6 +590,20 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
         }
     }
+    
+    
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void) {
+        let logDoc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection).document(userId).collection("Logged Workouts").document(date)
+        
+        logDoc.getDocument { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let logMessage = snapshot?.data()?["logMessage"] as? String
+                completion(.success(logMessage))
+            }
+        }
+    }
 
 }
 

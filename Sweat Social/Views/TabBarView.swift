@@ -29,11 +29,10 @@ struct TabBar: View {
             
             
             TabView {
-                Text("Activity View")
+                ActivityView(viewModel: ActivityViewModel())
                     .tabItem {
                         Label("Social", systemImage: "message")
                     }
-                    .badge(3)
                 
                 Text("Calender")
                     .tabItem {
@@ -63,7 +62,3 @@ struct TabBar: View {
     }
 }
 
-
-#Preview {
-    TabBar()
-}

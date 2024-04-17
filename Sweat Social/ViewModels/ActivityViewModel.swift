@@ -9,30 +9,63 @@ import Foundation
 import FirebaseFirestore
 
 class ActivityViewModel: ObservableObject {
-    @Published var users = [User]()
-    private var db = Firestore.firestore()
+    @Published var activityLogs: [String] = []
+    @Published var errorMessage: String = ""
     
-    func fetchData() {
+    private let firestore: FirestoreProtocol
+    private let auth: AuthProtocol
+    private let specificDate = "2024-04-17"
+    
+    init(auth: AuthProtocol = FirebaseAuthService(), firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+        self.auth = auth
+        self.firestore = firestore
+        fetchActivityLogs()
+    }
+    
+    func fetchActivityLogs() {
+        self.activityLogs = []  // Clear current logs
+        let userId = auth.currentUser
         
-        db.collection("users").addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("Empty")
-                return
+        firestore.fetchFollowing(userId: userId) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.errorMessage = "Failed to fetch following: \(error.localizedDescription)"
+            case .success(let followingUserIds):
+                self?.fetchLogs(for: followingUserIds)
             }
-            
-            self.users = documents.map { (queryDocumentSnapshot) -> User in
-                let data = queryDocumentSnapshot.data()
-                
-                let id = data["id"] as? String ?? ""
-                let name = data["name"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let joined = data["joined"] as? TimeInterval ?? 0
-                let workouts = data["workouts"] as? [WorkoutExercise] ?? []
-                
-                return User(id: id, name: name, email: email, joined: joined, workout:  workouts)
-                
-            }
-            
         }
     }
+    
+    private func fetchLogs(for userIds: [String]) {
+        let group = DispatchGroup()
+        
+        for userId in userIds {
+            group.enter()
+            firestore.fetchWorkoutLog(userId: userId, date: specificDate) { [weak self] result in
+                defer { group.leave() }
+                
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.errorMessage = "Error fetching logs: \(error.localizedDescription)"
+                    }
+                case .success(let logMessage):
+                    if let logMessage = logMessage {
+                        DispatchQueue.main.async {
+                            self?.activityLogs.append(logMessage)
+                        }
+                    }
+                }
+            }
+        }
+        
+        group.notify(queue: .main) {
+            print("All logs fetched.")
+        }
+    }
+    
+    func refreshActivityLogs() {
+        fetchActivityLogs()
+    }
 }
+

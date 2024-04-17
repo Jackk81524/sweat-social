@@ -7,41 +7,28 @@
 
 import SwiftUI
 
-struct ActivityTabView: View {
-    @ObservedObject private var activityViewModel = ActivityViewModel()
+struct ActivityView: View {
+    @ObservedObject var viewModel: ActivityViewModel
     
     var body: some View {
         NavigationView {
-            VStack {
-                Form {
-                    ForEach(activityViewModel.users, id: \.id) { user in
-                        Section(header: Text(user.name + " completed a workout")) {
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("\(formattedDate(from: user.joined))")
-                                    .font(.headline)
-                                Text("Burned 400 calories")
-                                    .font(.body)
-                            }
-                        }
-                    }
-                }
-                .navigationBarTitle("Social Activity")
-                .onAppear() {
-                    self.activityViewModel.fetchData()
+            List {
+                ForEach(viewModel.activityLogs, id: \.self) { log in
+                    Text(log)
+                        .padding()
                 }
             }
+            .navigationTitle("Activity Logs")
+            .navigationBarItems(trailing: Button("Refresh") {
+                viewModel.refreshActivityLogs()
+            })
+            .onAppear {
+                viewModel.fetchActivityLogs()
+            }
         }
-    }
-    
-    func formattedDate(from timestamp: TimeInterval) -> String {
-        let date = Date(timeIntervalSince1970: timestamp)
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+//        .alert(isPresented: $viewModel.showError) {
+//            Alert(title: Text("Error"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
+//        }
     }
 }
 
-#Preview {
-    ActivityTabView()
-}
