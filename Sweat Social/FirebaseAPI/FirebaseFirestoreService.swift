@@ -21,6 +21,11 @@ class FirebaseFirestoreService : FirestoreProtocol {
     static var Splits = "Splits"
     
     func insertNewUser(userId: String, name: String, email: String, completion: @escaping (Result<Void?, Error>) -> Void) {
+        
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         let newUser = User(id: userId,
                            name: name,
                            email: email,
@@ -40,6 +45,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     
     func insertWorkout(userId: String,newWorkoutCategory: WorkoutExercise, newExercise: WorkoutExercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
 
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         var toAdd = newWorkoutCategory
         
         
@@ -74,6 +83,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func deleteWorkout(userId: String, workoutToDelete: WorkoutExercise, exerciseToDelete: WorkoutExercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.WorkoutCategoriesCollection)
@@ -94,6 +107,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
 
     func insertSet(userId: String, workout: String, exercise: String, reps: Int, weight: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+        
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
         
         let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
@@ -136,6 +153,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func deleteSet(userId: String, workout: String, exercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void){
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         let document = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
@@ -181,6 +202,11 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func fetchWorkouts(userId: String, workout: String?, date: Date?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void){
+        
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         var doc = FirebaseFirestoreService.db
             .collection(FirebaseFirestoreService.userCollection)
             .document(userId)
@@ -222,6 +248,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func fetchSets(userId: String, workout: String, exercise: String, date: Date?, completion: @escaping (Result<Sets?, Error>) -> Void){
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         var sets: Sets? = nil
         
         var document = FirebaseFirestoreService.db
@@ -259,6 +289,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     
 
     func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void) {
+        guard validUser(userId: userId) else {
+            return completion(NoCurrentUser())
+        }
+        
         var doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.Splits)
@@ -282,6 +316,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func deleteSplit(userId: String, splitToDelete: String, completion: @escaping (Error?) -> Void){
+        guard validUser(userId: userId) else {
+            return completion(NoCurrentUser())
+        }
+        
         let doc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.Splits)
@@ -297,6 +335,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void){
+        guard validUser(userId: userId) else {
+            return completion(.failure(NoCurrentUser()))
+        }
+        
         var collection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
             .document(userId)
             .collection(FirebaseFirestoreService.Splits)
@@ -325,6 +367,10 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, splitName: String, completion: @escaping (Error?) -> Void) {
+        guard validUser(userId: userId) else {
+            return completion(NoCurrentUser())
+        }
+        
         let dateLogged = Date()
 
         let logDoc = FirebaseFirestoreService.db
@@ -478,6 +524,14 @@ class FirebaseFirestoreService : FirestoreProtocol {
                     }
                 }
             }
+        }
+    }
+    
+    private func validUser(userId: String) -> Bool {
+        if(userId != ""){
+            return true
+        } else {
+            return false
         }
     }
 }
