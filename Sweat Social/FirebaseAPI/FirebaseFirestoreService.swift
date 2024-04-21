@@ -596,6 +596,7 @@ class FirebaseFirestoreService : FirestoreProtocol {
         let logDoc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection).document(userId).collection("Logged Workouts").document(date)
         
         logDoc.getDocument { snapshot, error in
+            print(snapshot?.data())
             if let error = error {
                 completion(.failure(error))
             } else {

@@ -7,28 +7,47 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct ActivityView: View {
     @ObservedObject var viewModel: ActivityViewModel
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.activityLogs, id: \.self) { log in
-                    Text(log)
-                        .padding()
+                ForEach(viewModel.activityLogs, id: \.userId) { log in
+                    NavigationLink(destination: 
+                        Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
+                    ) {
+                        VStack {
+                            HStack {
+                                Text(log.userName)
+                                    .padding(.horizontal, 4)
+                                    .bold()
+                                Text(log.date)
+                                Spacer()
+                            }
+                            HStack {
+                                Text(log.message)
+                                    .monospaced()
+                                    .padding(4)
+                                Spacer()
+                            }
+                            
+                        }
+                        
+                    }
                 }
             }
             .navigationTitle("Activity Logs")
             .navigationBarItems(trailing: Button("Refresh") {
                 viewModel.refreshActivityLogs()
             })
-            .onAppear {
-                viewModel.fetchActivityLogs()
-            }
+//            .onAppear {
+//                viewModel.fetchActivityLogs()
+//            }
         }
-//        .alert(isPresented: $viewModel.showError) {
-//            Alert(title: Text("Error"), message: Text(viewModel.errorMessage), dismissButton: .default(Text("OK")))
-//        }
     }
 }
+
 
