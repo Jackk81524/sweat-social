@@ -180,29 +180,38 @@ struct UserProfileView: View {
     
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text(user.name)
-                .font(.title)
-                .fontWeight(.bold)
-            
-            Text(user.email)
-                .font(.subheadline)
-            
-            Button(action: {
-                if viewModel.followingUserIds.contains(user.id) {
-                    // You might want to implement an "unfollow" functionality
-                } else {
-                    viewModel.followUser(user.id)
+        VStack() {
+            VStack(spacing: 8) {
+                HStack {
+                    Text(user.name)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Spacer()
                 }
-            }) {
-                Text(viewModel.followingUserIds.contains(user.id) ? "Following" : "Follow")
-                    .bold()
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(viewModel.followingUserIds.contains(user.id) ? Color.green : Color.blue)
-                    .cornerRadius(10)
+                HStack {
+                    Text(user.email)
+                        .font(.subheadline)
+                    Spacer()
+                }
+                
+                
+                Button(action: {
+                    if viewModel.followingUserIds.contains(user.id) {
+                        // You might want to implement an "unfollow" functionality
+                    } else {
+                        viewModel.followUser(user.id)
+                    }
+                }) {
+                    Text(viewModel.followingUserIds.contains(user.id) ? "Following" : "Follow")
+                        .bold()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(viewModel.followingUserIds.contains(user.id) ? Color.green : Color.blue)
+                        .cornerRadius(10)
+                }
             }
+            
             
             if viewModel.followingUserIds.contains(user.id) {
                 VStack {

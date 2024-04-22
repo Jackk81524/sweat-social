@@ -7,8 +7,15 @@
 import Foundation
 import FirebaseFirestore
 
+struct Log {
+    let date: String
+    let message: String
+    let userId: String
+    let userName: String
+}
+
 class ActivityViewModel: ObservableObject {
-    @Published var activityLogs: [(date: String, message: String, userId: String, userName: String)] = []
+    @Published var activityLogs: [Log] = []
     @Published var errorMessage: String = ""
 
     private let firestore: FirestoreProtocol
@@ -57,7 +64,7 @@ class ActivityViewModel: ObservableObject {
                         case .success(let logMessage):
                             if let logMessage = logMessage {
                                 DispatchQueue.main.async {
-                                    self?.activityLogs.append((date: date, message: logMessage, userId: userId, userName: user.name))
+                                    self?.activityLogs.append(Log(date: date, message: logMessage, userId: userId, userName: user.name))
                                 }
                             }
                         }

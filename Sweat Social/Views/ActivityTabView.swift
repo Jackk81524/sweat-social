@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-import SwiftUI
+
 
 struct ActivityView: View {
     @ObservedObject var viewModel: ActivityViewModel
-    
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(viewModel.activityLogs, id: \.userId) { log in
-                    NavigationLink(destination: 
-                        Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
+                    NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
+                                   
                     ) {
                         VStack {
                             HStack {
@@ -51,3 +51,35 @@ struct ActivityView: View {
 }
 
 
+struct ActivityViewMessage: View {
+    var log: Log
+    @ObservedObject var viewModel: UserSearchViewModel
+    @StateObject var viewManagerViewModel : WorkoutViewManagerViewModel
+
+    
+    init(log: Log, viewModel: UserSearchViewModel) {
+        self.log = log
+        self.viewModel = viewModel
+        self._viewManagerViewModel = StateObject(wrappedValue: WorkoutViewManagerViewModel(userId: log.userId))
+    }
+
+    var body: some View {
+        VStack {
+            Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
+
+            //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
+            WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
+                .padding(.top,20)
+            
+            NavigationStack{
+                WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+            }
+            .frame(width: UIScreen.main.bounds.width)
+            .frame(maxHeight: .infinity)
+            
+        }
+        .onAppear {
+            viewManagerViewModel.allowEditing = false
+        }
+    }
+}
