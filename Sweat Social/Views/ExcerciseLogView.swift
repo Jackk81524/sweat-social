@@ -24,9 +24,11 @@ struct ExerciseLogView: View {
                 ScrollView {
                     // Displays the exercise buttons in two columns.
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 5), GridItem(.flexible(), spacing: 5)], spacing: 5) {
+
                         ForEach(viewModel.exerciseList) { exercise in
-                            ExerciseButtonView(workout: workout.id, 
+                            ExerciseButtonView(workout: workout.id,
                                                 exercise: exercise,
+                                                date: viewManagerViewModel.date,
                                                 toDelete: $viewModel.toDelete,
                                                 viewManagerViewModel: viewManagerViewModel,
                                                 action: viewModel.fetchSets)
@@ -62,7 +64,8 @@ struct ExerciseLogView: View {
                 viewModel.workout = workout
                 viewManagerViewModel.backButton = true
                 viewManagerViewModel.title = workout.id
-                viewModel.fetchExercises()
+
+                viewModel.fetchExercises(date: viewManagerViewModel.date)
             }
         }
         // This triggers if back button is pressed. Exercise dismiss is additional logic to ensure that if the set view is dismissed, it displays exercise view, and not workout view.
@@ -70,6 +73,7 @@ struct ExerciseLogView: View {
             if(viewManagerViewModel.exerciseDismiss) {
                 viewManagerViewModel.title = "Your Workout"
                 viewManagerViewModel.backButton = false
+                
                 presentationMode.wrappedValue
                     .dismiss()
             } else {

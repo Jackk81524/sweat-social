@@ -64,13 +64,13 @@ class ExerciseLogViewModel: ObservableObject {
     }
     
     // Fetch exercise calling firestore api
-    func fetchExercises() {
+    func fetchExercises(date: Date?) {
         guard let workout = self.workout else {
             print("No workout provided")
             return
         }
         
-        firestore.fetchWorkouts(userId: self.userId, workout: workout.id) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: workout.id, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -99,14 +99,14 @@ class ExerciseLogViewModel: ObservableObject {
     }
     
     // Fetch sets using firestore api
-    func fetchSets(exercise: String, completion: @escaping (Sets?) -> Void) {
+    func fetchSets(exercise: String, date: Date?, completion: @escaping (Sets?) -> Void) {
         guard let workout = self.workout else {
             print("No workout provided")
             completion(nil)
             return
         }
         
-        firestore.fetchSets(userId: self.userId, workout: workout.id, exercise: exercise) { result in
+        firestore.fetchSets(userId: self.userId, workout: workout.id, exercise: exercise, date: date) { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

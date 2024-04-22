@@ -31,6 +31,7 @@ struct SetsLogView: View {
                             SetButtonView(reps: sets.reps[index],
                                           weight: sets.weight[index],
                                           setNum: index+1,
+                                          date: $viewManagerViewModel.date,
                                           toDelete: $viewModel.toDelete)
                         }
                         
@@ -66,6 +67,7 @@ struct SetsLogView: View {
                 viewManagerViewModel.backButton = true
                 viewManagerViewModel.exerciseDismiss = false
                 viewModel.sets = sets
+                
                 
             }
             // Back button logic

@@ -11,14 +11,16 @@ import SwiftUI
 struct ExerciseButtonView: View {
     @State var sets: Sets?
     let workout : String
+
     let exercise: WorkoutExercise
-    
+    let date: Date?
+
     @Binding var toDelete: WorkoutExercise?
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
     @State private var navigate = false
     @State private var longPress = false
-    let action: (String, @escaping (Sets?) -> Void) -> ()
+    let action: (String, Date?, @escaping (Sets?) -> Void) -> ()
     
     var body: some View {
         // Logic to trigger delete screen if held, or if tapped, go to set view
@@ -89,7 +91,7 @@ struct ExerciseButtonView: View {
         }
         .onAppear{
             // Trigger fetch on the exercises sets
-            action(exercise.id) { result in
+            action(exercise.id, date) { result in
                 sets = result
             }
             
@@ -98,10 +100,12 @@ struct ExerciseButtonView: View {
         .simultaneousGesture(
             LongPressGesture(minimumDuration: 0.7)
                 .onEnded { _ in
-                    self.longPress = true
-                    toDelete = exercise
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
+                    if viewManagerViewModel.date == nil {
+                        self.longPress = true
+                        toDelete = exercise
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                    }
                 }
         )
         
@@ -110,9 +114,9 @@ struct ExerciseButtonView: View {
 }
 
 #Preview {
-    ExerciseButtonView(workout: "Arms", exercise: WorkoutExercise(id: "Arms", dateAdded: 10.0),
-                        toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)),
-                        viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_  in
+    ExerciseButtonView(workout: "Arms", exercise: WorkoutExercise(id: "Arms", dateAdded: 10.0), date: nil,
+                       toDelete: .constant(WorkoutExercise(id: "Arms", dateAdded: 10.0)),
+                       viewManagerViewModel: WorkoutViewManagerViewModel()) {_,_,_   in
         return
     }
 }

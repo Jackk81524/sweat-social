@@ -47,10 +47,12 @@ struct WorkoutGroupButtonView: View {
         .simultaneousGesture(
             LongPressGesture(minimumDuration: 0.7)
                 .onEnded { _ in
-                    self.longPress = true
-                    toDelete = name
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
+                    if viewManagerViewModel.date == nil {
+                        self.longPress = true
+                        toDelete = name
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                    }
                 }
         )
         .buttonStyle(PlainButtonStyle())

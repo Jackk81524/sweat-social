@@ -18,7 +18,6 @@ class WorkoutLogViewModel: ObservableObject {
     @Published var toDelete: WorkoutExercise? = nil // Workout pending deletion, also controls popup
     @Published var deleteSuccess = false // Helps control deletion confirm popup
     
-    
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
     
@@ -58,9 +57,9 @@ class WorkoutLogViewModel: ObservableObject {
         
     }
     
-    func fetchWorkouts() {
+    func fetchWorkouts(date: Date?) {
         
-        firestore.fetchWorkouts(userId: self.userId, workout: nil) { [weak self] result in
+        firestore.fetchWorkouts(userId: self.userId, workout: nil, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)

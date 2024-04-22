@@ -107,6 +107,9 @@ struct SplitsFormView: View {
         }
         .frame(width: 350, height: 420)
         .offset(y:-65)
+        .onAppear {
+            viewManagerViewModel.addSplitForm = false
+        }
         
     }
 }

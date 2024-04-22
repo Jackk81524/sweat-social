@@ -19,7 +19,7 @@ struct TabBar: View {
                     }
                     .badge(3)
                 
-                Text("Calender")
+                CalendarView()
                     .tabItem {
                         Label("Calender", systemImage: "calendar")
                     }
