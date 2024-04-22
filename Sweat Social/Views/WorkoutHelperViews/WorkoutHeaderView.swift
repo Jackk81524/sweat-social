@@ -38,38 +38,41 @@ struct WorkoutHeaderView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 .font(.system(size:24))
                 .padding(.leading, viewManagerViewModel.backButton ? 0 : UIScreen.main.bounds.width / 6)
+                .padding(.trailing, viewManagerViewModel.allowEditing ? 0 : UIScreen.main.bounds.width / 6)
                 .multilineTextAlignment(.center)
             
-            HStack {
-                Button {
-                    viewManagerViewModel.splitsForm.toggle()
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundColor(.black)
-                        Text("Splits")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
+            if viewManagerViewModel.allowEditing {
+                HStack {
+                    Button {
+                        viewManagerViewModel.splitsForm.toggle()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.black)
+                            Text("Splits")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                        }
                     }
-                }
-                .frame(width: 75, height: 26)
-                .offset(x:10)
-                
-                // Add button, toggle the add form variable which will display a popup on respective view
-                Button {
-                    viewManagerViewModel.addForm.toggle()
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundColor(.black)
-                        Text("+")
-                            .foregroundColor(.white)
-                            .font(.system(size: 20))
-                            .fontWeight(.bold)
+                    .frame(width: 75, height: 26)
+                    .offset(x:10)
+                    
+                    // Add button, toggle the add form variable which will display a popup on respective view
+                    Button {
+                        viewManagerViewModel.addForm.toggle()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.black)
+                            Text("+")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20))
+                                .fontWeight(.bold)
+                        }
                     }
+                    .frame(width: 39, height: 26)
+                    .padding()
                 }
-                .frame(width: 39, height: 26)
-                .padding()
             }
         }
     }

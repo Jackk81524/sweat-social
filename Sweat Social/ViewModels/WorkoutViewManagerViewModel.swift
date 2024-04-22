@@ -26,6 +26,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var splitCancelled = false
     @Published var addSplitForm = false
     @Published var logWorkoutForm = false
+    @Published var allowEditing = true
     @Published var logMessage = ""
     
     private let firestore: FirestoreProtocol
@@ -33,10 +34,16 @@ class WorkoutViewManagerViewModel: ObservableObject {
     
     // Iniitalize firestore and auth
     init(auth: AuthProtocol = FirebaseAuthService(),
-         firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+         firestore: FirestoreProtocol = FirebaseFirestoreService(),
+         userId: String? = nil) {
         self.auth = auth
         self.firestore = firestore
-        self.userId = auth.currentUser
+        
+        if let userId = userId {
+            self.userId = userId
+        } else {
+            self.userId = auth.currentUser
+        }
     }
     
     func logWorkout(){
