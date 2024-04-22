@@ -89,8 +89,8 @@ class SetsLogViewModel: ObservableObject {
     }
     
     // Calls firestore api to fetch sets
-    func fetchSets() {
-        firestore.fetchSets(userId: self.userId, workout: self.workout, exercise: self.exercise) { [weak self] result in
+    func fetchSets(date: Date? = nil) {
+        firestore.fetchSets(userId: self.userId, workout: self.workout, exercise: self.exercise, date: date) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
@@ -118,4 +118,3 @@ class SetsLogViewModel: ObservableObject {
     
     
 }
-

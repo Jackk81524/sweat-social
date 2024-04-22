@@ -29,9 +29,7 @@ protocol FirestoreProtocol {
     
     func deleteSet(userId: String, workout: String, exercise: String, index: Int, completion: @escaping (Result<Void?, Error>) -> Void)
     
-    func fetchWorkouts(userId: String, workout: String?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void)
-    
-    func fetchSets(userId: String, workout: String, exercise: String, completion: @escaping (Result<Sets?, Error>) -> Void)
+    func fetchWorkouts(userId: String, workout: String?, date: Date?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void)
     
     func fetchUser(userId: String, completion: @escaping (Result<User?, Error>) -> Void)
     
@@ -41,17 +39,19 @@ protocol FirestoreProtocol {
     
     func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void)
 
+    func fetchSets(userId: String, workout: String, exercise: String, date: Date?, completion: @escaping (Result<Sets?, Error>) -> Void)
+
     func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void)
-    
+        
     func deleteSplit(userId: String, splitToDelete: String, completion: @escaping (Error?) -> Void)
     
     func fetchSplits(userId: String, completion: @escaping (Result<[Split],Error>)-> Void)
     
-    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, completion: @escaping (Error?) -> Void)
+    func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, splitName: String, completion: @escaping (Error?) -> Void)
+    
     
     func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
     
     func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void)
     
 }
-

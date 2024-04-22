@@ -27,6 +27,7 @@ struct WorkoutViewManagerView: View {
                 
                 if(viewManagerViewModel.splitsForm && viewManagerViewModel.splitToDelete == ""){
                     SplitsFormView(viewManagerViewModel: viewManagerViewModel)
+                
                     
                 } else if (viewManagerViewModel.splitToDelete != "") {
                     DeleteConfirmationView(toDelete: viewManagerViewModel.splitToDelete,

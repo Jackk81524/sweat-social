@@ -34,7 +34,7 @@ struct TabBar: View {
                         Label("Social", systemImage: "message")
                     }
                 
-                Text("Calender")
+                CalendarView()
                     .tabItem {
                         Label("Calender", systemImage: "calendar")
                     }

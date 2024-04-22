@@ -15,10 +15,10 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var title = "Your Workout"
     @Published var backButton = false
     @Published var workouts: [WorkoutExercise] = []
-    
     @Published var dismiss = false
     @Published var exerciseDismiss = true
     @Published var errorMessage = ""
+
     @Published var workoutsToLog: [String] = []
     @Published var splitsForm = false
     @Published var splits: [Split] = []
@@ -28,6 +28,10 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var logWorkoutForm = false
     @Published var allowEditing = true
     @Published var logMessage = ""
+    @Published var splitToLog = ""
+    @Published var date: Date? = nil
+    @Published var calendarForm = false
+    @Published var calendarButton = false
     
     private let firestore: FirestoreProtocol
     private let auth: AuthProtocol
@@ -51,21 +55,16 @@ class WorkoutViewManagerViewModel: ObservableObject {
             return workoutsToLog.contains(workout.id)
         }
 
-        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage) { [weak self] error in
+        firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage,splitName: self.splitToLog) { [weak self] error in
             guard self != nil else { return }
             
             if error != nil {
-                if error is EntryExists {
-                    self?.errorMessage = "You already logged a workout today."
-                    return
-                } else {
-                    self?.errorMessage = error?.localizedDescription ?? ""
-                    return
-                }
+                    self?.errorMessage = error?.localizedDescription ?? "Unknown Error"
             } else {
                 self?.errorMessage = ""
                 self?.workoutsToLog = []
                 self?.logMessage = ""
+                self?.splitToLog = ""
                 self?.logWorkoutForm.toggle()
             }
         }
@@ -106,9 +105,5 @@ class WorkoutViewManagerViewModel: ObservableObject {
             self.splitToDelete = ""
             
         }
-    }
-
-    
-    
-    
+    }    
 }
