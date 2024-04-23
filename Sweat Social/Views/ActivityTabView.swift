@@ -11,40 +11,62 @@ struct ActivityView: View {
     @ObservedObject var viewModel: ActivityViewModel
 
     var body: some View {
-        NavigationView {
-            List {
-                Section {
-                    ForEach(viewModel.activityLogs) { log in
-                        NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
-                        ) {
-                            VStack {
-                                HStack {
-                                    Text(log.userName)
-                                        .padding(.horizontal, 4)
-                                        .bold()
-                                    Spacer()
-                                    Text(log.date)
-                                }
-                                HStack {
-                                    Text(log.message)
-                                        .monospaced()
-                                        .padding(4)
-                                    Spacer()
-                                }
-                            }
-                            
-                        }
-                    }
-                } header: {
-                    Text("Recent Activity")
-                }
-            }
-            .navigationTitle("Activity Logs")
-            .navigationBarItems(trailing: Button("Refresh") {
-                viewModel.refreshActivityLogs()
-            })
-            .navigationBarTitleDisplayMode(.inline)
-        }
+         NavigationView {
+             List {
+                 ForEach(viewModel.sortedDates, id: \.self) { date in
+                     Section(header: Text(formatDate(date))) {
+                         ForEach(viewModel.logsForDate(date)) { log in
+                             NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())) {
+                                 VStack(alignment: .leading) {
+                                     HStack {
+                                         Text(log.userName)
+                                             .bold()
+                                         Spacer()
+                                         Text(log.splitName ?? "")
+                                             .italic()
+                                             .foregroundStyle(.secondary)
+                                     }
+                                     if (log.message == "" || log.message == " ") {
+                                         Text("completed a workout")
+                                             .padding(.top, 2)
+                                     } else {
+                                         Text(log.message)
+                                             .padding(.top, 2)
+                                     }
+                                     
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+             .navigationTitle("Activity Logs")
+             .navigationBarItems(trailing: Button("Refresh") {
+                 viewModel.refreshActivityLogs()
+             })
+             .navigationBarTitleDisplayMode(.inline)
+         }
+     }
+
+     private func formatDate(_ date: String) -> String {
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd"
+         let date = dateFormatter.date(from: date) ?? Date()
+         
+         dateFormatter.dateStyle = .full
+         return dateFormatter.string(from: date)
+     }
+}
+extension ActivityViewModel {
+    // Compute sorted dates from logs
+    var sortedDates: [String] {
+        let dates = Set(activityLogs.map { $0.date })
+        return dates.sorted(by: >)
+    }
+    
+    // Filter logs by date
+    func logsForDate(_ date: String) -> [Log] {
+        return activityLogs.filter { $0.date == date }
     }
 }
 
@@ -82,9 +104,16 @@ struct ActivityViewMessage: View {
                     .padding(.horizontal)
                     
                     HStack {
-                        Text(log.message)
-                            .font(.system(.title3, design: .monospaced))
-                            .foregroundStyle(.indigo)
+                        if (log.message == "" || log.message == " ") {
+                            Text("completed a workout")
+                                .font(.system(.title3, design: .monospaced))
+                                .foregroundStyle(.indigo)
+                        } else {
+                            Text(log.message)
+                                .font(.system(.title3, design: .monospaced))
+                                .foregroundStyle(.indigo)
+                        }
+
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -136,17 +165,28 @@ struct ActivityViewMessage: View {
                                     Text("\(exercise.id)")
                                         .padding(.leading, 32)
                                         .font(.headline)
+                                        .monospaced()
                                     Spacer()
                                 }
+                                .padding(.vertical, 4)
                                 
-                                Text("Reps: \(exercise.reps.map(String.init).joined(separator: ", "))")
-                                    .padding(.leading, 48)
+//                                Text("Reps: \(exercise.reps.map(String.init).joined(separator: ", "))")
+//                                    .padding(.leading, 48)
+//                                
+//                                Text("Weights: \(exercise.weights.map(String.init).joined(separator: ", "))")
+//                                    .padding(.leading, 48)
                                 
-                                Text("Weights: \(exercise.weights.map(String.init).joined(separator: ", "))")
-                                    .padding(.leading, 48)
+                                VStack(alignment: .leading) {
+                                    ForEach(0..<exercise.reps.count, id: \.self) { index in
+                                        Text("Set \(index + 1): \(exercise.reps[index]) reps at \(exercise.weights[index]) lbs")
+                                            .padding(.leading, 48)
+                                            .monospaced()
+                                    }
+                                }
                             }
                         }
-                }
+                        .padding(.vertical)
+                    }
                     
                 })
                 .padding(.bottom)

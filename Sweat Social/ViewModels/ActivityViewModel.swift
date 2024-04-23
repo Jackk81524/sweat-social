@@ -93,25 +93,37 @@ class ActivityViewModel: ObservableObject {
             }
         }
     }
-
-
+    
     private func lastSevenDates() -> [String] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = Date()
-        let y1 = Calendar.current.date(byAdding: .day, value: -1, to: today)!
-        let y2 = Calendar.current.date(byAdding: .day, value: -2, to: today)!
-        let y3 = Calendar.current.date(byAdding: .day, value: -3, to: today)!
-        let y4 = Calendar.current.date(byAdding: .day, value: -4, to: today)!
-        let y5 = Calendar.current.date(byAdding: .day, value: -5, to: today)!
-        let y6 = Calendar.current.date(byAdding: .day, value: -6, to: today)!
-        
-        let y7 = Calendar.current.date(byAdding: .day, value: -7, to: today)!
-        let y8 = Calendar.current.date(byAdding: .day, value: -8, to: today)!
-        let y9 = Calendar.current.date(byAdding: .day, value: -9, to: today)!
-
-        return [formatter.string(from: today), formatter.string(from: y1), formatter.string(from: y2), formatter.string(from: y3), formatter.string(from: y4), formatter.string(from: y5), formatter.string(from: y6), formatter.string(from: y7), formatter.string(from: y8), formatter.string(from: y9)]
+        // Last 2 Weeks
+        return (0...13).map { formatter.string(from: Calendar.current.date(byAdding: .day, value: -$0, to: today)!) }
     }
+
+
+//    private func lastSevenDates() -> [String] {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let today = Date()
+//        let y1 = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+//        let y2 = Calendar.current.date(byAdding: .day, value: -2, to: today)!
+//        let y3 = Calendar.current.date(byAdding: .day, value: -3, to: today)!
+//        let y4 = Calendar.current.date(byAdding: .day, value: -4, to: today)!
+//        let y5 = Calendar.current.date(byAdding: .day, value: -5, to: today)!
+//        let y6 = Calendar.current.date(byAdding: .day, value: -6, to: today)!
+//
+//        return [
+//            formatter.string(from: today),
+//            formatter.string(from: y1),
+//            formatter.string(from: y2),
+//            formatter.string(from: y3),
+//            formatter.string(from: y4),
+//            formatter.string(from: y5),
+//            formatter.string(from: y6),
+//        ]
+//    }
     
     func refreshActivityLogs() {
         fetchActivityLogs()

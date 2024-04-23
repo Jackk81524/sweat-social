@@ -202,7 +202,7 @@ struct UserProfileView: View {
                         viewModel.followUser(user.id)
                     }
                 }) {
-                    Text(viewModel.followingUserIds.contains(user.id) ? "Following" : "Follow")
+                    Text(viewModel.followingUserIds.contains(user.id) ? "Following" : "Add Friend")
                         .bold()
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
