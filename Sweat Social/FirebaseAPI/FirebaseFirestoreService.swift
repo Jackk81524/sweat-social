@@ -664,30 +664,39 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
             let logMessage = data["logMessage"] as? String
             let splitName = data["splitName"] as? String
-
+            
             // Fetch workout categories
-            logDoc.collection("Workout Categories").getDocuments { (categorySnapshot, error) in
+            logDoc.collection("Workout Categories").getDocuments { (querySnapshot, error) in
                 if let error = error {
                     completion(.failure(error))
                     return
                 }
-                var exercisesPerCategory: [String: [String]] = [:]
-                let workoutCategories = categorySnapshot?.documents.map { $0.documentID } ?? []
-                
+                var categories: [WorkoutCategory] = []
                 let group = DispatchGroup()
-
-                workoutCategories.forEach { categoryId in
+                
+                for categoryDocument in querySnapshot!.documents {
                     group.enter()
-                    logDoc.collection("Workout Categories").document(categoryId).collection("Exercises").getDocuments { (exerciseSnapshot, error) in
-                        defer { group.leave() }
-                        if let exercises = exerciseSnapshot?.documents.map({ $0.documentID }) {
-                            exercisesPerCategory[categoryId] = exercises
+                    let categoryId = categoryDocument.documentID
+                    categoryDocument.reference.collection("Exercises").getDocuments { (exerciseSnapshot, error) in
+                        if let error = error {
+                            completion(.failure(error))
+                            return
                         }
+                        var exercises: [Exercise] = []
+                        for exerciseDocument in exerciseSnapshot!.documents {
+                            let reps = exerciseDocument.data()["Reps"] as? [Int] ?? []
+                            let weights = exerciseDocument.data()["Weight"] as? [Int] ?? []
+                            let exercise = Exercise(id: exerciseDocument.documentID, reps: reps, weights: weights)
+                            exercises.append(exercise)
+                        }
+                        let category = WorkoutCategory(id: categoryId, exercises: exercises)
+                        categories.append(category)
+                        group.leave()
                     }
                 }
-
+                
                 group.notify(queue: .main) {
-                    let log = Log(date: date, message: logMessage ?? "", userId: userId, userName: "", splitName: splitName, workoutCategories: workoutCategories, exercisesPerCategory: exercisesPerCategory)
+                    let log = Log(date: date, message: logMessage ?? "", userId: userId, userName: "", splitName: splitName, workoutCategories: categories)
                     completion(.success(log))
                 }
             }

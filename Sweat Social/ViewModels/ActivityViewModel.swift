@@ -13,11 +13,20 @@ struct Log: Identifiable {
     let userId: String
     var userName: String
     let splitName: String?
-    var workoutCategories: [String] // IDs of the workout categories
-    var exercisesPerCategory: [String: [String]]  // Maps each category ID to a list of exercises
-    var id: String { "\(userId)_\(date)" }  // Combining userId and date for a unique identifier
+    var workoutCategories: [WorkoutCategory]
+    var id: String { "\(userId)_\(date)" }  // Unique identifier
 }
 
+struct WorkoutCategory: Identifiable {
+    let id: String
+    var exercises: [Exercise]
+}
+
+struct Exercise: Identifiable {
+    let id: String
+    let reps: [Int]
+    let weights: [Int]
+}
 
 
 class ActivityViewModel: ObservableObject {
@@ -50,6 +59,7 @@ class ActivityViewModel: ObservableObject {
                 }
             }
         }
+        
     }
     
     private func fetchLog(for userId: String, date: String) {
@@ -73,7 +83,8 @@ class ActivityViewModel: ObservableObject {
                                 updatedLog.userName = user.name // Populate user name
                                 DispatchQueue.main.async {
                                     self?.activityLogs.append(updatedLog)
-                                    
+//                                    print(updatedLog)
+//                                    print("==============================================")
                                 }
                             }
                         }
@@ -104,5 +115,6 @@ class ActivityViewModel: ObservableObject {
     
     func refreshActivityLogs() {
         fetchActivityLogs()
+        
     }
 }

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ActivityView: View {
     @ObservedObject var viewModel: ActivityViewModel
 
@@ -18,7 +16,6 @@ struct ActivityView: View {
                 Section {
                     ForEach(viewModel.activityLogs) { log in
                         NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
-                                       
                         ) {
                             VStack {
                                 HStack {
@@ -27,7 +24,6 @@ struct ActivityView: View {
                                         .bold()
                                     Spacer()
                                     Text(log.date)
-                                    
                                 }
                                 HStack {
                                     Text(log.message)
@@ -35,7 +31,6 @@ struct ActivityView: View {
                                         .padding(4)
                                     Spacer()
                                 }
-                                
                             }
                             
                         }
@@ -43,18 +38,12 @@ struct ActivityView: View {
                 } header: {
                     Text("Recent Activity")
                 }
-
-                
-
             }
             .navigationTitle("Activity Logs")
             .navigationBarItems(trailing: Button("Refresh") {
                 viewModel.refreshActivityLogs()
             })
             .navigationBarTitleDisplayMode(.inline)
-//            .onAppear {
-//                viewModel.fetchActivityLogs()
-//            }
         }
     }
 }
@@ -131,31 +120,36 @@ struct ActivityViewMessage: View {
                     }
                     .padding(.horizontal)
                     
-                    ForEach(log.workoutCategories, id: \.self) { category in
-                        HStack {
-                            Text(category)
-                                .font(.title3)
-                                .foregroundStyle(.indigo)
-                            Spacer()
-                        }
-                        .padding(.horizontal)
+                    ForEach(log.workoutCategories) { category in
                         VStack(alignment: .leading) {
-                            ForEach(log.exercisesPerCategory[category] ?? [], id: \.self) { exer in
+                            HStack {
+                                Text(category.id)
+                                    .font(.system(.title3, design: .monospaced))
+                                    .foregroundStyle(.indigo)
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+
+                            ForEach(category.exercises) { exercise in
+                                
                                 HStack {
-                                    Text("- \(exer)")
+                                    Text("\(exercise.id)")
                                         .padding(.leading, 32)
+                                        .font(.headline)
                                     Spacer()
                                 }
-                               
+                                
+                                Text("Reps: \(exercise.reps.map(String.init).joined(separator: ", "))")
+                                    .padding(.leading, 48)
+                                
+                                Text("Weights: \(exercise.weights.map(String.init).joined(separator: ", "))")
+                                    .padding(.leading, 48)
                             }
                         }
-
-                    }
-                    .padding(.bottom, 2)
+                }
                     
                 })
                 .padding(.bottom)
-            
 
                 Spacer()
             }
