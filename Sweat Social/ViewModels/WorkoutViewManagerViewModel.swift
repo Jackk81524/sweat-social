@@ -12,7 +12,7 @@ import Foundation
 class WorkoutViewManagerViewModel: ObservableObject {
     @Published var userId: String
     @Published var addForm = false
-    @Published var title = "Your Workout"
+    @Published var title = "Workouts"
     @Published var backButton = false
     @Published var workouts: [WorkoutExercise] = []
     @Published var dismiss = false

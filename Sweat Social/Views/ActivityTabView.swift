@@ -15,34 +15,43 @@ struct ActivityView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.activityLogs, id: \.userId) { log in
-                    NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
-                                   
-                    ) {
-                        VStack {
-                            HStack {
-                                Text(log.userName)
-                                    .padding(.horizontal, 4)
-                                    .bold()
-                                Text(log.date)
-                                Spacer()
-                            }
-                            HStack {
-                                Text(log.message)
-                                    .monospaced()
-                                    .padding(4)
-                                Spacer()
+                Section {
+                    ForEach(viewModel.activityLogs, id: \.userId) { log in
+                        NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
+                                       
+                        ) {
+                            VStack {
+                                HStack {
+                                    Text(log.userName)
+                                        .padding(.horizontal, 4)
+                                        .bold()
+                                    Spacer()
+                                    Text(log.date)
+                                    
+                                }
+                                HStack {
+                                    Text(log.message)
+                                        .monospaced()
+                                        .padding(4)
+                                    Spacer()
+                                }
+                                
                             }
                             
                         }
-                        
                     }
+                } header: {
+                    Text("Recent Activity")
                 }
+
+                
+
             }
             .navigationTitle("Activity Logs")
             .navigationBarItems(trailing: Button("Refresh") {
                 viewModel.refreshActivityLogs()
             })
+            .navigationBarTitleDisplayMode(.inline)
 //            .onAppear {
 //                viewModel.fetchActivityLogs()
 //            }
@@ -64,12 +73,35 @@ struct ActivityViewMessage: View {
     }
 
     var body: some View {
-        VStack {
-            Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
+        VStack(spacing: 4) {
+//            Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
+            
+            VStack(spacing: 4, content: {
+                HStack {
+                    Text("\(log.userName)'s Workout")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Spacer()
+                }
+                .padding([.top, .horizontal])
+                
+                HStack {
+                    Text(log.message)
+                        .font(.system(.title3, design: .monospaced))
+                    Spacer()
+                }
+                .padding([.bottom, .horizontal])
+            })
+            .frame(height: 100)
+            .padding(.top, -15)
+            
+
 
             //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
             WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
-                .padding(.top,20)
+//                .padding(.top,20)
+                .frame(height: 60)
+            
             
             NavigationStack{
                 WorkoutLogView(viewManagerViewModel: viewManagerViewModel)

@@ -78,7 +78,7 @@ struct ExerciseLogView: View {
         // This triggers if back button is pressed. Exercise dismiss is additional logic to ensure that if the set view is dismissed, it displays exercise view, and not workout view.
         .onChange(of: viewManagerViewModel.dismiss) { _ in
             if(viewManagerViewModel.exerciseDismiss) {
-                viewManagerViewModel.title = "Your Workout"
+                viewManagerViewModel.title = "Workouts"
                 viewManagerViewModel.backButton = false
                 
                 presentationMode.wrappedValue

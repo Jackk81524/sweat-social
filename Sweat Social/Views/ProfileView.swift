@@ -218,6 +218,7 @@ struct UserProfileView: View {
                     //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
                     WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
                         .padding(.top,20)
+                        .frame(height: 60)
                     
                     NavigationStack{
                         WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
