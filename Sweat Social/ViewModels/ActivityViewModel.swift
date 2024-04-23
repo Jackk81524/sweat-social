@@ -7,12 +7,18 @@
 import Foundation
 import FirebaseFirestore
 
-struct Log {
+struct Log: Identifiable {
     let date: String
     let message: String
     let userId: String
-    let userName: String
+    var userName: String
+    let splitName: String?
+    var workoutCategories: [String] // IDs of the workout categories
+    var exercisesPerCategory: [String: [String]]  // Maps each category ID to a list of exercises
+    var id: String { "\(userId)_\(date)" }  // Combining userId and date for a unique identifier
 }
+
+
 
 class ActivityViewModel: ObservableObject {
     @Published var activityLogs: [Log] = []
@@ -36,7 +42,7 @@ class ActivityViewModel: ObservableObject {
             case .failure(let error):
                 self?.errorMessage = "Failed to fetch following: \(error.localizedDescription)"
             case .success(let followingUserIds):
-                let dates = self?.lastThreeDates() ?? []
+                let dates = self?.lastSevenDates() ?? []
                 dates.forEach { date in
                     followingUserIds.forEach { userId in
                         self?.fetchLog(for: userId, date: date)
@@ -61,10 +67,13 @@ class ActivityViewModel: ObservableObject {
                             DispatchQueue.main.async {
                                 self?.errorMessage = "Error fetching logs: \(error.localizedDescription)"
                             }
-                        case .success(let logMessage):
-                            if let logMessage = logMessage {
+                        case .success(let log):
+                            if let log = log {
+                                var updatedLog = log
+                                updatedLog.userName = user.name // Populate user name
                                 DispatchQueue.main.async {
-                                    self?.activityLogs.append(Log(date: date, message: logMessage, userId: userId, userName: user.name))
+                                    self?.activityLogs.append(updatedLog)
+                                    
                                 }
                             }
                         }
@@ -74,7 +83,8 @@ class ActivityViewModel: ObservableObject {
         }
     }
 
-    private func lastThreeDates() -> [String] {
+
+    private func lastSevenDates() -> [String] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = Date()
@@ -84,9 +94,12 @@ class ActivityViewModel: ObservableObject {
         let y4 = Calendar.current.date(byAdding: .day, value: -4, to: today)!
         let y5 = Calendar.current.date(byAdding: .day, value: -5, to: today)!
         let y6 = Calendar.current.date(byAdding: .day, value: -6, to: today)!
+        
+        let y7 = Calendar.current.date(byAdding: .day, value: -7, to: today)!
+        let y8 = Calendar.current.date(byAdding: .day, value: -8, to: today)!
+        let y9 = Calendar.current.date(byAdding: .day, value: -9, to: today)!
 
-        return [formatter.string(from: today), formatter.string(from: y1), formatter.string(from: y2), formatter.string(from: y3), formatter.string(from: y4),
-                                               formatter.string(from: y5), formatter.string(from: y6)]
+        return [formatter.string(from: today), formatter.string(from: y1), formatter.string(from: y2), formatter.string(from: y3), formatter.string(from: y4), formatter.string(from: y5), formatter.string(from: y6), formatter.string(from: y7), formatter.string(from: y8), formatter.string(from: y9)]
     }
     
     func refreshActivityLogs() {

@@ -16,7 +16,7 @@ struct ActivityView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(viewModel.activityLogs, id: \.userId) { log in
+                    ForEach(viewModel.activityLogs) { log in
                         NavigationLink(destination: ActivityViewMessage(log: log, viewModel: UserSearchViewModel())
                                        
                         ) {
@@ -73,41 +73,106 @@ struct ActivityViewMessage: View {
     }
 
     var body: some View {
-        VStack(spacing: 4) {
-//            Text("\(log.userName) just logged a workout on \(log.date)\n\(log.message)")
-            
-            VStack(spacing: 4, content: {
+        VStack(spacing: 6) {
+            ScrollView {
                 HStack {
                     Text("\(log.userName)'s Workout")
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
                 }
-                .padding([.top, .horizontal])
+                .padding()
+                Divider()
                 
-                HStack {
-                    Text(log.message)
-                        .font(.system(.title3, design: .monospaced))
-                    Spacer()
-                }
-                .padding([.bottom, .horizontal])
-            })
-            .frame(height: 100)
-            .padding(.top, -15)
+                VStack(spacing: 8, content: {
+                    HStack {
+                        Text("Logged Message")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    HStack {
+                        Text(log.message)
+                            .font(.system(.title3, design: .monospaced))
+                            .foregroundStyle(.indigo)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                })
+                .padding(.bottom)
+                
+                Divider()
+                VStack(spacing: 8, content: {
+                    HStack {
+                        Text("Split Name")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    HStack {
+                        Text(log.splitName ?? "-")
+                            .font(.system(.title3, design: .monospaced))
+                            .foregroundStyle(.indigo)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                })
+                .padding(.bottom)
+                
+                Divider()
+                VStack(spacing: 8, content: {
+                    HStack {
+                        Text("Workout Details")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    ForEach(log.workoutCategories, id: \.self) { category in
+                        HStack {
+                            Text(category)
+                                .font(.title3)
+                                .foregroundStyle(.indigo)
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                        VStack(alignment: .leading) {
+                            ForEach(log.exercisesPerCategory[category] ?? [], id: \.self) { exer in
+                                HStack {
+                                    Text("- \(exer)")
+                                        .padding(.leading, 32)
+                                    Spacer()
+                                }
+                               
+                            }
+                        }
+
+                    }
+                    .padding(.bottom, 2)
+                    
+                })
+                .padding(.bottom)
             
 
-
-            //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
-            WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
-//                .padding(.top,20)
-                .frame(height: 60)
-            
-            
-            NavigationStack{
-                WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+                Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width)
-            .frame(maxHeight: .infinity)
+
+
+
+//            //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
+//            WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
+////                .padding(.top,20)
+//                .frame(height: 60)
+//            
+//            
+//            NavigationStack{
+//                WorkoutLogView(viewManagerViewModel: viewManagerViewModel)
+//            }
+//            .frame(width: UIScreen.main.bounds.width)
+//            .frame(maxHeight: .infinity)
             
         }
         .onAppear {

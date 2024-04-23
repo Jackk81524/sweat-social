@@ -650,19 +650,51 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
     
-    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void) {
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<Log?, Error>) -> Void) {
         let logDoc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection).document(userId).collection("Logged Workouts").document(date)
-        
+
         logDoc.getDocument { snapshot, error in
-            print(snapshot?.data())
             if let error = error {
                 completion(.failure(error))
-            } else {
-                let logMessage = snapshot?.data()?["logMessage"] as? String
-                completion(.success(logMessage))
+                return
+            }
+            guard let data = snapshot?.data() else {
+                completion(.success(nil))
+                return
+            }
+            let logMessage = data["logMessage"] as? String
+            let splitName = data["splitName"] as? String
+
+            // Fetch workout categories
+            logDoc.collection("Workout Categories").getDocuments { (categorySnapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                var exercisesPerCategory: [String: [String]] = [:]
+                let workoutCategories = categorySnapshot?.documents.map { $0.documentID } ?? []
+                
+                let group = DispatchGroup()
+
+                workoutCategories.forEach { categoryId in
+                    group.enter()
+                    logDoc.collection("Workout Categories").document(categoryId).collection("Exercises").getDocuments { (exerciseSnapshot, error) in
+                        defer { group.leave() }
+                        if let exercises = exerciseSnapshot?.documents.map({ $0.documentID }) {
+                            exercisesPerCategory[categoryId] = exercises
+                        }
+                    }
+                }
+
+                group.notify(queue: .main) {
+                    let log = Log(date: date, message: logMessage ?? "", userId: userId, userName: "", splitName: splitName, workoutCategories: workoutCategories, exercisesPerCategory: exercisesPerCategory)
+                    completion(.success(log))
+                }
             }
         }
     }
+
+
 
 
     private func validUser(userId: String) -> Bool {

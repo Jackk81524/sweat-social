@@ -52,6 +52,6 @@ protocol FirestoreProtocol {
     
     func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
     
-    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void)
-    
+//    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void)
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<Log?, Error>) -> Void)
 }
