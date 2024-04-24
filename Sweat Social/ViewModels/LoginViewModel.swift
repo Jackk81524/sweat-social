@@ -7,12 +7,18 @@
 
 import Foundation
 import FirebaseAuth
-class LoginViewViewModel: ObservableObject {
+
+
+class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
     
-    init() {}
+    private let auth: AuthProtocol
+    
+    init(auth: AuthProtocol = FirebaseAuthService()) {
+        self.auth = auth
+    }
     
     func login() {
         guard validate() else {
@@ -22,8 +28,8 @@ class LoginViewViewModel: ObservableObject {
         // Try login
         // This throws User doesnt exist message upon failure, but doesn't actually check error message
         // At the time, this was too complex, and should be fixed as the app develops
-        Auth.auth().signIn(withEmail: email, password: password) { (_, error) in
-            if let error = error {
+        auth.signIn(withEmail: email, password: password) { (error) in
+            if error != nil {
                 self.errorMessage = "User does not exist"
             }
         }

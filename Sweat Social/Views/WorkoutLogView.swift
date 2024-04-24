@@ -7,63 +7,70 @@
 
 import SwiftUI
 
+// This is the main workout category log view.
 struct WorkoutLogView: View {
-    @StateObject var viewModel = WorkoutLogViewModel()
+    @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel // viewModel to control header
+    
+    @StateObject var viewModel: WorkoutLogViewModel // viewModel to manage workout log
+    
+    init(viewManagerViewModel: WorkoutViewManagerViewModel) {
+        self.viewManagerViewModel = viewManagerViewModel
+        self._viewModel = StateObject(wrappedValue: WorkoutLogViewModel(userId: viewManagerViewModel.userId))
+        
+    }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack{
             ZStack {
-                VStack {
-                    ScrollView {
-                        if let workoutGroups = viewModel.workoutGroups {
-                            ForEach(workoutGroups) { group in
-                                WorkoutGroupButtonView(name: group.name)
-                            }
-                            .offset(y:50)
-                        }
+                // Create a scroll view of workout buttons
+                ScrollView {
+                    ForEach(viewModel.workoutList) { group in
+                        WorkoutGroupButtonView(name: group,
+                                               toDelete: $viewModel.toDelete,
+                                               viewManagerViewModel: viewManagerViewModel)
                     }
                 }
                 
-                ZStack{
-                    
-                    Text("Your Workout")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    HStack {
-                        Spacer()
-                        Button {
-                            viewModel.addWorkoutForm.toggle()
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundColor(.black)
-                                Text("+")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 20))
-                                    .fontWeight(.bold)
-                            }
-                            .frame(width: 39, height: 26)
-                            .padding()
-                            
-                        }
-                        .padding(8)
-                        
-                    }
-                }
-                .offset(y:-340)
-
-                if viewModel.addWorkoutForm {
+                // Check to see if add form is clicked, and display form if so
+                if viewManagerViewModel.addForm {
                     ZStack {
-                        AddWorkoutView(showForm: $viewModel.addWorkoutForm, action: viewModel.addWorkoutGroup)
+                        AddWorkoutView(showAddWorkoutForm: $viewManagerViewModel.addForm,
+                                       errorMessage: $viewModel.errorMessage,
+                                       workoutList: $viewModel.workoutList,
+                                       mainTitle: "Add Workout",
+                                       placeHolder: "Enter Workout",
+                                       action: viewModel.addWorkout)
                     }
                 }
                 
+                // Check to see if delete is enabled, and show confirm screen if so
+                if let toDelete = viewModel.toDelete {
+                    DeleteConfirmationView(toDelete: toDelete.id,
+                                           toDeleteType: "workout",
+                                           update: $viewModel.deleteSuccess,
+                                           delete: viewModel.deleteWorkout)
+                    .onChange(of: viewModel.deleteSuccess) { _ in
+                        viewModel.toDelete = nil // This removes popup if cancel is pressed
+                    }
+                    
+                }
             }
-            
+            .onAppear {
+                viewModel.fetchWorkouts(date: viewManagerViewModel.date)
+            }
+            .onChange(of: viewManagerViewModel.date){ date in
+                viewModel.fetchWorkouts(date: date)
+            }
+            .onChange(of: viewModel.workoutList.count) { _ in
+                viewManagerViewModel.workouts = viewModel.workoutList
+            }
         }
+        .navigationBarHidden(true)
+        
     }
 }
 
 #Preview {
-    WorkoutLogView()
+    WorkoutLogView(viewManagerViewModel: WorkoutViewManagerViewModel())
 }
+

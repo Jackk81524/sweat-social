@@ -24,11 +24,15 @@ struct RegisterView: View {
                     Text("Register with us now")
                         .font(.system(size:26))
                         .padding(.bottom, 20)
-                    
+                        
                     if !viewModel.errorMessage.isEmpty {
                         Text(viewModel.errorMessage)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(nil)
+                            .frame(maxWidth:350)
                             
                     }
+                    
                     AuthTextFieldView(display: "Full Name",
                                        input: $viewModel.name)
                     AuthTextFieldView(display: "Email",
@@ -40,6 +44,7 @@ struct RegisterView: View {
                     
                     AuthButtonView(title: "Sign up")
                     {
+                        
                         viewModel.register()
                     }
                 }

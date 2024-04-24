@@ -6,12 +6,12 @@
 //
 
 import Foundation
-
-struct User: Codable {
+//Test
+struct User: Codable, Identifiable {
     let id: String
     let name: String
     let email: String
     let joined: TimeInterval
-    var workout: [WorkoutGroup]
     var profilePictureURL: String?
+    var workout: [WorkoutExercise]?
 }
