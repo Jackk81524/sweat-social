@@ -13,4 +13,5 @@ struct User: Codable {
     let email: String
     let joined: TimeInterval
     var workout: [WorkoutGroup]
+    var profilePictureURL: String?
 }

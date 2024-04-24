@@ -45,6 +45,7 @@
 		C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5414D2B882056005AC444 /* GoalsView.swift */; };
 		C8A9BF462BAA0FA90086F2B5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A9BF452BAA0FA90086F2B5 /* ProfileView.swift */; };
 		C8A9BF482BAA1A2D0086F2B5 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A9BF472BAA1A2D0086F2B5 /* ProfileViewModel.swift */; };
+		C8A9BF4A2BAA21730086F2B5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C8A9BF492BAA21730086F2B5 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 			files = (
 				C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */,
 				C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */,
+				C8A9BF4A2BAA21730086F2B5 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +315,7 @@
 			packageProductDependencies = (
 				C528A2332B76B75B00346B27 /* FirebaseAuth */,
 				C528A2352B76B75B00346B27 /* FirebaseFirestore */,
+				C8A9BF492BAA21730086F2B5 /* FirebaseStorage */,
 			);
 			productName = "Sweat Social";
 			productReference = 0B6E8B0B2B6A9D0600455CB3 /* Sweat Social.app */;
@@ -827,6 +830,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C528A2322B76B75B00346B27 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		C8A9BF492BAA21730086F2B5 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -101,19 +101,19 @@ struct displayImageFromURL: View {
         return AnyView(
             AsyncImage(url: url) { phase in
                 switch phase {
-                case .empty:
-                    ProgressView() // Displayed while the image is loading
-                case .success(let image):
-                    image.resizable() // Display the loaded image
-                         .aspectRatio(contentMode: .fill)
-                case .failure:
-                    // Displayed if there is an error loading the image
-                    Text("Error loading image.")
-                        .frame(width: imageSize, height: imageSize)
-                        .background(Color.gray)
-                        .clipShape(Circle())
-                @unknown default:
-                    EmptyView() // Fallback for future cases
+                    case .empty:
+                        ProgressView() // Displayed while the image is loading
+                    case .success(let image):
+                        image.resizable() // Display the loaded image
+                             .aspectRatio(contentMode: .fill)
+                    case .failure:
+                        // Displayed if there is an error loading the image
+                        Text("Error loading image.")
+                            .frame(width: imageSize, height: imageSize)
+                            .background(Color.gray)
+                            .clipShape(Circle())
+                    @unknown default:
+                        EmptyView() // Fallback for future cases
                 }
             }
             .frame(width: imageSize, height: imageSize)
