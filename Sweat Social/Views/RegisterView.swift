@@ -44,6 +44,7 @@ struct RegisterView: View {
                     
                     AuthButtonView(title: "Sign up")
                     {
+                        
                         viewModel.register()
                     }
                 }
