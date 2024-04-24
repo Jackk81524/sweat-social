@@ -1,0 +1,578 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:4b0f38f7-de5a-474c-bf39-6889a05f0052",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2024-04-18T19:12:23Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "10.4.1",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@10.4.1",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@10.4.1",
+          "author": "OWASP Foundation",
+          "publisher": "OWASP Foundation"
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "swiftpm",
+      "version": "latest",
+      "type": "application",
+      "bom-ref": "pkg:swift/swiftpm@latest",
+      "purl": "pkg:swift/swiftpm@latest"
+    }
+  },
+  "components": [
+    {
+      "group": "github.com/google",
+      "name": "abseil-cpp-binary",
+      "version": "1.2024011601.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/abseil-cpp-binary/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/abseil-cpp-binary@1.2024011601.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/abseil-cpp-binary.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/abseil-cpp-binary@1.2024011601.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "app-check",
+      "version": "10.18.1",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/app-check/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/app-check@10.18.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/app-check.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/app-check@10.18.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/firebase",
+      "name": "firebase-ios-sdk",
+      "version": "10.23.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/firebase/firebase-ios-sdk/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/firebase/firebase-ios-sdk@10.23.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/firebase/firebase-ios-sdk.git"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:swift/github.com/firebase/firebase-ios-sdk@10.23.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "GoogleAppMeasurement",
+      "version": "10.23.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/GoogleAppMeasurement/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/GoogleAppMeasurement@10.23.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/GoogleAppMeasurement.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/GoogleAppMeasurement@10.23.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "GoogleDataTransport",
+      "version": "9.4.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/GoogleDataTransport/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/GoogleDataTransport@9.4.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/GoogleDataTransport.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/GoogleDataTransport@9.4.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "GoogleUtilities",
+      "version": "7.13.1",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/GoogleUtilities/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/GoogleUtilities@7.13.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/GoogleUtilities.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/GoogleUtilities@7.13.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "grpc-binary",
+      "version": "1.62.1",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/grpc-binary/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/grpc-binary@1.62.1",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/grpc-binary.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/grpc-binary@1.62.1",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "gtm-session-fetcher",
+      "version": "3.3.2",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/gtm-session-fetcher/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/gtm-session-fetcher@3.3.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/gtm-session-fetcher.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/gtm-session-fetcher@3.3.2",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "interop-ios-for-google-sdks",
+      "version": "100.0.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/interop-ios-for-google-sdks/blob/main/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/interop-ios-for-google-sdks@100.0.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/interop-ios-for-google-sdks.git"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:swift/github.com/google/interop-ios-for-google-sdks@100.0.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/firebase",
+      "name": "leveldb",
+      "version": "1.22.4",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/firebase/leveldb/blob/firebase-release/LICENSE",
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/firebase/leveldb@1.22.4",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/firebase/leveldb.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/firebase/leveldb@1.22.4",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/firebase",
+      "name": "nanopb",
+      "version": "2.30910.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/firebase/nanopb/blob/master/LICENSE.txt",
+            "id": "Zlib"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/firebase/nanopb@2.30910.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/firebase/nanopb.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/firebase/nanopb@2.30910.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/google",
+      "name": "promises",
+      "version": "2.4.0",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/google/promises/blob/master/LICENSE",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/google/promises@2.4.0",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/google/promises.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/google/promises@2.4.0",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    },
+    {
+      "group": "github.com/apple",
+      "name": "swift-protobuf",
+      "version": "1.25.2",
+      "licenses": [
+        {
+          "license": {
+            "url": "https://github.com/apple/swift-protobuf/blob/main/LICENSE.txt",
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:swift/github.com/apple/swift-protobuf@1.25.2",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apple/swift-protobuf.git"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:swift/github.com/apple/swift-protobuf@1.25.2",
+      "evidence": {
+        "identity": {
+          "field": "purl",
+          "confidence": 1,
+          "methods": [
+            {
+              "technique": "manifest-analysis",
+              "confidence": 1,
+              "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "/Users/SOUR/Documents/sweat-social/Sweat Social.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        }
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": []
+}

@@ -31,6 +31,14 @@ protocol FirestoreProtocol {
     
     func fetchWorkouts(userId: String, workout: String?, date: Date?, completion: @escaping (Result<[WorkoutExercise], Error>) -> Void)
     
+    func fetchUser(userId: String, completion: @escaping (Result<User?, Error>) -> Void)
+    
+    func followUser(currentUserId: String, targetUserId: String, completion: @escaping (Result<Void?, Error>) -> Void)
+    
+    func fetchFollowStatus(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
+    
+    func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void)
+
     func fetchSets(userId: String, workout: String, exercise: String, date: Date?, completion: @escaping (Result<Sets?, Error>) -> Void)
 
     func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void)
@@ -42,4 +50,8 @@ protocol FirestoreProtocol {
     func logSavedWorkout(userId: String, workoutsToLog: [WorkoutExercise], logMessage: String?, splitName: String, completion: @escaping (Error?) -> Void)
     
     
+    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void)
+    
+//    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<String?, Error>) -> Void)
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<Log?, Error>) -> Void)
 }

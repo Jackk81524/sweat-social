@@ -9,15 +9,30 @@ import SwiftUI
 
 struct TabBar: View {
     var body: some View {
-        ZStack {
+        VStack(spacing: 0) {
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.black)
+                    .ignoresSafeArea(edges: .top)
+
+                Text("Sweat Social")
+                    .font(.custom("Futura-MediumItalic", size: 48))
+                    .fontWidth(.condensed)
+                    .foregroundStyle(.white)
+                    .bold()
+                    .ignoresSafeArea(edges: .top)
+
+                
+            }
+            .frame(height: 80)
             
             
             TabView {
-                ActivityTabView()
+                ActivityView(viewModel: ActivityViewModel())
                     .tabItem {
                         Label("Social", systemImage: "message")
                     }
-                    .badge(3)
                 
                 CalendarView()
                     .tabItem {
@@ -37,33 +52,13 @@ struct TabBar: View {
                         
                     }
                 
-                Text("Profile")
+                SelfProfileView()
                     .tabItem {
                         Label("Profile", systemImage: "person.fill")
                     }
             }
-            .padding(.top, 70)
-            
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.black)
-                
-                Text("Sweat Social")
-                    .font(.custom("Futura-MediumItalic", size: 64))
-                    .fontWidth(.condensed)
-                    .foregroundStyle(.white)
-                    .baselineOffset(-135)
-                    .bold()
-                
-            }
-            .frame(width: UIScreen.main.bounds.width, height: 259)
-            .offset(y: -400)
-            
+                        
         }
     }
 }
 
-
-#Preview {
-    TabBar()
-}

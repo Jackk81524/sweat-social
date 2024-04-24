@@ -25,10 +25,16 @@ class ExerciseLogViewModel: ObservableObject {
     
     // Initilize firebase auth and firestore
     init(auth: AuthProtocol = FirebaseAuthService(),
-         firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+         firestore: FirestoreProtocol = FirebaseFirestoreService(),
+         userId: String? = nil) {
         self.auth = auth
         self.firestore = firestore
-        self.userId = auth.currentUser
+        
+        if let userId = userId {
+            self.userId = userId
+        } else {
+            self.userId = auth.currentUser
+        }
     }
     
     // Adds exercise using firestore api

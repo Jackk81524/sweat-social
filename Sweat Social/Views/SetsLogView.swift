@@ -9,15 +9,25 @@ import SwiftUI
 
 // View to display the sets for an exercise
 struct SetsLogView: View {
-    let workout: String
-    let exercise: String
-    let sets: Sets?
+    var workout: String
+    var exercise: String
+    var sets: Sets?
     
     @Environment(\.presentationMode) var
         presentationMode: Binding<PresentationMode>
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
-    @StateObject var viewModel = SetsLogViewModel()
+    @StateObject var viewModel: SetsLogViewModel
+    
+    init(workout: String, exercise: String, sets: Sets?, viewManagerViewModel: WorkoutViewManagerViewModel) {
+        self.workout = workout
+        self.exercise = exercise
+        self.sets = sets
+        
+        self.viewManagerViewModel = viewManagerViewModel
+        self._viewModel = StateObject(wrappedValue: SetsLogViewModel(userId: viewManagerViewModel.userId))
+        
+    }
     
     
     var body: some View {

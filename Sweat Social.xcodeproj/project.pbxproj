@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B2900102BC985E500B85197 /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B29000F2BC985E500B85197 /* FollowViewModel.swift */; };
+		0B54F9A02BB3B20900D03B11 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B54F99F2BB3B20900D03B11 /* ProfileViewModel.swift */; };
 		0B6E8B0F2B6A9D0600455CB3 /* Sweat_SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B0E2B6A9D0600455CB3 /* Sweat_SocialApp.swift */; };
 		0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B102B6A9D0600455CB3 /* ContentView.swift */; };
 		0B6E8B132B6A9D0800455CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B6E8B122B6A9D0800455CB3 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 		0B6E8B202B6A9D0800455CB3 /* Sweat_SocialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B1F2B6A9D0800455CB3 /* Sweat_SocialTests.swift */; };
 		0B6E8B2A2B6A9D0800455CB3 /* Sweat_SocialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B292B6A9D0800455CB3 /* Sweat_SocialUITests.swift */; };
 		0B6E8B2C2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */; };
+		0B80CBC72BB365CA00D43636 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B80CBC62BB365CA00D43636 /* ProfileView.swift */; };
+		0B81B62C2BC492C700CC53C3 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B81B62B2BC492C700CC53C3 /* UserSearchViewModel.swift */; };
 		0BE9245F2B7D828F006F65F4 /* References in Resources */ = {isa = PBXBuildFile; fileRef = 0BE9245E2B7D828F006F65F4 /* References */; };
 		0BE924612B7D8A23006F65F4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE924602B7D8A23006F65F4 /* TabBarView.swift */; };
 		0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */; };
@@ -87,6 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B29000F2BC985E500B85197 /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
+		0B54F99F2BB3B20900D03B11 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0B6E8B0B2B6A9D0600455CB3 /* Sweat Social.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sweat Social.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6E8B0E2B6A9D0600455CB3 /* Sweat_SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialApp.swift; sourceTree = "<group>"; };
 		0B6E8B102B6A9D0600455CB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +104,8 @@
 		0B6E8B292B6A9D0800455CB3 /* Sweat_SocialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialUITests.swift; sourceTree = "<group>"; };
 		0B6E8B2B2B6A9D0800455CB3 /* Sweat_SocialUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sweat_SocialUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Sweat-Social-Info.plist"; sourceTree = SOURCE_ROOT; };
+		0B80CBC62BB365CA00D43636 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0B81B62B2BC492C700CC53C3 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
 		0BE9245E2B7D828F006F65F4 /* References */ = {isa = PBXFileReference; lastKnownFileType = text; path = References; sourceTree = "<group>"; };
 		0BE924602B7D8A23006F65F4 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTabView.swift; sourceTree = "<group>"; };
@@ -329,6 +337,7 @@
 				C536A1EA2B7D0D8C00079DCC /* RegisterView.swift */,
 				C527F1BE2B89235A00D0934F /* WorkoutLogView.swift */,
 				C53A75C02B9BE149008338B6 /* SetsLogView.swift */,
+				0B80CBC62BB365CA00D43636 /* ProfileView.swift */,
 				C532B4152BC70AA000D69525 /* CalendarView.swift */,
 			);
 			path = Views;
@@ -344,7 +353,10 @@
 				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
 				C527F1C02B89247B00D0934F /* WorkoutLogViewModel.swift */,
 				C53935E62BA9D63D003228F9 /* SetsLogViewModel.swift */,
+				0B54F99F2BB3B20900D03B11 /* ProfileViewModel.swift */,
+				0B81B62B2BC492C700CC53C3 /* UserSearchViewModel.swift */,
 				C532A8232BAF8F0100E672B4 /* ExcerciseLogViewModel.swift */,
+				0B29000F2BC985E500B85197 /* FollowViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -535,6 +547,7 @@
 				C503B6CC2BBEF59E0069C6C6 /* FormRoundedRectangleView.swift in Sources */,
 				C50F11182B7AFEC80025FB0E /* AuthViewModel.swift in Sources */,
 				C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */,
+				0B81B62C2BC492C700CC53C3 /* UserSearchViewModel.swift in Sources */,
 				0BFE3C142B8BD7DD00689AA0 /* ActivityTabView.swift in Sources */,
 				C503B6CA2BBEE9A10069C6C6 /* LogWorkoutFormView.swift in Sources */,
 				C528A23C2B76B9E900346B27 /* User.swift in Sources */,
@@ -545,14 +558,17 @@
 				C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */,
 				C526F8852BBDC0A4008E1606 /* SplitsFormView.swift in Sources */,
 				C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */,
+				0B54F9A02BB3B20900D03B11 /* ProfileViewModel.swift in Sources */,
 				C5329ACC2B96731F00D8ED3D /* Errors.swift in Sources */,
 				C536A1EB2B7D0D8C00079DCC /* RegisterView.swift in Sources */,
 				C50785102B90E61500555C57 /* FirebaseAuthService.swift in Sources */,
 				C50CA40D2B795FFB00AEACCA /* AuthHeaderView.swift in Sources */,
+				0B2900102BC985E500B85197 /* FollowViewModel.swift in Sources */,
 				C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */,
 				C532B4142BC7071000D69525 /* Util.swift in Sources */,
 				C532A8242BAF8F0100E672B4 /* ExcerciseLogViewModel.swift in Sources */,
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
+				0B80CBC72BB365CA00D43636 /* ProfileView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
 				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,

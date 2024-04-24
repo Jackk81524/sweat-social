@@ -12,7 +12,7 @@ import Foundation
 class WorkoutViewManagerViewModel: ObservableObject {
     @Published var userId: String
     @Published var addForm = false
-    @Published var title = "Your Workout"
+    @Published var title = "Workouts"
     @Published var backButton = false
     @Published var workouts: [WorkoutExercise] = []
     @Published var dismiss = false
@@ -26,6 +26,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
     @Published var splitCancelled = false
     @Published var addSplitForm = false
     @Published var logWorkoutForm = false
+    @Published var allowEditing = true
     @Published var logMessage = ""
     @Published var splitToLog = ""
     @Published var date: Date? = nil
@@ -37,10 +38,16 @@ class WorkoutViewManagerViewModel: ObservableObject {
     
     // Iniitalize firestore and auth
     init(auth: AuthProtocol = FirebaseAuthService(),
-         firestore: FirestoreProtocol = FirebaseFirestoreService()) {
+         firestore: FirestoreProtocol = FirebaseFirestoreService(),
+         userId: String? = nil) {
         self.auth = auth
         self.firestore = firestore
-        self.userId = auth.currentUser
+        
+        if let userId = userId {
+            self.userId = userId
+        } else {
+            self.userId = auth.currentUser
+        }
     }
     
     func logWorkout(){

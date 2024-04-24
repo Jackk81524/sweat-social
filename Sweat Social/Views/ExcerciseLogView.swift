@@ -9,14 +9,21 @@ import SwiftUI
 
 // Exercise log view, displays exercises for a certain workout and gives a preview of its sets
 struct ExerciseLogView: View {
-    let workout: WorkoutExercise
+    var workout: WorkoutExercise
+    
     @Environment(\.presentationMode) var
         presentationMode: Binding<PresentationMode>
     
     @ObservedObject var viewManagerViewModel: WorkoutViewManagerViewModel
     
-    @StateObject var viewModel = ExerciseLogViewModel()
+    @StateObject var viewModel : ExerciseLogViewModel
     @State private var setDismiss = false
+    
+    init(workout: WorkoutExercise, viewManagerViewModel: WorkoutViewManagerViewModel) {
+        self.workout = workout
+        self.viewManagerViewModel = viewManagerViewModel
+        self._viewModel = StateObject(wrappedValue: ExerciseLogViewModel(userId: viewManagerViewModel.userId))
+    }
     
     var body: some View {
         NavigationStack {
@@ -71,7 +78,7 @@ struct ExerciseLogView: View {
         // This triggers if back button is pressed. Exercise dismiss is additional logic to ensure that if the set view is dismissed, it displays exercise view, and not workout view.
         .onChange(of: viewManagerViewModel.dismiss) { _ in
             if(viewManagerViewModel.exerciseDismiss) {
-                viewManagerViewModel.title = "Your Workout"
+                viewManagerViewModel.title = "Workouts"
                 viewManagerViewModel.backButton = false
                 
                 presentationMode.wrappedValue

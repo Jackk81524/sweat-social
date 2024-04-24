@@ -43,6 +43,32 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
     }
     
+    func fetchUser(userId: String, completion: @escaping (Result<User?, Error>) -> Void) {
+        
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .getDocument { (documentSnapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                guard let document = documentSnapshot, document.exists,
+                      let id = document["id"] as? String,
+                      let name = document["name"] as? String,
+                      let email = document["email"] as? String,
+                      let joined = document["joined"] as? TimeInterval else {
+                    completion(.success(nil))
+                    return
+                }
+                
+                let user = User(id: id, name: name, email: email, joined: joined)
+                completion(.success(user))
+            }
+        
+        
+        
+    }
+    
     func insertWorkout(userId: String,newWorkoutCategory: WorkoutExercise, newExercise: WorkoutExercise?, completion: @escaping (Result<Void?, Error>) -> Void) {
 
         guard validUser(userId: userId) else {
@@ -288,6 +314,38 @@ class FirebaseFirestoreService : FirestoreProtocol {
     }
     
 
+    func followUser(currentUserId: String, targetUserId: String, completion: @escaping (Result<Void?, Error>) -> Void) {
+        let followingDocument = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(currentUserId)
+            .collection("following")
+            .document(targetUserId)
+        
+        let followersDocument = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(targetUserId)
+            .collection("followers")
+            .document(currentUserId)
+        
+        // Add the target user to the current user's "following" collection
+        followingDocument.setData(["userId": targetUserId]) { error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // Add the current user to the target user's "followers" collection
+            followersDocument.setData(["userId": currentUserId]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    }
+    
+
+
+
     func addSplit(userId: String, split: Split, completion: @escaping (Error?) -> Void) {
         guard validUser(userId: userId) else {
             return completion(NoCurrentUser())
@@ -314,6 +372,40 @@ class FirebaseFirestoreService : FirestoreProtocol {
             }
         }
     }
+        
+    func fetchFollowStatus(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followingCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("following")
+        
+        followingCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followingIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followingIds ?? []))
+            }
+        }
+    }
+    
+    func searchUsersByName(query: String, completion: @escaping (Result<[User], Error>) -> Void) {
+        FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .whereField("name", isGreaterThanOrEqualTo: query)
+            .whereField("name", isLessThan: query + "\u{f8ff}")
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                let users = snapshot?.documents.compactMap { document -> User? in
+                    try? document.data(as: User.self)
+                }
+                
+                completion(.success(users ?? []))
+            }
+    }
+    
     
     func deleteSplit(userId: String, splitToDelete: String, completion: @escaping (Error?) -> Void){
         guard validUser(userId: userId) else {
@@ -527,6 +619,93 @@ class FirebaseFirestoreService : FirestoreProtocol {
         }
     }
     
+    func fetchFollowers(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followersCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("followers")
+        
+        followersCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followerIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followerIds ?? []))
+            }
+        }
+    }
+    
+    func fetchFollowing(userId: String, completion: @escaping (Result<[String], Error>) -> Void) {
+        let followersCollection = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection)
+            .document(userId)
+            .collection("following")
+        
+        followersCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let followerIds = querySnapshot?.documents.map { $0.documentID }
+                completion(.success(followerIds ?? []))
+            }
+        }
+    }
+    
+    
+    func fetchWorkoutLog(userId: String, date: String, completion: @escaping (Result<Log?, Error>) -> Void) {
+        let logDoc = FirebaseFirestoreService.db.collection(FirebaseFirestoreService.userCollection).document(userId).collection("Logged Workouts").document(date)
+
+        logDoc.getDocument { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let data = snapshot?.data() else {
+                completion(.success(nil))
+                return
+            }
+            let logMessage = data["logMessage"] as? String
+            let splitName = data["splitName"] as? String
+            
+            // Fetch workout categories
+            logDoc.collection("Workout Categories").getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                var categories: [WorkoutCategory] = []
+                let group = DispatchGroup()
+                
+                for categoryDocument in querySnapshot!.documents {
+                    group.enter()
+                    let categoryId = categoryDocument.documentID
+                    categoryDocument.reference.collection("Exercises").getDocuments { (exerciseSnapshot, error) in
+                        if let error = error {
+                            completion(.failure(error))
+                            return
+                        }
+                        var exercises: [Exercise] = []
+                        for exerciseDocument in exerciseSnapshot!.documents {
+                            let reps = exerciseDocument.data()["Reps"] as? [Int] ?? []
+                            let weights = exerciseDocument.data()["Weight"] as? [Int] ?? []
+                            let exercise = Exercise(id: exerciseDocument.documentID, reps: reps, weights: weights)
+                            exercises.append(exercise)
+                        }
+                        let category = WorkoutCategory(id: categoryId, exercises: exercises)
+                        categories.append(category)
+                        group.leave()
+                    }
+                }
+                
+                group.notify(queue: .main) {
+                    let log = Log(date: date, message: logMessage ?? "", userId: userId, userName: "", splitName: splitName, workoutCategories: categories)
+                    completion(.success(log))
+                }
+            }
+        }
+    }
+
+
+
+
     private func validUser(userId: String) -> Bool {
         if(userId != ""){
             return true
@@ -534,4 +713,5 @@ class FirebaseFirestoreService : FirestoreProtocol {
             return false
         }
     }
+
 }
