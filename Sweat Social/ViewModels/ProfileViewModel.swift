@@ -53,7 +53,6 @@ class ProfileViewModel: ObservableObject {
             case .success(let followingIds):
                 print("Following user IDs: \(followingIds)")
                 // Update your UI based on followingIds, if needed
->>>>>>> main
             }
         }
     }

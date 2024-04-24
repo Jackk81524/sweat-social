@@ -11,7 +11,7 @@ import Foundation
 import FirebaseStorage
 import Firebase
 
-class ProfileViewModel: ObservableObject {
+class ProfilePictureViewModel: ObservableObject {
     @Published var userID = ""
     @Published var profilePictureURL: String = ""
     //@Published var addWorkoutForm = false
