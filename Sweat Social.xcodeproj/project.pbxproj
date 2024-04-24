@@ -63,6 +63,10 @@
 		C53F5E732BBE3432007F4632 /* AddSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53F5E722BBE3432007F4632 /* AddSplitView.swift */; };
 		C54A04482B9789A4000ADCAD /* WorkoutHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */; };
 		C54CFB152B96318800DBC93B /* FirebaseFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */; };
+		C54E07FC2BD6ADCE00EC96BD /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54E07FB2BD6ADCE00EC96BD /* AnalyticsView.swift */; };
+		C54E08052BD6B4CD00EC96BD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C54E08042BD6B4CD00EC96BD /* FirebaseAnalytics */; };
+		C54E08072BD6B4D200EC96BD /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C54E08062BD6B4D200EC96BD /* FirebaseAnalyticsSwift */; };
+		C54E08082BD6B4E000EC96BD /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54E08022BD6B48C00EC96BD /* AdSupport.framework */; };
 		C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */; };
 		C550D8BB2BAA4B99004AB0C9 /* AddSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */; };
 		C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5766A092B741B1800F898EA /* LoginViewModel.swift */; };
@@ -149,6 +153,8 @@
 		C53F5E722BBE3432007F4632 /* AddSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSplitView.swift; sourceTree = "<group>"; };
 		C54A04472B9789A3000ADCAD /* WorkoutHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHeaderView.swift; sourceTree = "<group>"; };
 		C54CFB142B96318800DBC93B /* FirebaseFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreService.swift; sourceTree = "<group>"; };
+		C54E07FB2BD6ADCE00EC96BD /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
+		C54E08022BD6B48C00EC96BD /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		C54F8D8D2BB07EB300F3DF15 /* WorkoutViewManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewManagerView.swift; sourceTree = "<group>"; };
 		C550D8BA2BAA4B99004AB0C9 /* AddSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSetView.swift; sourceTree = "<group>"; };
 		C5766A092B741B1800F898EA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -166,7 +172,10 @@
 			files = (
 				C532B4122BC7069F00D69525 /* WeeklyCalendar in Frameworks */,
 				C528A2342B76B75B00346B27 /* FirebaseAuth in Frameworks */,
+				C54E08052BD6B4CD00EC96BD /* FirebaseAnalytics in Frameworks */,
 				C528A2362B76B75B00346B27 /* FirebaseFirestore in Frameworks */,
+				C54E08072BD6B4D200EC96BD /* FirebaseAnalyticsSwift in Frameworks */,
+				C54E08082BD6B4E000EC96BD /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +205,7 @@
 				0B6E8B282B6A9D0800455CB3 /* Sweat SocialUITests */,
 				0B6E8B0C2B6A9D0600455CB3 /* Products */,
 				C52C0E0A2B8525CB0070D707 /* Recovered References */,
+				C54E07FD2BD6B09600EC96BD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +222,7 @@
 		0B6E8B0D2B6A9D0600455CB3 /* Sweat Social */ = {
 			isa = PBXGroup;
 			children = (
+				C54E07FA2BD6AD8E00EC96BD /* Analytics */,
 				C507850A2B90DB3E00555C57 /* FirebaseAPI */,
 				C536A1FB2B7D2C2500079DCC /* Other */,
 				0B7D28302B6AAF6400066E36 /* Sweat-Social-Info.plist */,
@@ -321,6 +332,22 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		C54E07FA2BD6AD8E00EC96BD /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				C54E07FB2BD6ADCE00EC96BD /* AnalyticsView.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		C54E07FD2BD6B09600EC96BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C54E08022BD6B48C00EC96BD /* AdSupport.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C5766A032B7418A400F898EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +434,8 @@
 				C528A2332B76B75B00346B27 /* FirebaseAuth */,
 				C528A2352B76B75B00346B27 /* FirebaseFirestore */,
 				C532B4112BC7069F00D69525 /* WeeklyCalendar */,
+				C54E08042BD6B4CD00EC96BD /* FirebaseAnalytics */,
+				C54E08062BD6B4D200EC96BD /* FirebaseAnalyticsSwift */,
 			);
 			productName = "Sweat Social";
 			productReference = 0B6E8B0B2B6A9D0600455CB3 /* Sweat Social.app */;
@@ -444,6 +473,8 @@
 				0B6E8B272B6A9D0800455CB3 /* PBXTargetDependency */,
 			);
 			name = "Sweat SocialUITests";
+			packageProductDependencies = (
+			);
 			productName = "Sweat SocialUITests";
 			productReference = 0B6E8B252B6A9D0800455CB3 /* Sweat SocialUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -534,6 +565,7 @@
 				C53935E72BA9D63D003228F9 /* SetsLogViewModel.swift in Sources */,
 				C53A75C12B9BE14A008338B6 /* SetsLogView.swift in Sources */,
 				C532A8262BAF99BF00E672B4 /* ExcerciseButtonView.swift in Sources */,
+				C54E07FC2BD6ADCE00EC96BD /* AnalyticsView.swift in Sources */,
 				C53F5E732BBE3432007F4632 /* AddSplitView.swift in Sources */,
 				C532B4162BC70AA000D69525 /* CalendarView.swift in Sources */,
 				C54F8D8E2BB07EB300F3DF15 /* WorkoutViewManagerView.swift in Sources */,
@@ -850,7 +882,6 @@
 		0B6E8B362B6A9D0800455CB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -870,7 +901,6 @@
 		0B6E8B372B6A9D0800455CB3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -962,6 +992,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C532B4102BC7069F00D69525 /* XCRemoteSwiftPackageReference "WeeklyCalendar" */;
 			productName = WeeklyCalendar;
+		};
+		C54E08042BD6B4CD00EC96BD /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C528A2322B76B75B00346B27 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C54E08062BD6B4D200EC96BD /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C528A2322B76B75B00346B27 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

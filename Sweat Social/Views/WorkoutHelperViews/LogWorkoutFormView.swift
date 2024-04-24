@@ -86,6 +86,8 @@ struct LogWorkoutFormView: View {
                                 viewManagerViewModel.splitToLog = viewManagerViewModel.splits[selectedSplit].id
                                 viewManagerViewModel.logWorkout()
                                 
+                                AnalyticsManager.shared.logEvent(name: "Logged_Workout")
+                                
                             } label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 32)

@@ -65,7 +65,7 @@ class WorkoutViewManagerViewModel: ObservableObject {
                 self?.workoutsToLog = []
                 self?.logMessage = ""
                 self?.splitToLog = ""
-                self?.logWorkoutForm.toggle()
+                self?.logWorkoutForm = false
             }
         }
     }
