@@ -41,6 +41,9 @@ class RegisterViewModel: ObservableObject {
                     case .failure(let error):
                         self?.errorMessage = error.localizedDescription
                     default:
+                        // Initialize their achievements
+                        let achievements = FirestoreAchievementsService()
+                        achievements.initializeAchievementsForUser(userId: self!.userId)
                         break
                     }
                 }

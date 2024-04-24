@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AchievementsView: View {
-    let achievements: [Achievement]
-    
+    @StateObject private var viewModel = AchievementsViewModel()
+
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))], spacing: 20) {
-                ForEach(achievements) { achievement in
+                ForEach(viewModel.achievements) { achievement in
                     BadgeView(achievement: achievement)
                 }
             }
@@ -52,7 +52,7 @@ struct BadgeView: View {
     }
 }
 
-
+/*
 struct AchievementsView_Previews: PreviewProvider {
     static var previews: some View {
         AchievementsView(achievements: [
@@ -61,6 +61,7 @@ struct AchievementsView_Previews: PreviewProvider {
         ])
     }
 }
+ */
 
 struct AchievementDetailView: View {
     var achievement: Achievement
@@ -83,7 +84,7 @@ struct AchievementDetailView: View {
 }
 
 
-// Sample achievements data
+// Sample achievements data for testing
 func sampleAchievements() -> [Achievement] {
     return [
         Achievement(title: "Beginner", description: "Complete the tutorial", isUnlocked: true),
@@ -96,5 +97,5 @@ func sampleAchievements() -> [Achievement] {
 }
 
 #Preview {
-    AchievementsView(achievements: sampleAchievements())
+    AchievementsView()
 }

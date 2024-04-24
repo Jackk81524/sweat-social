@@ -117,7 +117,7 @@ struct GoalsView: View {
                     .font(.title)
                     .padding()
                 
-                AchievementsView(achievements: sampleAchievements())
+                AchievementsView()
                 
                 
                 
