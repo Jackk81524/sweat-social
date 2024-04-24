@@ -26,6 +26,9 @@ struct SelfProfileView: View {
             ScrollView {
                 if let user = viewModel.user {
                     VStack {
+                        
+                        ProfilePictureView()
+                        
                         HStack {
                             Text(user.name)
                                 .font(.title)
@@ -71,7 +74,7 @@ struct SelfProfileView: View {
                             .cornerRadius(8)
                         }
                         .padding(.horizontal)
-
+                        
                         .onAppear {
                             followingViewModel.fetchFollowing(userId: viewModel.userId)
                         }
@@ -89,17 +92,12 @@ struct SelfProfileView: View {
                 } else {
                     ProgressView()
                 }
->>>>>>> main
             }
         }
     }
 }
 
-<<<<<<< HEAD
-#Preview {
-    ProfileView()
-}
-=======
+
 struct FollowersView: View {
     @ObservedObject var viewModel: FollowersViewModel
 
@@ -243,5 +241,3 @@ struct UserProfileView: View {
         }
     }
 }
-
->>>>>>> main

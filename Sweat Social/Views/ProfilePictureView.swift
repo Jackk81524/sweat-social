@@ -1,18 +1,31 @@
 //
-//  ProfilePictureView.swift
+//  ProfileView.swift
 //  Sweat Social
 //
-//  Created by Luke Chigges on 4/24/24.
+//  Created by Luke Chigges on 3/19/24.
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ProfilePictureView: View {
+    @StateObject var viewModel = ProfilePictureViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack {
+                Spacer().frame(height: 10)
+                
+                displayImageFromURL(urlString: viewModel.profilePictureURL)
+                
+                PhotoPicker(onImageSelected: viewModel.storeProfilePictureImageInDatabase)
+                
+                Spacer().frame(height: 10)
+            }
+        }
     }
 }
 
 #Preview {
     ProfilePictureView()
 }
+
