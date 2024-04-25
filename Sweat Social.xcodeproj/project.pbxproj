@@ -79,6 +79,7 @@
 		C815C1FF2BD9900300C71DAB /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C815C1FE2BD9900300C71DAB /* FirebaseAuthCombine-Community */; };
 		C815C2012BD9900300C71DAB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C815C2002BD9900300C71DAB /* FirebaseStorageCombine-Community */; };
 		C815C2032BD990ED00C71DAB /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C2022BD990ED00C71DAB /* ProfilePictureView.swift */; };
+		C815C2082BD993D800C71DAB /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C2072BD993D800C71DAB /* NotificationHandler.swift */; };
 		C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5414D2B882056005AC444 /* GoalsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,7 @@
 		C815C1FA2BD98E5F00C71DAB /* ProfilePictureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureViewModel.swift; sourceTree = "<group>"; };
 		C815C2022BD990ED00C71DAB /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		C815C2062BD992F300C71DAB /* Sweat Social.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sweat Social.entitlements"; sourceTree = "<group>"; };
+		C815C2072BD993D800C71DAB /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		C8A5414D2B882056005AC444 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -389,6 +391,7 @@
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
 				C815C1FA2BD98E5F00C71DAB /* ProfilePictureViewModel.swift */,
+				C815C2072BD993D800C71DAB /* NotificationHandler.swift */,
 				C531534C2BB1C73000604987 /* WorkoutViewManagerViewModel.swift */,
 				C536A1EC2B7D0E9F00079DCC /* RegisterViewModel.swift */,
 				0BFE3C152B8BDECA00689AA0 /* ActivityViewModel.swift */,
@@ -620,6 +623,7 @@
 				C536A1F62B7D13E800079DCC /* AuthPasswordView.swift in Sources */,
 				0B80CBC72BB365CA00D43636 /* ProfileView.swift in Sources */,
 				C536A1FD2B7D2C4600079DCC /* Extensions.swift in Sources */,
+				C815C2082BD993D800C71DAB /* NotificationHandler.swift in Sources */,
 				0BFE3C162B8BDECA00689AA0 /* ActivityViewModel.swift in Sources */,
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,

@@ -96,6 +96,17 @@ struct GoalsView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                    Button(action: {
+                        requestNotifications()
+                        scheduleLocalNotification()
+                    }) {
+                        Text("Notification")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
                 
                 Spacer()
