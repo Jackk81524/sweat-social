@@ -15,104 +15,105 @@ struct GoalsView: View {
     ]
     
     var body: some View {
-        VStack {
-            HeaderView()
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: 100)
-                .background(Color.black)
-                .foregroundColor(.white)
-            
-            Text("Weekly Goals!")
-                .font(.title)
-                .padding()
-            
-            GoalBlock(goal: goals[0])
-            GoalBlock(goal: goals[1])
-            GoalBlock(goal: goals[2])
-            
-            HStack {
-                Button(action: {
-                    goals[0].numComplete -= 10
-                }) {
-                    Text("Decrement 1")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+        ScrollView {
+            VStack {
+                HeaderView()
+                    .frame(maxWidth: .infinity)
+                    .frame(minHeight: 100)
+                    .background(Color.black)
+                    .foregroundColor(.white)
+                
+                Text("Weekly Goals!")
+                    .font(.title)
+                    .padding()
+                
+                GoalBlock(goal: goals[0])
+                GoalBlock(goal: goals[1])
+                GoalBlock(goal: goals[2])
+                
+                HStack {
+                    Button(action: {
+                        goals[0].numComplete -= 10
+                    }) {
+                        Text("Decrement 1")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goals[0].numComplete += 1
+                    }) {
+                        Text("Increment 1")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
-                Button(action: {
-                    goals[0].numComplete += 1
-                }) {
-                    Text("Increment 1")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                HStack {
+                    Button(action: {
+                        goals[1].numComplete -= 1
+                    }) {
+                        Text("Decrement 2")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goals[1].numComplete += 1
+                    }) {
+                        Text("Increment 2")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
                 }
+                HStack {
+                    Button(action: {
+                        goals[2].numComplete -= 1
+                    }) {
+                        Text("Decrement 3")
+                            .font(.title)
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        goals[2].numComplete += 1
+                    }) {
+                        Text("Increment 3")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                
+                Spacer()
+                
+                
+                
+                /*
+                 FooterView()
+                 .frame(maxWidth: .infinity)
+                 .frame(minHeight: 75)
+                 .background(Color.black)
+                 .foregroundColor(.white)
+                 */
+                
             }
-            HStack {
-                Button(action: {
-                    goals[1].numComplete -= 1
-                }) {
-                    Text("Decrement 2")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                Button(action: {
-                    goals[1].numComplete += 1
-                }) {
-                    Text("Increment 2")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            HStack {
-                Button(action: {
-                    goals[2].numComplete -= 1
-                }) {
-                    Text("Decrement 3")
-                        .font(.title)
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                Button(action: {
-                    goals[2].numComplete += 1
-                }) {
-                    Text("Increment 3")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            
-            Spacer()
-            
-            
-            
-            /*
-             FooterView()
-                .frame(maxWidth: .infinity)
-                .frame(minHeight: 75)
-                .background(Color.black)
-                .foregroundColor(.white)
-             */
-            
+            .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .edgesIgnoringSafeArea(.top)
-        .edgesIgnoringSafeArea(.bottom)
-        
     }
 }
 

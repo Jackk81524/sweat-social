@@ -22,8 +22,6 @@ struct TabBar: View {
                     .foregroundStyle(.white)
                     .bold()
                     .ignoresSafeArea(edges: .top)
-
-                
             }
             .frame(height: 80)
             

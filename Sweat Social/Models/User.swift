@@ -12,5 +12,6 @@ struct User: Codable, Identifiable {
     let name: String
     let email: String
     let joined: TimeInterval
+    var profilePictureURL: String?
     var workout: [WorkoutExercise]?
 }
