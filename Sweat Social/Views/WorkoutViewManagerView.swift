@@ -16,7 +16,7 @@ struct WorkoutViewManagerView: View {
         VStack {
             //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
             WorkoutHeaderView(viewManagerViewModel: viewManagerViewModel)
-                .padding(.top,40)
+                .padding(.top,25)
                 .frame(height: 60)
             
             //Beginning of workout navigation stack, first is the Workout log view.

@@ -15,7 +15,7 @@ struct CalendarView: View {
         VStack {
             //Main feature, sets the title, and add/back buttons. The viewManagerViewModel controls the title and other variation
             CalendarHeaderView(viewManagerViewModel: viewManagerViewModel)
-                .padding(.top,40)
+                .padding(.top,10)
             
             if viewManagerViewModel.calendarForm {
                 WeeklyCalendar()

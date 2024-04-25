@@ -33,7 +33,7 @@ struct WorkoutHeaderView: View {
                     }
                     
                 }
-                    
+
                 // Displays title in top center of the screen. Controller by viewManagerViewModel
                 Text(viewManagerViewModel.title)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -41,6 +41,8 @@ struct WorkoutHeaderView: View {
                     .padding(.leading, viewManagerViewModel.backButton ? 0 : UIScreen.main.bounds.width / 6)
                     .padding(.trailing, viewManagerViewModel.allowEditing ? 0 : UIScreen.main.bounds.width / 6)
                     .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                    
                 
                 if viewManagerViewModel.allowEditing {
                     HStack {
@@ -76,8 +78,8 @@ struct WorkoutHeaderView: View {
                     }
                 }
             }
-            .padding()
-            Spacer()
+            //.padding()
+            //Spacer()
         }
     }
 }
