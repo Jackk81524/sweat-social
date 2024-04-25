@@ -54,6 +54,8 @@ class WorkoutViewManagerViewModel: ObservableObject {
         let formattedWorkoutsToLog = workouts.filter { workout in
             return workoutsToLog.contains(workout.id)
         }
+        
+        sendPushNotification(title: "Workout Logged!", body: "Great job logging a workout!")
 
         firestore.logSavedWorkout(userId: self.userId, workoutsToLog: formattedWorkoutsToLog, logMessage: logMessage,splitName: self.splitToLog) { [weak self] error in
             guard self != nil else { return }
