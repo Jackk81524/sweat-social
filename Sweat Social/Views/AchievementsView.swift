@@ -12,6 +12,10 @@ struct AchievementsView: View {
 
     var body: some View {
         ScrollView {
+            Button("Refresh") {
+                viewModel.fetchAchievements()
+            }
+            
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))], spacing: 20) {
                 ForEach(viewModel.achievements) { achievement in
                     BadgeView(achievement: achievement)
@@ -95,7 +99,8 @@ func sampleAchievements() -> [Achievement] {
         Achievement(title: "Veteran", description: "Log 100 hours of activity", isUnlocked: false),
     ]
 }
-
+/*
 #Preview {
     AchievementsView()
 }
+*/

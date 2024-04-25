@@ -25,7 +25,7 @@ struct GoalsView: View {
                     .foregroundColor(.white)
                  */
                 
-                Text("Weekly Goals!")
+                /*Text("Weekly Goals!")
                     .font(.title)
                     .padding()
                 
@@ -112,6 +112,7 @@ struct GoalsView: View {
                 }
                 
                 Spacer()
+                 */
                 
                 Text("Achievements!")
                     .font(.title)
