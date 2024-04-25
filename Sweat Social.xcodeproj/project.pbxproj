@@ -80,6 +80,8 @@
 		C815C2012BD9900300C71DAB /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C815C2002BD9900300C71DAB /* FirebaseStorageCombine-Community */; };
 		C815C2032BD990ED00C71DAB /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C2022BD990ED00C71DAB /* ProfilePictureView.swift */; };
 		C815C2082BD993D800C71DAB /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C2072BD993D800C71DAB /* NotificationHandler.swift */; };
+		C815C20A2BD99AE400C71DAB /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C2092BD99AE400C71DAB /* AchievementsView.swift */; };
+		C815C20C2BD99C8000C71DAB /* AchievementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C815C20B2BD99C8000C71DAB /* AchievementViewModel.swift */; };
 		C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5414D2B882056005AC444 /* GoalsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +174,8 @@
 		C815C2022BD990ED00C71DAB /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		C815C2062BD992F300C71DAB /* Sweat Social.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sweat Social.entitlements"; sourceTree = "<group>"; };
 		C815C2072BD993D800C71DAB /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		C815C2092BD99AE400C71DAB /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		C815C20B2BD99C8000C71DAB /* AchievementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewModel.swift; sourceTree = "<group>"; };
 		C8A5414D2B882056005AC444 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -373,6 +377,7 @@
 				C532A8212BAF8C3A00E672B4 /* ExcerciseLogView.swift */,
 				C815C2022BD990ED00C71DAB /* ProfilePictureView.swift */,
 				0BFE3C132B8BD7DD00689AA0 /* ActivityTabView.swift */,
+				C815C2092BD99AE400C71DAB /* AchievementsView.swift */,
 				C8A5414D2B882056005AC444 /* GoalsView.swift */,
 				0BE924602B7D8A23006F65F4 /* TabBarView.swift */,
 				C5766A0D2B741EF400F898EA /* LoginView.swift */,
@@ -390,6 +395,7 @@
 			children = (
 				C5766A092B741B1800F898EA /* LoginViewModel.swift */,
 				C50F11172B7AFEC80025FB0E /* AuthViewModel.swift */,
+				C815C20B2BD99C8000C71DAB /* AchievementViewModel.swift */,
 				C815C1FA2BD98E5F00C71DAB /* ProfilePictureViewModel.swift */,
 				C815C2072BD993D800C71DAB /* NotificationHandler.swift */,
 				C531534C2BB1C73000604987 /* WorkoutViewManagerViewModel.swift */,
@@ -608,6 +614,7 @@
 				C5766A0A2B741B1800F898EA /* LoginViewModel.swift in Sources */,
 				0B6E8B112B6A9D0600455CB3 /* ContentView.swift in Sources */,
 				C526F8872BBDC36B008E1606 /* FormTemplateView.swift in Sources */,
+				C815C20A2BD99AE400C71DAB /* AchievementsView.swift in Sources */,
 				C5766A0E2B741EF400F898EA /* LoginView.swift in Sources */,
 				C526F8852BBDC0A4008E1606 /* SplitsFormView.swift in Sources */,
 				C8A5414E2B882056005AC444 /* GoalsView.swift in Sources */,
@@ -628,6 +635,7 @@
 				C536A1F42B7D13D900079DCC /* AuthTextFieldView.swift in Sources */,
 				C536A1F82B7D235B00079DCC /* AuthButtonView.swift in Sources */,
 				C527F1C12B89247B00D0934F /* WorkoutLogViewModel.swift in Sources */,
+				C815C20C2BD99C8000C71DAB /* AchievementViewModel.swift in Sources */,
 				C5344EEF2BB30A3A00DF4936 /* DeleteConfirmationView.swift in Sources */,
 				C815C2032BD990ED00C71DAB /* ProfilePictureView.swift in Sources */,
 				C536A1ED2B7D0E9F00079DCC /* RegisterViewModel.swift in Sources */,

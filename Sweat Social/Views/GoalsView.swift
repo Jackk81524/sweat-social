@@ -17,13 +17,15 @@ struct GoalsView: View {
     var body: some View {
         ScrollView {
             VStack {
+                /*
                 HeaderView()
                     .frame(maxWidth: .infinity)
                     .frame(minHeight: 100)
                     .background(Color.black)
                     .foregroundColor(.white)
+                 */
                 
-                Text("Weekly Goals!")
+                /*Text("Weekly Goals!")
                     .font(.title)
                     .padding()
                 
@@ -110,6 +112,13 @@ struct GoalsView: View {
                 }
                 
                 Spacer()
+                 */
+                
+                Text("Achievements!")
+                    .font(.title)
+                    .padding()
+                
+                AchievementsView()
                 
                 
                 
