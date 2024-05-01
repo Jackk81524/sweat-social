@@ -260,6 +260,8 @@ class FirestoreAchievementsService {
 
     
     func checkAndUnlockAchievement() {
+        self.initializeAchievementsForUser(userId: self.userID)
+        
         let achievementsCollection = db.collection("users").document(self.userID).collection("achievements")
         
         // Fetch achievements that are related to hours logged and are still locked
