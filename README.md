@@ -11,10 +11,14 @@ Many features are attached to this firestore connection and requires a google-se
 Our mission is to create a social-driven fitness platform that enhances user motivation through community engagement. Key features include:
 
 Authentication: Users securely sign in and access the app via Firebase authentication.
-Workout Logging: Real-time logging of workouts with intuitive input mechanisms for exercises, sets, and tracking progress.
-Social Activity: Users can connect with friends, follow their activities, and provide support and encouragement.
-Gamification: Progress is incentivized through unlockable badges, rewarding users for their achievements.
-Profile Customization: Users can personalize their profiles and connect with friends within the app.
+
+**Workout Logging**: Real-time logging of workouts with intuitive input mechanisms for exercises, sets, and tracking progress.
+
+**Social Activity**: Users can connect with friends, follow their activities, and provide support and encouragement.
+
+**Gamification**: Progress is incentivized through unlockable badges, rewarding users for their achievements.
+
+**Profile Customization**: Users can personalize their profiles and connect with friends within the app.
 
 Our application fosters a supportive environment for users to track their fitness journeys, connect with others, and stay motivated towards their goals!
 
