@@ -29,5 +29,3 @@ The project is organized as follows:
 ## Installation
 
 Sweat Social is an iOS app that is not currently on the App Store. It can be downloaded through Test Flight to a limited audience.
-
-## Usage
