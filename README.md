@@ -10,7 +10,7 @@ Many features are attached to this firestore connection and requires a google-se
 
 Our mission is to create a social-driven fitness platform that enhances user motivation through community engagement. Key features include:
 
-Authentication: Users securely sign in and access the app via Firebase authentication.
+**Authentication**: Users securely sign in and access the app via Firebase authentication.
 
 **Workout Logging**: Real-time logging of workouts with intuitive input mechanisms for exercises, sets, and tracking progress.
 
