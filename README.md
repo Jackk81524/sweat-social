@@ -8,7 +8,7 @@ Our app connects to Google FireStore to store user data and Firebase Authenticat
 
 Many features are attached to this firestore connection and requires a google-services.plist file to operate successfully.
 
-Our mission is to create a social-driven fitness platform that enhances user motivation through community engagement. Key features include:
+Our mission is to create a social-driven fitness platform that enhances user motivation through community engagement.
 
 ## Features
 
