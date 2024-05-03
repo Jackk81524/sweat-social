@@ -4,6 +4,10 @@
 
 Sweat social is a fitness logging app that aims to bring social elements to your workout. Users can log their workouts, view past workouts, earn badges, and share their achievements with friends.
 
+Our app connects to Google FireStore to store user data and Firebase Authentication to manage user accounts.
+
+Many features are attached to this firestore connection and requires a google-services.plist file to operate successfully.
+
 ## Directory Structure
 
 The project is organized as follows:
